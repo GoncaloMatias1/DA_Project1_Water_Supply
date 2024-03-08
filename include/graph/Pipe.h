@@ -6,20 +6,23 @@
 #define DA_PROJECT_23_24_PIPE_H
 
 #include "Graph.h"
+#include <string>
+class Vertex;
 
 class Pipe{
 private:
-    float capacity;
+    double capacity;
     Vertex* destination;
 public:
-    Pipe();
+    Pipe(float maxCapacity, Vertex* endpoint);
 
     // Class getters
-    float getCapacity() const;
+    double getCapacity() const;
     Vertex* getDestination() const;
+    const std::string& getDestinationId() const;
 
     // Class setters
-    void setCapacity(float newCapacity);
+    void setCapacity(double newCapacity);
     void setDestination(Vertex* destination);
 
 

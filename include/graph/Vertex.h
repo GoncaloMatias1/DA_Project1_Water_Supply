@@ -6,27 +6,31 @@
 #define DA_PROJECT_23_24_VERTEX_H
 
 #include "Pipe.h"
+#include <vector>
+#include <string>
 
+class Pipe;
 class Vertex{
-private:
-    std::vector<Pipe*> adjPipes;
-    std::vector<Pipe*> incomingPipes;
+protected:
+    std::vector<Pipe*> adj;
+    std::string id;
 
 public:
-    Vertex();
+    Vertex(const std::string&);
 
     // Class setters
+    void setID(const std::string& identifier);
+
     void setAdj(const std::vector<Pipe*>& newAdj);
 
     void addPipe(Pipe* newPipe);
 
-    void addPipeTo(const std::string& endpoint, float capacity);
-    void removePipeTo(const std::string& endpoint);
-
-    void addIncomingPipeFrom();
+    bool removePipeTo(const std::string& endpoint);
 
 
     // Class getters
+    const std::string& getID() const;
+
 
 };
 

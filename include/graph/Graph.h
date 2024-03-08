@@ -6,19 +6,31 @@
 #define DA_PROJECT_23_24_GRAPH_H
 
 #include "Vertex.h"
+#include <unordered_map>
+#include <vector>
+#include <string>
+
+class Vertex;
+class Pipe;
 
 class Graph{
-private:
-    std::vector<Vertex*> graph;
+protected:
+    std::unordered_map<std::string, Vertex*> vertexSet;
+
 public:
-    Graph();
+    ~Graph();
+    Vertex *findVertex(const std::string& in) const;
 
-    // Class getters
-    std::vector<Vertex*> getVertexSet() const;
 
-    // Class setters
-    void setVertexSet(const std::vector<Vertex*>& newSet);
+    bool addVertex(Vertex* newVertex);
+    bool removeVertex(const std::string &in);
 
+    bool addEdge(const std::string &sourc, const std::string &dest, float w);
+    bool removeEdge(const std::string &source, const std::string &dest);
+    bool addBidirectionalEdge(const std::string &sourc, const std::string &dest, double w);
+
+    int getNumVertex() const;
+    std::vector<Vertex *> getVertexSet() const;
 
 };
 
