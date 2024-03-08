@@ -5,10 +5,13 @@
 #include "Graph.h"
 
 Graph::~Graph(){
-    for(std::pair<std::string, Vertex*> vertex: this->vertexSet){
-        this->removeVertex(vertex.second->getID());
+    for(auto itr = this->vertexSet.begin(); itr != this->vertexSet.end(); ){
+        this->removeEdgesTo(itr->second->getID());
+        Vertex* toRemove = itr->second;
+        itr = this->vertexSet.erase(itr);
+        delete toRemove;
     }
-};
+}
 
 Vertex *Graph::findVertex(const std::string &in) const {
     return vertexSet.at(in);
@@ -54,7 +57,7 @@ bool Graph::removeEdge(const std::string &source, const std::string &dest) {
     if(sourceVertex != nullptr){
         return sourceVertex->removePipeTo(dest);
     }
-    return  false;
+    return false;
 }
 
 bool Graph::addBidirectionalEdge(const std::string &sourc, const std::string &dest, double w) {
@@ -68,6 +71,16 @@ bool Graph::addBidirectionalEdge(const std::string &sourc, const std::string &de
         return true;
     }
     return  false;
+}
+
+void Graph::removeEdgesTo(const std::string &out) {
+    for(std::pair<std::string, Vertex*> pair: this->vertexSet){
+        // Delete all references to dead vertex
+        Vertex* currentVertex = pair.second;
+        if(currentVertex->getID() != out){
+            currentVertex->removePipeTo(out);
+        }
+    }
 }
 
 

@@ -29,8 +29,8 @@ public:
     bool removeEdge(const std::string &source, const std::string &dest);
     bool addBidirectionalEdge(const std::string &sourc, const std::string &dest, double w);
 
-    int getNumVertex() const;
-    std::vector<Vertex *> getVertexSet() const;
+    void removeEdgesTo(const std::string& out);
+
 
 };
 
