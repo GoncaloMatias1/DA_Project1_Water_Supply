@@ -2,6 +2,7 @@
 // Created by admin1 on 08-03-2024.
 //
 
+#include <queue>
 #include "NetworkController.h"
 #include "City.h"
 #include "WaterReservoir.h"
@@ -11,6 +12,7 @@
 NetworkController::NetworkController(const std::string &src) {
     this->dataRoot = src;
     this->parseData();
+    std::cout << this->network.getCityId("Beja") << std::endl;
 }
 
 void NetworkController::parseData() {
@@ -130,8 +132,146 @@ void NetworkController::readPipes() {
         }
 
         this->network.addEdge(Service_Point_A, Service_Point_B, cap);
+
         if(Direction == "0"){
             this->network.addEdge(Service_Point_B, Service_Point_A, cap);
         }
+
     }
 }
+
+Vertex* NetworkController::generateSuperSource() {
+    // Create super source with code "SuperSource"
+    Vertex* super = this->network.findVertex("SuperSource");
+    if(super!= nullptr) return super;
+
+    super = new Vertex("SuperSource");
+    this->network.addVertex(super);
+
+    // Connect super source to all reservoirs
+    for(Vertex* vertex: this->network.getVertexSet()){
+
+        WaterReservoir* reservoir = dynamic_cast<WaterReservoir*>(vertex);
+        if(reservoir != nullptr){
+            // Found a reservoir
+            Pipe* pipe = new Pipe(reservoir->getMaxDelivery(), super, vertex);
+            super->addOutgoingPipe(pipe);
+            vertex->addIncomingPipe(pipe);
+        }
+    }
+    return super;
+}
+
+Vertex* NetworkController::generateSuperSink() {
+    // Create super sink with code "SuperSink"
+    Vertex* super = this->network.findVertex("SuperSink");
+    if(super!= nullptr) return super;
+
+    super = new Vertex("SuperSink");
+    this->network.addVertex(super);
+
+    // generate pipes to super sink from cities
+    for(Vertex* vertex: this->network.getVertexSet()){
+
+        City* city = dynamic_cast<City*>(vertex);
+        if(city != nullptr){
+            // Found a city
+            Pipe* pipe =new Pipe(INF, city, super);
+            city->addOutgoingPipe(pipe);
+            super->addIncomingPipe(pipe);
+        }
+    }
+    return super;
+}
+
+void NetworkController::edmondsKarp() {
+    Vertex* source = this->generateSuperSource();
+    Vertex* sink = this->generateSuperSink();
+
+    for(Vertex* vertex: this->network.getVertexSet()){
+        for(Pipe* pipe: vertex->getOugoing()){
+            pipe->setFlow(0);
+        }
+    }
+
+    while(this->findAugmentingPath(source, sink)){
+        double f = this->findMinResidualAlongPath(source, sink);
+        this->augmentFlowAlongPath(source, sink , f);
+    }
+
+    double maxFlow = 0;
+    for(Pipe* pipe: sink->getIncoming()){
+        maxFlow += pipe->getFlow();
+    }
+    std::cout << "Max flow is " << maxFlow << std::endl;
+}
+
+bool NetworkController::findAugmentingPath(Vertex *source, Vertex *sink) {
+    for(Vertex* v: this->network.getVertexSet()){
+        v->setVisited(false);
+    }
+
+    source->setVisited(true);
+    std::queue<Vertex*> q;
+    q.push(source);
+
+    while(!q.empty() && !sink->isVisited()){
+        Vertex* v = q.front();
+        q.pop();
+
+        for(Pipe* pipe: v->getOugoing()){
+            testAndVisit(q, pipe, pipe->getDestination(), pipe->getCapacity() - pipe->getFlow());
+        }
+
+        for(Pipe* pipe: v->getIncoming()){
+            testAndVisit(q, pipe, pipe->getOrigin(), pipe->getFlow());
+        }
+    }
+
+    return sink->isVisited();
+}
+
+void NetworkController::testAndVisit(std::queue<Vertex *> &q, Pipe *pipe, Vertex *dest, double residual) {
+    if(!dest->isVisited() && residual > 0){
+        dest->setVisited(true);
+        dest->setPath(pipe);
+        q.push(dest);
+    }
+}
+
+double NetworkController::findMinResidualAlongPath(Vertex *source, Vertex *sink) {
+    double f = INF;
+
+    for (Vertex* vertex = sink; vertex != source; ) {
+        Pipe* pipe = vertex->getPath();
+        if (pipe->getDestination() == vertex) {
+            f = std::min(f, pipe->getCapacity() - pipe->getFlow());
+            vertex = pipe->getOrigin();
+        }
+        else {
+            f = std::min(f, pipe->getFlow());
+            vertex = pipe->getDestination();
+        }
+    }
+
+    return f;
+}
+
+void NetworkController::augmentFlowAlongPath(Vertex *source, Vertex *sink, double f) {
+    for (Vertex* vertex = sink; vertex != source; ) {
+        Pipe* pipe = vertex->getPath();
+        double flow = pipe->getFlow();
+
+        if (pipe->getDestination() == vertex) {
+            pipe->setFlow(flow + f);
+            vertex = pipe->getOrigin();
+        }
+        else {
+            pipe->setFlow(flow - f);
+            vertex = pipe->getDestination();
+        }
+    }
+}
+
+
+

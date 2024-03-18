@@ -9,29 +9,53 @@
 #include <vector>
 #include <string>
 
+enum VertexType{
+        ReservoirVertex,
+        PumpingStationVertex,
+        CityVertex,
+        VirtualVertex
+};
+
 class Pipe;
 class Vertex{
 protected:
-    std::vector<Pipe*> adj;
-    std::string id;
+    std::vector<Pipe*> outgoing;
+    std::vector<Pipe*> incoming;
+    std::string code;
+    bool visited = false;
+
+    bool processing = false;
+    double dist = 0;
+    Pipe *path = nullptr;
 
 public:
     Vertex(const std::string&);
 
     // Class setters
-    void setID(const std::string& identifier);
+    void setCode(const std::string& identifier);
+    void setOutgoing(const std::vector<Pipe*>& newAdj);
+    void setIncoming(const std::vector<Pipe*>& newAdj);
 
-    void setAdj(const std::vector<Pipe*>& newAdj);
+    void setVisited(bool newSt);
+    void setProcessing(bool proc);
+    void setPath(Pipe* parent);
 
-    void addPipe(Pipe* newPipe);
+    void addOutgoingPipe(Pipe* newPipe);
+    void addIncomingPipe(Pipe* newPipe);
 
     bool removePipeTo(const std::string& endpoint);
+    bool removePipeFrom(const std::string& origin);
 
 
     // Class getters
-    const std::string& getID() const;
+    const std::string& getCode() const;
+    bool isVisited() const;
+    bool isProcessing() const;
+    Pipe* getPath() const;
+    std::vector<Pipe*> getIncoming() const;
+    std::vector<Pipe*> getOugoing() const;
 
-
+    virtual VertexType getType() const;
 };
 
 #endif //DA_PROJECT_23_24_VERTEX_H

@@ -13,6 +13,7 @@ private:
 public:
     PumpingStation(const std::string& id, unsigned  int psID);
 
+    VertexType getType() const override;
 };
 
 #endif //DA_PROJECT_23_24_PUMPINGSTATION_H

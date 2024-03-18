@@ -15,6 +15,9 @@ private:
     double maxDelivery;
 public:
     WaterReservoir(const std::string& id, const std::string& name, const std::string& municipality, unsigned int resID, double maxDel);
+
+    VertexType getType() const override;
+    double getMaxDelivery() const;
 };
 
 #endif //DA_PROJECT_23_24_WATERRESERVOIR_H

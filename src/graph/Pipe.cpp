@@ -4,8 +4,9 @@
 
 #include "Pipe.h"
 
-Pipe::Pipe(float maxCapacity, Vertex *endpoint) {
+Pipe::Pipe(double maxCapacity, Vertex *origin_, Vertex *endpoint) {
     this->capacity = maxCapacity;
+    this->origin = origin_;
     this->destination = endpoint;
 }
 
@@ -18,7 +19,7 @@ Vertex* Pipe::getDestination() const {
 }
 
 const std::string& Pipe::getDestinationId() const {
-    return this->destination->getID();
+    return this->destination->getCode();
 }
 
 
@@ -29,3 +30,23 @@ void Pipe::setCapacity(double newCapacity) {
 void Pipe::setDestination(Vertex *newDestination) {
     this->destination = newDestination;
 }
+
+void Pipe::setFlow(double newFlow) {
+    this->flow = newFlow;
+}
+
+double Pipe::getFlow() const {
+    return this->flow;
+}
+
+Vertex *Pipe::getOrigin() {
+    return this->origin;
+}
+
+void Pipe::setOrigin(Vertex *orig) {
+    this->origin = orig;
+}
+
+
+
+

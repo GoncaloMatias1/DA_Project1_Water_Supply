@@ -5,37 +5,91 @@
 
 #include "Vertex.h"
 
-
 Vertex::Vertex(const std::string & identifier) {
-    this->id = identifier;
-    this->adj.clear();
+    this->code = identifier;
+    this->incoming.clear();
+    this->outgoing.clear();
 }
 
-void Vertex::setID(const std::string &identifier) {
-    this->id = identifier;
+void Vertex::setCode(const std::string &identifier) {
+    this->code = identifier;
 }
 
-void Vertex::setAdj(const std::vector<Pipe *> &newAdj) {
-    this->adj = newAdj;
+void Vertex::setOutgoing(const std::vector<Pipe *> &newAdj) {
+    this->outgoing = newAdj;
+}
+void Vertex::setIncoming(const std::vector<Pipe *> &newAdj) {
+    this->incoming = newAdj;
 }
 
-void Vertex::addPipe(Pipe *newPipe) {
-    this->adj.push_back(newPipe);
+void Vertex::addOutgoingPipe(Pipe *newPipe) {
+    this->outgoing.push_back(newPipe);
 }
 
+void Vertex::addIncomingPipe(Pipe *newPipe) {
+    this->incoming.push_back(newPipe);
+}
 
 bool Vertex::removePipeTo(const std::string &endpoint) {
-    for(auto itr = adj.begin(); itr != adj.end(); itr++){
+    for(auto itr = outgoing.begin(); itr != outgoing.end(); itr++){
         if((*itr)->getDestinationId() == endpoint){
-            adj.erase(itr);
+            outgoing.erase(itr);
             return true;
         }
     }
     return false;
 }
 
-
-
-const std::string& Vertex::getID() const {
-    return this->id;
+bool Vertex::removePipeFrom(const std::string &origin) {
+    for(auto itr = incoming.begin(); itr != incoming.end(); itr++){
+        if((*itr)->getDestinationId() == origin){
+            incoming.erase(itr);
+            return true;
+        }
+    }
+    return false;
 }
+
+const std::string& Vertex::getCode() const {
+    return this->code;
+}
+
+void Vertex::setVisited(bool newSt) {
+    this->visited = newSt;
+}
+
+bool Vertex::isVisited() const {
+    return this->visited;
+}
+
+void Vertex::setProcessing(bool proc) {
+    this->processing = proc;
+}
+
+bool Vertex::isProcessing() const {
+    return this->processing;
+}
+
+void Vertex::setPath(Pipe *parent) {
+    this->path = parent;
+}
+
+Pipe *Vertex::getPath() const {
+    return this->path;
+}
+
+VertexType Vertex::getType() const {
+    return VertexType::VirtualVertex;
+}
+
+std::vector<Pipe *> Vertex::getIncoming() const {
+    return this->incoming;
+}
+
+std::vector<Pipe *> Vertex::getOugoing() const {
+    return this->outgoing;
+}
+
+
+
+

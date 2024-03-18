@@ -17,6 +17,17 @@ public:
     City(const std::string& vertexId, const std::string &name, unsigned int id, double demand_, unsigned int population);
 
     // Getters and setters
+    void setName(const std::string& name);
+    void setID(unsigned int id);
+    void setPop(unsigned int pop_);
+    void setDemand(double demand_);
+
+    const std::string& getName() const;
+    unsigned int getID() const;
+    unsigned int getPop() const;
+    double getDemand() const;
+
+    VertexType getType() const override;
 
 };
 

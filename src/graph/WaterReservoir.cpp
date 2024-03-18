@@ -10,3 +10,12 @@ WaterReservoir::WaterReservoir(const std::string &id, const std::string &name_, 
     this->maxDelivery = maxDel;
 }
 
+VertexType WaterReservoir::getType() const {
+    return VertexType::ReservoirVertex;
+}
+
+double WaterReservoir::getMaxDelivery() const {
+    return this->maxDelivery;
+}
+
+

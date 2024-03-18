@@ -4,6 +4,7 @@
 
 int main() {
     NetworkController controller("../data");
+    controller.edmondsKarp();
     //Menu menu;
     //menu.menu();
 
