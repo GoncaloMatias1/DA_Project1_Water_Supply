@@ -11,9 +11,14 @@
 
 NetworkController::NetworkController(const std::string &src) {
     this->dataRoot = src;
+}
+
+void NetworkController::initializeNetwork() {
     this->parseData();
     std::cout << this->network.getCityId("Beja") << std::endl;
+    this->edmondsKarp();
 }
+
 
 void NetworkController::parseData() {
     try{

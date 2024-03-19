@@ -28,6 +28,7 @@ public:
     void readPumpingStations();
     void readCities();
     void readPipes();
+    void initializeNetwork();
 
     // FOr edmonds-karp
     // Generate super source that connects all sources to this with edge capacity INF
