@@ -8,6 +8,7 @@ Pipe::Pipe(double maxCapacity, Vertex *origin_, Vertex *endpoint) {
     this->capacity = maxCapacity;
     this->origin = origin_;
     this->destination = endpoint;
+    this->flow = 0;
 }
 
 double Pipe::getCapacity() const {

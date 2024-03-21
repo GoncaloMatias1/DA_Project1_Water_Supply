@@ -5,8 +5,9 @@
 int main() {
     NetworkController controller("../data");
     controller.edmondsKarp();
-    //Menu menu;
-    //menu.menu();
+    for(auto pair : controller.getLowWaterCities()){
+        std::cout << "City with code " << pair.first << " has a deficit of  " << pair.second << std::endl;
+    }
 
     return 0 ;
 }

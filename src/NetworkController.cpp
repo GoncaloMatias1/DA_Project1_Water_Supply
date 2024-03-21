@@ -203,7 +203,13 @@ void NetworkController::edmondsKarp() {
     for(Pipe* pipe: sink->getIncoming()){
         maxFlow += pipe->getFlow();
     }
+
+    /*
+    for(Pipe* pipe: sink->getIncoming()){
+        std::cout << "Flow in " << pipe->getOrigin()->getCode() << " is " << pipe->getFlow() << std::endl;
+    }
     std::cout << "Max flow is " << maxFlow << std::endl;
+    */
 }
 
 bool NetworkController::findAugmentingPath(Vertex *source, Vertex *sink) {
@@ -271,6 +277,24 @@ void NetworkController::augmentFlowAlongPath(Vertex *source, Vertex *sink, doubl
             vertex = pipe->getDestination();
         }
     }
+}
+
+std::vector<std::pair<unsigned int, unsigned int>> NetworkController::getLowWaterCities() {
+    std::vector<std::pair<unsigned int, unsigned int>> result;
+
+    Vertex* superSink = this->network.findVertex("SuperSink");
+    if(superSink == nullptr) return {};
+
+    for(Pipe* pipe: superSink->getIncoming()){
+        City* city = dynamic_cast<City*>(pipe->getOrigin());
+        if(city != nullptr){
+            if(city->getDemand() > pipe->getFlow()){
+                result.emplace_back(city->getID(), city->getDemand() - pipe->getFlow());
+            }
+        }
+
+    }
+    return result;
 }
 
 

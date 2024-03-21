@@ -29,7 +29,7 @@ public:
     void readCities();
     void readPipes();
 
-    // FOr edmonds-karp
+    // For  T2.1
     // Generate super source that connects all sources to this with edge capacity INF
     Vertex* generateSuperSource();
     // Generate super sink that connects all sinks to this with edge capacity INF
@@ -40,6 +40,9 @@ public:
     double findMinResidualAlongPath(Vertex *source, Vertex *sink);
     void augmentFlowAlongPath(Vertex* source, Vertex* sink, double f);
 
+
+    // For T2.2
+    std::vector<std::pair<unsigned int, unsigned int>> getLowWaterCities();
 
 };
 
