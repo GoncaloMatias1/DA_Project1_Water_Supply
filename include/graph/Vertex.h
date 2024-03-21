@@ -30,6 +30,7 @@ protected:
 
 public:
     Vertex(const std::string&);
+    void clearIncoming();
 
     // Class setters
     void setCode(const std::string& identifier);

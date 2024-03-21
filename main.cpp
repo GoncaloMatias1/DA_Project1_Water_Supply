@@ -4,13 +4,14 @@
 void showMenu() {
     std::cout << "\n=== Water Supply Management Analysis System Menu ===\n";
     std::cout << "1. Initialize Network and Run Edmonds-Karp Algorithm\n";
-    std::cout << "2. Exit\n";
+    std::cout << "2. Calculate Max Flow to a City\n"; // New option
+    std::cout << "3. Exit\n";
     std::cout << "Select an option: ";
 }
 
 int main() {
-    NetworkController controller("../data"); // Controller is created, but not initialized yet
-
+    NetworkController controller("../data");
+    std::string cityCode;
     bool running = true;
     int choice;
 
@@ -18,18 +19,16 @@ int main() {
         showMenu();
         std::cin >> choice;
 
-        if (std::cin.fail()) {
-            std::cin.clear(); // Clear the error flags
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the rest of the input
-            std::cout << "Invalid input. Please enter a number.\n";
-            continue;
-        }
-
         switch (choice) {
             case 1:
-                controller.initializeNetwork(); // Now initialization is controlled by the menu
+                controller.initializeNetwork();
                 break;
             case 2:
+                std::cout << "Enter the city code to calculate the max flow to: ";
+                std::cin >> cityCode;
+                controller.edmondsKarpForCity(cityCode);
+                break;
+            case 3:
                 std::cout << "Exiting program...\n";
                 running = false;
                 break;
