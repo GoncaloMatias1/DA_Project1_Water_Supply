@@ -280,32 +280,26 @@ void NetworkController::augmentFlowAlongPath(Vertex *source, Vertex *sink, doubl
 
 
 void NetworkController::edmondsKarpForCity(const std::string& cityCode) {
-    // Initialize the super source and super sink
     Vertex* superSource = this->generateSuperSource();
     Vertex* originalSuperSink = this->generateSuperSink();
 
-    // Redirect super sink connections temporarily to target city
     for (auto& pipe : originalSuperSink->getIncoming()) {
         Vertex* sourceVertex = pipe->getOrigin();
         this->network.addEdge(sourceVertex->getCode(), cityCode, pipe->getCapacity());
     }
-    this->network.removeVertex("SuperSink"); // Remove super sink temporarily
+    this->network.removeVertex("SuperSink");
 
-    // Run the Edmonds-Karp algorithm
     this->edmondsKarp();
 
-    // Calculate the maximum flow to the specific city
     double maxFlowToCity = 0;
     Vertex* cityVertex = this->network.findVertex(cityCode);
     for (auto& pipe : cityVertex->getIncoming()) {
         maxFlowToCity += pipe->getFlow();
     }
 
-    // Output the result to console
     std::cout << "Maximum flow to city " << cityCode << " is " << maxFlowToCity << std::endl;
 
-    // Save the result to a file
-    std::ofstream outFile("max_flow_to_city_results.txt", std::ios::app); // Open in append mode
+    std::ofstream outFile("max_flow_to_city_results.txt", std::ios::app);
     if (outFile.is_open()) {
         outFile << cityCode << ", " << maxFlowToCity << std::endl;
         outFile.close();
@@ -313,16 +307,12 @@ void NetworkController::edmondsKarpForCity(const std::string& cityCode) {
         std::cerr << "Error opening the output file." << std::endl;
     }
 
-    // Restore the original network configuration
     this->network.addVertex(originalSuperSink);
     for (auto& pipe : originalSuperSink->getIncoming()) {
         Vertex* sourceVertex = pipe->getOrigin();
         this->network.addEdge(sourceVertex->getCode(), "SuperSink", pipe->getCapacity());
     }
-    // Remove temporary edges to the city
     cityVertex->clearIncoming();
 
-    // Optionally, reset all flows in the network for a clean state if necessary
-    // ResetFlows();
 }
 

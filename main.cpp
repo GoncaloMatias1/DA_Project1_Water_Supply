@@ -4,7 +4,7 @@
 void showMenu() {
     std::cout << "\n=== Water Supply Management Analysis System Menu ===\n";
     std::cout << "1. Initialize Network and Run Edmonds-Karp Algorithm\n";
-    std::cout << "2. Calculate Max Flow to a City\n"; // New option
+    std::cout << "2. Calculate Max Flow to a City\n";
     std::cout << "3. Exit\n";
     std::cout << "Select an option: ";
 }
