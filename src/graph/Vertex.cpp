@@ -90,6 +90,9 @@ std::vector<Pipe *> Vertex::getOugoing() const {
     return this->outgoing;
 }
 
+void Vertex::clearIncoming() {
+    this->incoming.clear();
+}
 
 
 

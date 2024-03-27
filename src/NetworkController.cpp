@@ -11,9 +11,15 @@
 
 NetworkController::NetworkController(const std::string &src) {
     this->dataRoot = src;
-    this->parseData();
-    std::cout << this->network.getCityId("Beja") << std::endl;
+    this->maxFlowValid = false;
 }
+
+void NetworkController::initializeNetwork() {
+    this->parseData();
+    this->edmondsKarp();
+    this->saveCityData();
+}
+
 
 void NetworkController::parseData() {
     try{
@@ -140,7 +146,7 @@ void NetworkController::readPipes() {
     }
 }
 
-Vertex* NetworkController::generateSuperSource() {
+Vertex* NetworkController::getSuperSource() {
     // Create super source with code "SuperSource"
     Vertex* super = this->network.findVertex("SuperSource");
     if(super!= nullptr) return super;
@@ -162,7 +168,7 @@ Vertex* NetworkController::generateSuperSource() {
     return super;
 }
 
-Vertex* NetworkController::generateSuperSink() {
+Vertex* NetworkController::getSuperSink() {
     // Create super sink with code "SuperSink"
     Vertex* super = this->network.findVertex("SuperSink");
     if(super!= nullptr) return super;
@@ -176,7 +182,7 @@ Vertex* NetworkController::generateSuperSink() {
         City* city = dynamic_cast<City*>(vertex);
         if(city != nullptr){
             // Found a city
-            Pipe* pipe =new Pipe(INF, city, super);
+            Pipe* pipe =new Pipe(city->getDemand(), city, super);
             city->addOutgoingPipe(pipe);
             super->addIncomingPipe(pipe);
         }
@@ -185,8 +191,8 @@ Vertex* NetworkController::generateSuperSink() {
 }
 
 void NetworkController::edmondsKarp() {
-    Vertex* source = this->generateSuperSource();
-    Vertex* sink = this->generateSuperSink();
+    Vertex* source = this->getSuperSource();
+    Vertex* sink = this->getSuperSink();
 
     for(Vertex* vertex: this->network.getVertexSet()){
         for(Pipe* pipe: vertex->getOugoing()){
@@ -204,12 +210,7 @@ void NetworkController::edmondsKarp() {
         maxFlow += pipe->getFlow();
     }
 
-    /*
-    for(Pipe* pipe: sink->getIncoming()){
-        std::cout << "Flow in " << pipe->getOrigin()->getCode() << " is " << pipe->getFlow() << std::endl;
-    }
-    std::cout << "Max flow is " << maxFlow << std::endl;
-    */
+    this->maxFlowValid = true;
 }
 
 bool NetworkController::findAugmentingPath(Vertex *source, Vertex *sink) {
@@ -279,8 +280,8 @@ void NetworkController::augmentFlowAlongPath(Vertex *source, Vertex *sink, doubl
     }
 }
 
-std::vector<std::pair<unsigned int, unsigned int>> NetworkController::getLowWaterCities() {
-    std::vector<std::pair<unsigned int, unsigned int>> result;
+std::vector<std::pair<std::string, double>> NetworkController::getLowWaterCities() {
+    std::vector<std::pair<std::string, double>> result;
 
     Vertex* superSink = this->network.findVertex("SuperSink");
     if(superSink == nullptr) return {};
@@ -289,13 +290,55 @@ std::vector<std::pair<unsigned int, unsigned int>> NetworkController::getLowWate
         City* city = dynamic_cast<City*>(pipe->getOrigin());
         if(city != nullptr){
             if(city->getDemand() > pipe->getFlow()){
-                result.emplace_back(city->getID(), city->getDemand() - pipe->getFlow());
+                result.emplace_back(city->getCode(), city->getDemand() - pipe->getFlow());
             }
         }
-
     }
     return result;
 }
 
+void NetworkController::saveCityData() {
+    Vertex* superSink = this->getSuperSink();
 
+    std::ofstream outFile("../output/max_flow_network.txt");
+    if (outFile.is_open()) {
+        outFile << "CityCode, CityDemand, CityFlow" << std::endl;
+        for(Pipe* pipe: superSink->getIncoming()){
+            City* city = dynamic_cast<City*>(pipe->getOrigin());
+            if(city != nullptr)
+                outFile << city->getCode() << ", " << city->getDemand()  << ", " << pipe->getFlow() << std::endl;
+        }
+        outFile.close();
+    } else {
+        std::cerr << "Error opening the output file." << std::endl;
+    }
+
+}
+
+std::pair<std::string, double> NetworkController::getMaxFlowInCity(const std::string &city) {
+    if(!this->maxFlowValid) this->edmondsKarp();
+    City* cityVertex = dynamic_cast<City*>(this->network.findVertex(city));
+    if(cityVertex == nullptr) return {};
+
+    for(Pipe* pipe: cityVertex->getOugoing()){
+        if(pipe->getDestination() == this->getSuperSink()){
+            return {city, pipe->getFlow()};
+        }
+    }
+    return {};
+}
+
+std::vector<std::pair<std::string, double>> NetworkController::getNetworkFlow() {
+    std::vector<std::pair<std::string, double>> result;
+    if(!this->maxFlowValid) edmondsKarp();
+
+    Vertex* superSink = this->getSuperSink();
+    for(Pipe* pipe : superSink->getIncoming()){
+        City* city = dynamic_cast<City*>(pipe->getOrigin());
+        if(city == nullptr) continue;
+        result.emplace_back(city->getCode(), pipe->getFlow());
+    }
+
+    return result;
+}
 

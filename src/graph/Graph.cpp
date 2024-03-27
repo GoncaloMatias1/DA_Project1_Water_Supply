@@ -7,7 +7,6 @@
 
 Graph::~Graph(){
     for(auto itr = this->vertexSet.begin(); itr != this->vertexSet.end(); ){
-        
         this->removeEdgesTo((*itr)->getCode());
         Vertex* toRemove = (*itr);
         itr = this->vertexSet.erase(itr);
