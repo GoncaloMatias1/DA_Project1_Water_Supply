@@ -1,20 +1,26 @@
 #include <iostream>
 #include "NetworkController.h"
 #include "Menu.h"
-
-void showMenu() {
-    std::cout << "\n=== Water Supply Management Analysis System Menu ===\n";
-    std::cout << "1. Calculate Max flow of network\n";
-    std::cout << "2. Calculate Max Flow to a City\n";
-    std::cout << "3. Calculate Cities with deficit of water\n";
-    std::cout << "4. Get statistics on reservoir removal\n";
-    std::cout << "5. Exit\n";
-    std::cout << "Select an option: ";
-}
-
 int main() {
     NetworkController controller("../data");
-    controller.initializeNetwork(true);
+    char choice;
+    while(! ((choice - '0') == 1 || (choice - '0') == 2)){
+        std::cout << "Choose a dataset:" << std::endl;
+        std::cout << "1. Madeira (small)" << std::endl;
+        std::cout << "2. Continental Portugal (big)" << std::endl;
+        std::cout << "Enter your choice (1 or 2): ";
+        std::cin >> choice;
+
+        switch (choice - '0') {
+            case 1:
+                controller.initializeNetwork(true);
+                break;
+            case 2:
+                controller.initializeNetwork(false);
+                break;
+        }
+    }
+    
     Menu menu(&controller);
     return 0;
 }

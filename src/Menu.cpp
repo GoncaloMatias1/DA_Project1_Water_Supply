@@ -57,7 +57,6 @@ void Menu::showMainMenu() {
 
 void Menu::run_menu() {
     while(running){
-
         this->showMainMenu();
         char choice;
         std::cin >> choice;

@@ -26,7 +26,7 @@ add_executable(DA_Project_23_24
         main.cpp
         src/graph/PumpingStation.cpp
         src/graph/WaterReservoir.cpp
-        src/graph/Menu.cpp
+        src/Menu.cpp
         include/Menu.h
 
 )
