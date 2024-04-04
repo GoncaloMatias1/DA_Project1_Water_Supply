@@ -3,6 +3,7 @@
 //
 
 #include "Pipe.h"
+#include "Vertex.h"
 
 Pipe::Pipe(double maxCapacity, Vertex *origin_, Vertex *endpoint) {
     this->capacity = maxCapacity;
@@ -48,6 +49,7 @@ void Pipe::setOrigin(Vertex *orig) {
     this->origin = orig;
 }
 
-
-
+std::string Pipe::getPipeId() const {
+    return origin->getCode() + "-" + destination->getCode();
+}
 

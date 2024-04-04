@@ -86,7 +86,7 @@ std::vector<Pipe *> Vertex::getIncoming() const {
     return this->incoming;
 }
 
-std::vector<Pipe *> Vertex::getOugoing() const {
+std::vector<Pipe *> Vertex::getOutgoing() const {
     return this->outgoing;
 }
 

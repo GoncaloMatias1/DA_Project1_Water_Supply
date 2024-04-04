@@ -54,7 +54,7 @@ public:
     bool isProcessing() const;
     Pipe* getPath() const;
     std::vector<Pipe*> getIncoming() const;
-    std::vector<Pipe*> getOugoing() const;
+    std::vector<Pipe*> getOutgoing() const;
 
     virtual VertexType getType() const;
 };

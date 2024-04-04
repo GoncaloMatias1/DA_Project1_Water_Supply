@@ -7,6 +7,7 @@
 #include "City.h"
 #include "WaterReservoir.h"
 #include "PumpingStation.h"
+#include "Vertex.h"
 
 
 NetworkController::NetworkController(const std::string &src) {
@@ -196,7 +197,7 @@ void NetworkController::edmondsKarp() {
     Vertex* sink = this->getSuperSink();
 
     for(Vertex* vertex: this->network.getVertexSet()){
-        for(Pipe* pipe: vertex->getOugoing()){
+        for(Pipe* pipe: vertex->getOutgoing()){
             pipe->setFlow(0);
         }
     }
@@ -227,7 +228,7 @@ bool NetworkController::findAugmentingPath(Vertex *source, Vertex *sink) {
         Vertex* v = q.front();
         q.pop();
 
-        for(Pipe* pipe: v->getOugoing()){
+        for(Pipe* pipe: v->getOutgoing()){
             testAndVisit(q, pipe, pipe->getDestination(), pipe->getCapacity() - pipe->getFlow());
         }
 
@@ -322,7 +323,7 @@ std::pair<std::string, double> NetworkController::getMaxFlowInCity(const std::st
     City* cityVertex = dynamic_cast<City*>(this->network.findVertex(city));
     if(cityVertex == nullptr) return {city, -1};
 
-    for(Pipe* pipe: cityVertex->getOugoing()){
+    for(Pipe* pipe: cityVertex->getOutgoing()){
         if(pipe->getDestination() == this->getSuperSink()){
             return {city, pipe->getFlow()};
         }
@@ -354,7 +355,7 @@ std::unordered_map<std::string, std::pair<double, double>> NetworkController::ge
     std::unordered_map<std::string, std::pair<double, double>> result;
 
     // Set vertex to pass 0 flow, and run the function to get the cities that are low
-    for(Pipe* out_pipe : this->getSuperSource()->getOugoing()){
+    for(Pipe* out_pipe : this->getSuperSource()->getOutgoing()){
         if(out_pipe->getDestination() == vertex){
             double prevCapacity = out_pipe->getCapacity();
             out_pipe->setCapacity(0);
@@ -539,7 +540,7 @@ NetworkController::getAffectedByStation(const std::string &res_id) {
     std::unordered_map<std::string, std::pair<double, double>> result;
 
     std::vector<Pipe*> incoming = vertex->getIncoming();
-    std::vector<Pipe*> outgoing = vertex->getOugoing();
+    std::vector<Pipe*> outgoing = vertex->getOutgoing();
 
 
     vertex->setIncoming({});
@@ -560,5 +561,50 @@ NetworkController::getAffectedByStation(const std::string &res_id) {
     this->maxFlowValid = false;
     return result;
 }
+
+Pipe* NetworkController::findPipe(const std::string& servicePointA, const std::string& servicePointB) {
+    for (auto* v : this->network.getVertexSet()) {
+        for (auto* pipe : v->getOutgoing()) {
+            if (pipe->getOrigin()->getCode() == servicePointA && pipe->getDestination()->getCode() == servicePointB) {
+                return pipe;
+            }
+        }
+        for (auto* pipe : v->getIncoming()) {
+            if (pipe->getOrigin()->getCode() == servicePointB && pipe->getDestination()->getCode() == servicePointA) {
+                return pipe;
+            }
+        }
+    }
+    return nullptr;
+}
+
+
+void NetworkController::simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB) {
+    Pipe* pipe = this->findPipe(servicePointA, servicePointB);
+    if (pipe == nullptr) {
+        std::cerr << "Pipeline from " << servicePointA << " to " << servicePointB << " not found." << std::endl;
+        return;
+    }
+
+    double originalCapacity = pipe->getCapacity();
+    pipe->setCapacity(0);
+    this->edmondsKarp();
+
+    for (Vertex* v : this->network.getVertexSet()) {
+        City* city = dynamic_cast<City*>(v);
+        if (city != nullptr) {
+            std::pair<std::string, double> flowInCity = getMaxFlowInCity(city->getCode());
+            if (flowInCity.second < city->getDemand()) {
+                std::cout << "City affected by the pipeline failure: " << city->getCode()
+                          << " Old Flow: " << flowInCity.second
+                          << " New Flow: " << (flowInCity.second - (city->getDemand() - flowInCity.second)) << std::endl;
+            }
+        }
+    }
+
+    pipe->setCapacity(originalCapacity);
+}
+
+
 
 

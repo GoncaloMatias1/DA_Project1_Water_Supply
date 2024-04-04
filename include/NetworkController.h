@@ -35,6 +35,8 @@ public:
     void readPipes();
     void readPipesSmall();
     void initializeNetwork(bool small);
+    void simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB);
+    Pipe* findPipe(const std::string& servicePointA, const std::string& servicePointB);
 
     Vertex* getVertex(const std::string& id);
 

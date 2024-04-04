@@ -7,6 +7,7 @@
 
 #include "Graph.h"
 #include <string>
+#include "Vertex.h"
 class Vertex;
 
 class Pipe{
@@ -30,6 +31,7 @@ public:
     void setDestination(Vertex* destination);
     void setFlow(double newFlow);
     void setOrigin(Vertex* orig);
+    std::string getPipeId() const;
 
 
 

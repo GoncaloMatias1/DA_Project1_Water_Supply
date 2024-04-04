@@ -34,6 +34,8 @@ public:
     void showReservoirRemoval();
     // T3.2 Menu
     void showStationRemoval();
+    // T3.3 Menu
+    void simulatePipelineFailureHandler();
 
 };
 
