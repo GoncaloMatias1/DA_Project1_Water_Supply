@@ -24,12 +24,19 @@ private:
 public:
     NetworkController(const std::string& src);
     void parseData();
+    void parseDataSmall();
 
     void readReservoirs();
+    void readReservoirsSmall();
     void readPumpingStations();
+    void readStationsSmall();
     void readCities();
+    void readCitiesSmall();
     void readPipes();
-    void initializeNetwork();
+    void readPipesSmall();
+    void initializeNetwork(bool small);
+
+    Vertex* getVertex(const std::string& id);
 
 
     /**
@@ -102,7 +109,12 @@ public:
 
     void saveCityData();
     std::pair<std::string, double> getMaxFlowInCity(const std::string& city);
-    std::vector<std::pair<std::string, double>> getNetworkFlow();
+    std::unordered_map<std::string, double> getNetworkFlow();
+
+    // For T3.1
+    std::unordered_map<std::string, std::pair<double, double>> getAffectedByReservoir( const std::string& res_id);
+
+    std::unordered_map<std::string, std::pair<double, double>> getAffectedByStation( const std::string& res_id);
 
 };
 
