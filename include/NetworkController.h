@@ -35,7 +35,27 @@ public:
     void readPipes();
     void readPipesSmall();
     void initializeNetwork(bool small);
+
+    /**
+    * @brief Simulates the failure of a pipe between two service points and assesses the impact on water flow.
+    *
+    * This function first attempts to find the specified pipe. If found, it sets its capacity to zero to simulate failure.
+    * It then runs the Edmonds-Karp algorithm to recalculate the maximum flow. Finally, it iterates over cities
+    * to check which ones are affected by the failure and restores the pipe's capacity.
+    *
+    * @param servicePointA The code of the source service point of the pipe.
+    * @param servicePointB The code of the target service point of the pipe.
+    */
     void simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB);
+
+
+    /**
+    * @brief Searches for a pipe in the network between two service points.
+    *
+    * @param servicePointA The code of the source service point.
+    * @param servicePointB The code of the target service point.
+    * @return A pointer to the found pipe, or nullptr if not found.
+    */
     Pipe* findPipe(const std::string& servicePointA, const std::string& servicePointB);
 
     Vertex* getVertex(const std::string& id);
