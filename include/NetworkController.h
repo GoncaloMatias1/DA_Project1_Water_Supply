@@ -37,27 +37,44 @@ public:
     void initializeNetwork(bool small);
 
     /**
-    * @brief Simulates the failure of a pipe between two service points and assesses the impact on water flow.
+    * @brief Simulates the effect of a pipeline failure on the water distribution network.
     *
-    * This function first attempts to find the specified pipe. If found, it sets its capacity to zero to simulate failure.
-    * It then runs the Edmonds-Karp algorithm to recalculate the maximum flow. Finally, it iterates over cities
-    * to check which ones are affected by the failure and restores the pipe's capacity.
+    * This function attempts to find the specified pipeline and, if successful, sets its capacity to zero
+    * to simulate a failure. It then runs the Edmonds-Karp algorithm to assess the impact on the network's
+    * flow, especially how the failure affects the water supply to the cities. Afterward, it restores the
+    * original pipeline capacity.
     *
-    * @param servicePointA The code of the source service point of the pipe.
-    * @param servicePointB The code of the target service point of the pipe.
+    * @param servicePointA The identifier of the first service point of the pipeline.
+    * @param servicePointB The identifier of the second service point of the pipeline.
+    * @pre The network graph must be correctly initialized with all vertices and edges.
+    * @post The function restores the pipeline's capacity to its original state after simulation.
+    * @note This function will output the results directly to the standard output.
     */
     void simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB);
 
 
     /**
-    * @brief Searches for a pipe in the network between two service points.
+    * @brief Locates a pipe connecting two service points within the network graph.
     *
-    * @param servicePointA The code of the source service point.
-    * @param servicePointB The code of the target service point.
-    * @return A pointer to the found pipe, or nullptr if not found.
+    * This function iterates over the vertices of the network graph to find a pipe with the specified
+    * service points as its origin and destination. It considers both outgoing and incoming edges to account
+    * for potential bidirectionality in the graph.
+    *
+    * @param servicePointA The identifier of the origin service point of the pipe.
+    * @param servicePointB The identifier of the destination service point of the pipe.
+    * @return A pointer to the pipe if it exists, otherwise, nullptr.
     */
     Pipe* findPipe(const std::string& servicePointA, const std::string& servicePointB);
 
+    /**
+    * @brief Retrieves a vertex object from the network graph using its unique identifier.
+    *
+    * This method searches the network's internal graph representation for a vertex with the given
+    * identifier and returns it. If no vertex with the identifier exists, a null pointer is returned.
+    *
+    * @param id The unique identifier of the vertex to be retrieved.
+    * @return A pointer to the requested vertex if found, or nullptr if no such vertex exists.
+    */
     Vertex* getVertex(const std::string& id);
 
 
@@ -186,10 +203,16 @@ public:
     std::unordered_map<std::string, std::pair<double, double>> getAffectedByReservoir( const std::string& res_id);
 
     /**
-    * @brief Determines the impact on the network flow of removing a reservoir or a pumping station.
+    * @brief Determines the impact on network flow caused by the removal of a specified pumping station.
     *
-    * @param res_id The code of the reservoir or station.
-    * @return An unordered_map where each key-value pair consists of a city code and a pair of doubles representing the old and new flow values.
+    * This function first records the flow to all cities before removal. Then, it simulates the removal
+    * of the specified pumping station by temporarily disconnecting its incoming and outgoing pipes
+    * and recalculates the flow. It compares the before and after flows to determine the impact and
+    * restores the original connections afterward.
+    *
+    * @param res_id The unique identifier of the pumping station to be tested for removal.
+    * @return A map of city identifiers to pairs of doubles representing the flow before and after the
+    *         simulated removal of the pumping station.
     */
     std::unordered_map<std::string, std::pair<double, double>> getAffectedByStation( const std::string& res_id);
 
