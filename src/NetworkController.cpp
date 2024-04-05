@@ -3,6 +3,7 @@
 //
 
 #include <queue>
+#include <iomanip>
 #include "NetworkController.h"
 #include "City.h"
 #include "WaterReservoir.h"
@@ -157,14 +158,12 @@ Vertex* NetworkController::getSuperSource() {
     this->network.addVertex(super);
 
     // Connect super source to all reservoirs
-    for(Vertex* vertex: this->network.getVertexSet()){
+    for(std::pair<std::string, Vertex*> vertexPair: this->network.getVertexSet()){
 
-        WaterReservoir* reservoir = dynamic_cast<WaterReservoir*>(vertex);
+        WaterReservoir* reservoir = dynamic_cast<WaterReservoir*>(vertexPair.second);
         if(reservoir != nullptr){
             // Found a reservoir
-            Pipe* pipe = new Pipe(reservoir->getMaxDelivery(), super, vertex);
-            super->addOutgoingPipe(pipe);
-            vertex->addIncomingPipe(pipe);
+            this->network.addEdge(super->getCode(), reservoir->getCode(), reservoir->getMaxDelivery());
         }
     }
     return super;
@@ -179,14 +178,12 @@ Vertex* NetworkController::getSuperSink() {
     this->network.addVertex(super);
 
     // generate pipes to super sink from cities
-    for(Vertex* vertex: this->network.getVertexSet()){
+    for(std::pair<std::string, Vertex*> vertexPair: this->network.getVertexSet()){
 
-        City* city = dynamic_cast<City*>(vertex);
+        City* city = dynamic_cast<City*>(vertexPair.second);
         if(city != nullptr){
             // Found a city
-            Pipe* pipe =new Pipe(city->getDemand(), city, super);
-            city->addOutgoingPipe(pipe);
-            super->addIncomingPipe(pipe);
+            this->network.addEdge(city->getCode(), super->getCode(), city->getDemand());
         }
     }
     return super;
@@ -196,7 +193,8 @@ void NetworkController::edmondsKarp() {
     Vertex* source = this->getSuperSource();
     Vertex* sink = this->getSuperSink();
 
-    for(Vertex* vertex: this->network.getVertexSet()){
+    for(std::pair<std::string, Vertex*> vertexPair: this->network.getVertexSet()){
+        Vertex* vertex = vertexPair.second;
         for(Pipe* pipe: vertex->getOutgoing()){
             pipe->setFlow(0);
         }
@@ -216,8 +214,8 @@ void NetworkController::edmondsKarp() {
 }
 
 bool NetworkController::findAugmentingPath(Vertex *source, Vertex *sink) {
-    for(Vertex* v: this->network.getVertexSet()){
-        v->setVisited(false);
+    for(std::pair<std::string, Vertex*> v: this->network.getVertexSet()){
+        v.second->setVisited(false);
     }
 
     source->setVisited(true);
@@ -366,11 +364,18 @@ std::unordered_map<std::string, std::pair<double, double>> NetworkController::ge
         }
     }
 
-    // Iterave other before and after to find the divergent ones
-    for(std::pair<std::string, double> pair: flowBeforeRemoval){
-        if(flowAfterRemoval[pair.first] != pair.second){
-            result[pair.first] = std::make_pair(pair.second, flowAfterRemoval[pair.first]);
-        }
+    for(std::pair<std::string, double> afterPair: flowAfterRemoval){
+
+        // If it has its demand met
+        City* cityVertex = dynamic_cast<City*>(this->network.findVertex(afterPair.first));
+        if(cityVertex->getDemand() <= afterPair.second) continue;
+
+        // If the flow didn't change  i.g, not directly dependent -> skip
+        if(afterPair.second == flowBeforeRemoval[afterPair.first]) continue;
+
+        // It does not have its demand met and the flow changed!!!
+        result[afterPair.first] = {flowBeforeRemoval[afterPair.first], flowAfterRemoval[afterPair.first]};
+
     }
 
     this->maxFlowValid = false;
@@ -548,61 +553,69 @@ NetworkController::getAffectedByStation(const std::string &res_id) {
     this->edmondsKarp();
     flowAfterRemoval = this->getNetworkFlow();
 
+
+    for(std::pair<std::string, double> afterPair: flowAfterRemoval){
+
+        // If it has its demand met
+        City* cityVertex = dynamic_cast<City*>(this->network.findVertex(afterPair.first));
+        if(cityVertex->getDemand() <= afterPair.second) continue;
+
+        // If the flow didn't change  i.g, not directly dependent -> skip
+        if(afterPair.second == flowBeforeRemoval[afterPair.first]) continue;
+
+        // It does not have its demand met and the flow changed!!!
+        result[afterPair.first] = {flowBeforeRemoval[afterPair.first], flowAfterRemoval[afterPair.first]};
+
+    }
+
     vertex->setOutgoing(outgoing);
     vertex->setIncoming(incoming);
-
-    // Iterave other before and after to find the divergent ones
-    for(std::pair<std::string, double> pair: flowBeforeRemoval){
-        if(flowAfterRemoval[pair.first] != pair.second){
-            result[pair.first] = std::make_pair(pair.second, flowAfterRemoval[pair.first]);
-        }
-    }
 
     this->maxFlowValid = false;
     return result;
 }
 
 Pipe* NetworkController::findPipe(const std::string& servicePointA, const std::string& servicePointB) {
-    for (auto* v : this->network.getVertexSet()) {
-        for (auto* pipe : v->getOutgoing()) {
-            if (pipe->getOrigin()->getCode() == servicePointA && pipe->getDestination()->getCode() == servicePointB) {
-                return pipe;
-            }
-        }
-        for (auto* pipe : v->getIncoming()) {
-            if (pipe->getOrigin()->getCode() == servicePointB && pipe->getDestination()->getCode() == servicePointA) {
-                return pipe;
-            }
-        }
-    }
-    return nullptr;
+    return this->network.getPipe(servicePointA, servicePointB);
 }
 
 
-void NetworkController::simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB) {
+std::unordered_map<std::string, std::pair<double, double>> NetworkController::simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB) {
     Pipe* pipe = this->findPipe(servicePointA, servicePointB);
-    if (pipe == nullptr) {
-        std::cerr << "Pipeline from " << servicePointA << " to " << servicePointB << " not found." << std::endl;
-        return;
+    Vertex* a = this->network.findVertex(servicePointA);
+    Vertex* b = this->network.findVertex(servicePointB);
+
+    if (pipe == nullptr || a == nullptr || b == nullptr) {
+        throw std::invalid_argument("Pipeline was not found\n");
     }
 
+    std::unordered_map<std::string, double> flowBeforeRemoval = this->getNetworkFlow();
+    std::unordered_map<std::string, double> flowAfterRemoval;
+    std::unordered_map<std::string, std::pair<double, double>> result;
+
     double originalCapacity = pipe->getCapacity();
+
     pipe->setCapacity(0);
     this->edmondsKarp();
 
-    for (Vertex* v : this->network.getVertexSet()) {
-        City* city = dynamic_cast<City*>(v);
-        if (city != nullptr) {
-            std::pair<std::string, double> flowInCity = getMaxFlowInCity(city->getCode());
-            if (flowInCity.second < city->getDemand()) {
-                std::cout << "City affected by the pipeline failure: " << city->getCode()
-                          << " Old Flow: " << flowInCity.second
-                          << " New Flow: " << (flowInCity.second - (city->getDemand() - flowInCity.second)) << std::endl;
-            }
-        }
-    }
+    flowAfterRemoval = this->getNetworkFlow();
 
+    for(std::pair<std::string, double> afterPair: flowAfterRemoval){
+
+        // If it has its demand met
+        City* cityVertex = dynamic_cast<City*>(this->network.findVertex(afterPair.first));
+        if(cityVertex->getDemand() <= afterPair.second) continue;
+
+        // If the flow didn't change  i.g, not directly dependent -> skip
+        if(afterPair.second == flowBeforeRemoval[afterPair.first]) continue;
+
+        // It does not have its demand met and the flow changed!!!
+        result[afterPair.first] = {flowBeforeRemoval[afterPair.first], flowAfterRemoval[afterPair.first]};
+
+    }
     pipe->setCapacity(originalCapacity);
+    this->maxFlowValid = false;
+    return result;
 }
 
 

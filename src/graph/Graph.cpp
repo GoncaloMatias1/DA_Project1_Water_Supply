@@ -2,50 +2,50 @@
 // Created by admin1 on 04-03-2024.
 //
 
+#include <iostream>
 #include "Graph.h"
 #include "City.h"
 
 Graph::~Graph(){
     for(auto itr = this->vertexSet.begin(); itr != this->vertexSet.end(); ){
-        this->removeEdgesTo((*itr)->getCode());
-        Vertex* toRemove = (*itr);
+        Vertex* currentVertex = itr->second;
+        this->removeEdgesTo(currentVertex->getCode());
         itr = this->vertexSet.erase(itr);
-        delete toRemove;
+        delete currentVertex;
     }
 }
 
 Vertex *Graph::findVertex(const std::string &in) const {
-    for(Vertex* v: this->vertexSet){
-        if(v->getCode() == in) return v;
+    auto it = this->vertexSet.find(in);
+    if (it != this->vertexSet.end()) {
+        // Key exists in the map, return the corresponding value (Vertex*)
+        return it->second;
+    } else {
+        // Key not found, return nullptr or handle accordingly
+        return nullptr; // Or throw an exception, log an error, etc.
     }
-    return nullptr;
 }
 
 bool Graph::addVertex(Vertex* newVertex) {
-    this->vertexSet.push_back( newVertex);
+    if(newVertex->getCode() == "SuperSource");
+    this->vertexSet.emplace(newVertex->getCode(), newVertex);
 }
 
 bool Graph::removeVertex(const std::string &in) {
     Vertex* vertexToRemove = this->findVertex(in);
     if(vertexToRemove == nullptr) return false;
-    
-    for(Vertex* vertex: this->vertexSet){
+
+
+    for(std::pair<std::string, Vertex*> vertexPair: this->vertexSet){
         // Delete all references to dead vertex
-        if(vertex->getCode() != in){
-            vertex->removePipeTo(in);
-            vertex->removePipeFrom(in);
+        Vertex* currentVertex = vertexPair.second;
+        if(vertexPair.first != in){
+            currentVertex->removePipeTo(in);
+            currentVertex->removePipeFrom(in);
         }
     }
     
-    for(auto itr = this->vertexSet.begin(); itr != this->vertexSet.end();){
-        if((*itr)->getCode() == in) {
-            this->vertexSet.erase(itr);
-            delete vertexToRemove;
-            return true;
-        }
-        itr++;
-    }
-    return false;
+    return this->vertexSet.erase(in) != 0;
 }
 
 
@@ -53,11 +53,11 @@ bool Graph::addEdge(const std::string &sourc, const std::string &dest, float w) 
     Vertex* source = this->findVertex(sourc);
     Vertex* destination = this->findVertex(dest);
 
-
     if(source != nullptr && destination != nullptr){
         Pipe* newPipe = new Pipe(w, source, destination);
         source->addOutgoingPipe(newPipe);
         destination->addIncomingPipe(newPipe);
+        this->pipeSet[PIPE_ID(sourc, dest)] = newPipe;
         return true;
     }
     return  false;
@@ -84,34 +84,15 @@ bool Graph::addBidirectionalEdge(const std::string &sourc, const std::string &de
 }
 
 void Graph::removeEdgesTo(const std::string &out) {
-    for(Vertex* vertex: this->vertexSet){
+    for(std::pair<std::string, Vertex*> vertexPair: this->vertexSet){
+
         // Delete all references to dead vertex
-        Vertex* currentVertex = vertex;
+        Vertex* currentVertex = vertexPair.second;
         if(currentVertex->getCode() != out){
             currentVertex->removePipeTo(out);
             currentVertex->removePipeFrom(out);
         }
     }
-}
-
-int Graph::getCityId(const std::string &cityName) const {
-    for(Vertex* vertex: this->vertexSet){
-        City* curr_city = dynamic_cast<City*>(vertex);
-        if(curr_city != nullptr && curr_city->getName() == cityName){
-            return static_cast<int>(curr_city->getID());
-        }
-    }
-    return -1;
-}
-
-int Graph::getCityPopByName(const std::string &cityName) const {
-    for(Vertex* vertex: this->vertexSet){
-        City* curr_city = dynamic_cast<City*>(vertex);
-        if(curr_city != nullptr  && curr_city->getName() == cityName){
-            return static_cast<int>(curr_city->getPop());
-        }
-    }
-    return -1;
 }
 
 int Graph::getCityPop(const std::string& code) const {
@@ -123,15 +104,6 @@ int Graph::getCityPop(const std::string& code) const {
     return -1;
 }
 
-int Graph::getCityDemandByName(const std::string &cityName) const {
-    for(Vertex* vertex: this->vertexSet){
-        City* curr_city = dynamic_cast<City*>(vertex);
-        if(curr_city != nullptr  && curr_city->getName() == cityName){
-            return static_cast<int>(curr_city->getDemand());
-        }
-    }
-    return -1;
-}
 
 int Graph::getCityDemand(const std::string& code) const {
     City* curr_city = dynamic_cast<City*>(this->findVertex(code));
@@ -142,6 +114,10 @@ int Graph::getCityDemand(const std::string& code) const {
     return -1;
 }
 
-std::vector<Vertex* > Graph::getVertexSet() const {
+std::unordered_map<std::string, Vertex*> Graph::getVertexSet() const {
     return this->vertexSet;
+}
+
+Pipe *Graph::getPipe(const std::string &origin, const std::string &endpoint) {
+    return pipeSet[PIPE_ID(origin, endpoint)];
 }

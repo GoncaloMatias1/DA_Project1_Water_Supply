@@ -10,36 +10,35 @@
 #include <vector>
 #include <string>
 
+#define PIPE_ID(origin, endpoint) (origin + "/" + endpoint)
+
 class Vertex;
 class Pipe;
 
 class Graph{
 protected:
-    std::vector<Vertex*> vertexSet;
-
+    std::unordered_map<std::string, Vertex*> vertexSet;
+    std::unordered_map<std::string, Pipe*> pipeSet;
 public:
     ~Graph();
     Vertex *findVertex(const std::string& in) const;
 
-    std::vector<Vertex*> getVertexSet() const;
+    std::unordered_map<std::string, Vertex*> getVertexSet() const;
 
     bool addVertex(Vertex* newVertex);
     bool removeVertex(const std::string &in);
 
     bool addEdge(const std::string &sourc, const std::string &dest, float w);
     bool removeEdge(const std::string &source, const std::string &dest);
+    void removeEdgesTo(const std::string& out);
     bool addBidirectionalEdge(const std::string &sourc, const std::string &dest, double w);
 
     //Info about city
-    int getCityId(const std::string& cityName) const;
-    int getCityPopByName(const std::string& cityName) const;
-
     int getCityPop(const std::string& code) const;
-    int getCityDemandByName(const std::string& cityName) const;
     int getCityDemand(const std::string& code) const;
 
+    Pipe* getPipe(const std::string& origin, const std::string& endpoint);
 
-    void removeEdgesTo(const std::string& out);
 };
 
 #endif //DA_PROJECT_23_24_GRAPH_H

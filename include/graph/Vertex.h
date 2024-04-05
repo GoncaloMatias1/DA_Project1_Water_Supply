@@ -25,7 +25,6 @@ protected:
     bool visited = false;
 
     bool processing = false;
-    double dist = 0;
     Pipe *path = nullptr;
 
 public:
