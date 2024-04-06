@@ -51,7 +51,7 @@ void Menu::showMainMenu() {
     std::cout << "4. Analyze Impact of Reservoir Removal\n";
     std::cout << "5. Analyze Impact of Pumping Station Removal\n";
     std::cout << "6. Simulate Pipeline Failure\n" << RESET;
-    std::cout << "7. Exit\n" << RESET;
+    std::cout << RED << "7. Exit\n" << RESET;
     std::cout << "Select an option: ";
 }
 

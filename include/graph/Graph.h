@@ -6,29 +6,51 @@
 #define DA_PROJECT_23_24_GRAPH_H
 
 #include "Vertex.h"
+
+
 #include <unordered_map>
 #include <vector>
 #include <string>
 
 #define PIPE_ID(origin, endpoint) (origin + "/" + endpoint)
+#define RESERVOIR_CITY(res, city) (res + "/" + city)
+#define AUGMENTING_PATH std::pair<std::vector<Pipe*>, double>
+
+class Pipe;
 
 class Vertex;
-class Pipe;
+class City;
+class WaterReservoir;
+class PumpingStation;
+
 
 class Graph{
 protected:
     std::unordered_map<std::string, Vertex*> vertexSet;
+
+    std::unordered_map<std::string, City*> citySet;
+    std::unordered_map<std::string, WaterReservoir*> reservoirSet;
+    std::unordered_map<std::string, PumpingStation*> stationSet;
+
     std::unordered_map<std::string, Pipe*> pipeSet;
+
+    std::unordered_map<std::string, std::vector<AUGMENTING_PATH>> augmentingPaths;
+
 public:
     ~Graph();
     Vertex *findVertex(const std::string& in) const;
 
     std::unordered_map<std::string, Vertex*> getVertexSet() const;
+    std::vector<City*> getCities();
+    std::vector<WaterReservoir*> getReservoirs();
+    std::vector<PumpingStation*> getStations();
+
+    Pipe* getPipe(const std::string& origin, const std::string& endpoint);
 
     bool addVertex(Vertex* newVertex);
     bool removeVertex(const std::string &in);
 
-    bool addEdge(const std::string &sourc, const std::string &dest, float w);
+    bool addEdge(const std::string &sourc, const std::string &dest, double w);
     bool removeEdge(const std::string &source, const std::string &dest);
     void removeEdgesTo(const std::string& out);
     bool addBidirectionalEdge(const std::string &sourc, const std::string &dest, double w);
@@ -37,7 +59,19 @@ public:
     int getCityPop(const std::string& code) const;
     int getCityDemand(const std::string& code) const;
 
-    Pipe* getPipe(const std::string& origin, const std::string& endpoint);
+
+    void addAugmentingPath(const std::string& resCityID,AUGMENTING_PATH path);
+    void clearAugmentingPaths();
+
+    // Network effiency improvements
+    double calculateAverageDifference();
+    double calculateVariance();
+    double calculateMaxDifference();
+
+    std::unordered_map<std::string, Pipe*> getPipeSet();
+
+
+
 
 };
 

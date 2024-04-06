@@ -40,18 +40,6 @@ public:
 
     Vertex* getVertex(const std::string& id);
 
-
-    /**
- * @brief Calculates and displays the maximum water flow that can reach a specific city.
- *
- * This function modifies the network graph to direct the super sink connections temporarily to the target city and then runs the Edmonds-Karp algorithm. It calculates the maximum flow to the city, displays it, and saves the result to a file.
- *
- * @param cityCode The code of the city for which to calculate the maximum water flow.
- * @pre The network must be initialized, and the city code must correspond to an existing city in the network.
- * @post The original network configuration is restored after the calculation.
- * @note This function alters the network temporarily and should not be run concurrently with other operations that modify the network.
- */
-    void edmondsKarpForCity(const std::string& cityCode);
     // FOr edmonds-karp
 
     // Generate super source that connects all sources to this with edge capacity INF
@@ -117,6 +105,8 @@ public:
     std::unordered_map<std::string, std::pair<double, double>> getAffectedByReservoir( const std::string& res_id);
 
     std::unordered_map<std::string, std::pair<double, double>> getAffectedByStation( const std::string& res_id);
+
+    void balanceNetwork();
 
 };
 

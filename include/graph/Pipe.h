@@ -13,6 +13,8 @@ class Vertex;
 class Pipe{
 private:
     double capacity;
+    // Used for network improvements
+    double originalCapacity;
     double flow;
     Vertex* destination;
     Vertex* origin;
@@ -25,6 +27,7 @@ public:
     const std::string& getDestinationId() const;
     double getFlow() const;
     Vertex* getOrigin();
+    double getOriginalCapacity();
 
     // Class setters
     void setCapacity(double newCapacity);
