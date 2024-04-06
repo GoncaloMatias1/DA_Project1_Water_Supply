@@ -22,6 +22,7 @@ protected:
     std::vector<Pipe*> outgoing;
     std::vector<Pipe*> incoming;
     std::string code;
+    VertexType vertexType;
     bool visited = false;
 
     bool processing = false;
@@ -39,6 +40,7 @@ public:
     void setVisited(bool newSt);
     void setProcessing(bool proc);
     void setPath(Pipe* parent);
+    void setType(VertexType type);
 
     void addOutgoingPipe(Pipe* newPipe);
     void addIncomingPipe(Pipe* newPipe);

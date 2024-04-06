@@ -34,6 +34,7 @@ public:
     void readCitiesSmall();
     void readPipes();
     void readPipesSmall();
+
     void initializeNetwork(bool small);
     std::unordered_map<std::string, std::pair<double, double>> simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB);
     Pipe* findPipe(const std::string& servicePointA, const std::string& servicePointB);
@@ -99,14 +100,20 @@ public:
 
     void saveCityData();
     std::pair<std::string, double> getMaxFlowInCity(const std::string& city);
-    std::unordered_map<std::string, double> getNetworkFlow();
+    std::unordered_map<std::string, double> getCitiesFlow();
 
     // For T3.1
     std::unordered_map<std::string, std::pair<double, double>> getAffectedByReservoir( const std::string& res_id);
 
     std::unordered_map<std::string, std::pair<double, double>> getAffectedByStation( const std::string& res_id);
 
+
+    // For partial edmonds karp
+    /*
     void balanceNetwork();
+    std::unordered_map<std::string, std::pair<double, double>> removeReservoirPartial( const std::string& res_id);
+    void addAugmentingPathToGraph(Graph* graph, AUGMENTING_PATH path);
+     */
 
 };
 

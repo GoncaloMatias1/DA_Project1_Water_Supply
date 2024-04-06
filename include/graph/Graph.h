@@ -13,8 +13,7 @@
 #include <string>
 
 #define PIPE_ID(origin, endpoint) (origin + "/" + endpoint)
-#define RESERVOIR_CITY(res, city) (res + "/" + city)
-#define AUGMENTING_PATH std::pair<std::vector<Pipe*>, double>
+#define AUGMENTING_PATH std::vector<Pipe*>
 
 class Pipe;
 
@@ -53,15 +52,13 @@ public:
     bool addEdge(const std::string &sourc, const std::string &dest, double w);
     bool removeEdge(const std::string &source, const std::string &dest);
     void removeEdgesTo(const std::string& out);
-    bool addBidirectionalEdge(const std::string &sourc, const std::string &dest, double w);
-
-    //Info about city
-    int getCityPop(const std::string& code) const;
-    int getCityDemand(const std::string& code) const;
 
 
-    void addAugmentingPath(const std::string& resCityID,AUGMENTING_PATH path);
+    void addAugmentingPath(const std::string& resID, AUGMENTING_PATH path);
+    std::unordered_map<std::string, std::vector<AUGMENTING_PATH>> getAugmentingPaths();
     void clearAugmentingPaths();
+
+
 
     // Network effiency improvements
     double calculateAverageDifference();

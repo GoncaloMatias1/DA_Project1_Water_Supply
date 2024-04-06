@@ -94,5 +94,10 @@ void Vertex::clearIncoming() {
     this->incoming.clear();
 }
 
+void Vertex::setType(VertexType type) {
+    this->vertexType = type;
+}
+
+
 
 

@@ -64,21 +64,27 @@ void Menu::run_menu() {
         switch (choice - '0') {
             case 1:
                 this->showMaxFlowResult();
+                this->waitForContinue();
                 break;
             case 2:
                 this->showMaxFlowToCity();
+                this->waitForContinue();
                 break;
             case 3:
                 this->showCitiesWithDeficit();
+                this->waitForContinue();
                 break;
             case 4:
                 this->showReservoirRemoval();
+                this->waitForContinue();
                 break;
             case 5:
                 this->showStationRemoval();
+                this->waitForContinue();
                 break;
             case 6:
                 this->simulatePipelineFailureHandler();
+                this->waitForContinue();
                 break;
             case 7:
                 running = false;
@@ -86,14 +92,15 @@ void Menu::run_menu() {
                 return;
             default:
                 std::cout << "Invalid option!\n";
+                this->waitForContinue();
                 break;
         }
-        this->waitForContinue();
+
     }
 }
 
 void Menu::showMaxFlowResult() {
-    auto pairCityFlowVector = controller->getNetworkFlow();
+    auto pairCityFlowVector = controller->getCitiesFlow();
     double totalFlow = 0;
 
     std::cout <<"Code, Flow"  << std::endl;

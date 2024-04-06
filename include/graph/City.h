@@ -15,6 +15,7 @@ private:
     double demand;
 public:
     City(const std::string& vertexId, const std::string &name, unsigned int id, double demand_, unsigned int population);
+    City(City* city);
 
     // Getters and setters
     void setName(const std::string& name);

@@ -69,6 +69,7 @@ bool Graph::removeVertex(const std::string &in) {
 
 
 bool Graph::addEdge(const std::string &sourc, const std::string &dest, double w) {
+    if(this->pipeSet.find(PIPE_ID(sourc, dest)) != this->pipeSet.end()) return false;
     Vertex* source = this->findVertex(sourc);
     Vertex* destination = this->findVertex(dest);
 
@@ -91,17 +92,6 @@ bool Graph::removeEdge(const std::string &source, const std::string &dest) {
     return false;
 }
 
-bool Graph::addBidirectionalEdge(const std::string &sourc, const std::string &dest, double w) {
-    Vertex* source = this->findVertex(sourc);
-    Vertex* destination = this->findVertex(dest);
-    if(source != nullptr && destination != nullptr){
-        this->addEdge(sourc, dest, w);
-        this->addEdge(dest, sourc, w);
-        return true;
-    }
-    return  false;
-}
-
 void Graph::removeEdgesTo(const std::string &out) {
     for(std::pair<std::string, Vertex*> vertexPair: this->vertexSet){
 
@@ -114,28 +104,15 @@ void Graph::removeEdgesTo(const std::string &out) {
     }
 }
 
-int Graph::getCityPop(const std::string& code) const {
-    City* curr_city = dynamic_cast<City*>(this->findVertex(code));
-
-    if(curr_city != nullptr ){
-        return static_cast<int>(dynamic_cast<City*>(curr_city)->getPop());
-    }
-    return -1;
-}
-
-
-int Graph::getCityDemand(const std::string& code) const {
-    City* curr_city = dynamic_cast<City*>(this->findVertex(code));
-
-    if(curr_city != nullptr ){
-        return static_cast<int>(dynamic_cast<City*>(curr_city)->getDemand());
-    }
-    return -1;
-}
 
 std::unordered_map<std::string, Vertex*> Graph::getVertexSet() const {
     return this->vertexSet;
 }
+
+std::unordered_map<std::string, Pipe *> Graph::getPipeSet() {
+    return this->pipeSet;
+}
+
 
 Pipe *Graph::getPipe(const std::string &origin, const std::string &endpoint) {
     return pipeSet[PIPE_ID(origin, endpoint)];
@@ -149,8 +126,8 @@ void Graph::clearAugmentingPaths() {
     this->augmentingPaths.clear();
 }
 
-void Graph::addAugmentingPath(const std::string &resCityID, AUGMENTING_PATH path) {
-    auto currentResCity = this->augmentingPaths.find(resCityID);
+void Graph::addAugmentingPath(const std::string &resID, AUGMENTING_PATH path) {
+    auto currentResCity = this->augmentingPaths.find(resID);
 
     // Reservoir-city already has atleast one augmenting path
     if(currentResCity != this->augmentingPaths.end()){
@@ -158,10 +135,16 @@ void Graph::addAugmentingPath(const std::string &resCityID, AUGMENTING_PATH path
     }
     // Reservoir-city is not present in map
     else{
-        this->augmentingPaths[resCityID] = {path};
+        this->augmentingPaths[resID] = {path};
     }
 
 }
+std::unordered_map<std::string, std::vector<AUGMENTING_PATH>> Graph::getAugmentingPaths() {
+    return this->augmentingPaths;
+}
+
+
+// -----------------------
 
 std::vector<City *> Graph::getCities() {
     std::vector<City *> result;
@@ -193,6 +176,7 @@ std::vector<PumpingStation *> Graph::getStations() {
     return result;
 }
 
+// For heuristic algorithm
 
 double Graph::calculateAverageDifference() {
     double diffs = 0;
@@ -223,7 +207,8 @@ double Graph::calculateMaxDifference() {
     return max;
 }
 
-std::unordered_map<std::string, Pipe *> Graph::getPipeSet() {
-    return this->pipeSet;
-}
+
+// --------------------------------
+
+
 

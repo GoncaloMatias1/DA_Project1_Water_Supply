@@ -46,3 +46,10 @@ double City::getDemand() const {
 VertexType City::getType() const {
     return VertexType::CityVertex;
 }
+
+City::City(City *city): Vertex(city->getCode()){
+    this->pop = city->getPop();
+    this->cityName = city->getName();
+    this->cityId = city->getID();
+    this->demand = city->getDemand();
+}

@@ -10,12 +10,6 @@
 #include "PumpingStation.h"
 #include "Vertex.h"
 
-// Algoritmo heuristico
-
-// Finalidade: Balancear o grafo de forma a obter melhores resultados de flow em cada cidade
-
-
-
 NetworkController::NetworkController(const std::string &src) {
     this->dataRoot = src;
     this->maxFlowValid = false;
@@ -25,7 +19,7 @@ void NetworkController::initializeNetwork(bool small) {
     if(small) this->parseDataSmall();
     else this->parseData();
     this->edmondsKarp();
-    this->balanceNetwork();
+    //this->balanceNetwork();
     this->saveCityData();
 }
 
@@ -46,7 +40,7 @@ void NetworkController::parseData() {
 void NetworkController::readCities() {
     std::ifstream file(this->dataRoot + "/Cities.csv");
     if(!file.is_open()){
-        throw std::invalid_argument("Couldn't opboolen cities file!");
+        throw std::invalid_argument("Couldn't open cities file!");
     }
 
     std::string line; getline(file, line);
@@ -407,7 +401,7 @@ double NetworkController::findMinResidualAlongPath(Vertex *source, Vertex *sink)
 
     for (Vertex* vertex = sink; vertex != source; ) {
         Pipe* pipe = vertex->getPath();
-        newPath.first.push_back(pipe);
+        newPath.push_back(pipe);
         if (pipe->getDestination() == vertex) {
             f = std::min(f, pipe->getCapacity() - pipe->getFlow());
             vertex = pipe->getOrigin();
@@ -419,8 +413,7 @@ double NetworkController::findMinResidualAlongPath(Vertex *source, Vertex *sink)
         if(pipe->getOrigin() == source) reservoir = pipe->getDestinationId();
     }
 
-    newPath.second = f;
-    this->network.addAugmentingPath(RESERVOIR_CITY(reservoir, city), newPath);
+    this->network.addAugmentingPath(reservoir, newPath);
     return f;
 }
 
@@ -473,7 +466,6 @@ void NetworkController::saveCityData() {
     } else {
         std::cerr << "Error opening the output file." << std::endl;
     }
-
 }
 
 std::pair<std::string, double> NetworkController::getMaxFlowInCity(const std::string &city) {
@@ -489,7 +481,7 @@ std::pair<std::string, double> NetworkController::getMaxFlowInCity(const std::st
     return {};
 }
 
-std::unordered_map<std::string, double> NetworkController::getNetworkFlow() {
+std::unordered_map<std::string, double> NetworkController::getCitiesFlow() {
     std::unordered_map<std::string, double> result;
     if(!this->maxFlowValid) edmondsKarp();
 
@@ -503,11 +495,20 @@ std::unordered_map<std::string, double> NetworkController::getNetworkFlow() {
     return result;
 }
 
+Vertex *NetworkController::getVertex(const std::string &id) {
+    return this->network.findVertex(id);
+}
+
+// Removal of vertices
+
+
 std::unordered_map<std::string, std::pair<double, double>> NetworkController::getAffectedByReservoir(const std::string &res_id) {
+    //return this->removeReservoirPartial(res_id);
+
     Vertex* vertex = this->network.findVertex(res_id);
     if(vertex == nullptr) return {};
 
-    std::unordered_map<std::string, double> flowBeforeRemoval = this->getNetworkFlow();
+    std::unordered_map<std::string, double> flowBeforeRemoval = this->getCitiesFlow();
     std::unordered_map<std::string, double> flowAfterRemoval;
 
     std::unordered_map<std::string, std::pair<double, double>> result;
@@ -518,7 +519,7 @@ std::unordered_map<std::string, std::pair<double, double>> NetworkController::ge
             double prevCapacity = out_pipe->getCapacity();
             out_pipe->setCapacity(0);
             this->edmondsKarp();
-            flowAfterRemoval = this->getNetworkFlow();
+            flowAfterRemoval = this->getCitiesFlow();
             out_pipe->setCapacity(prevCapacity);
             break;
         }
@@ -542,16 +543,13 @@ std::unordered_map<std::string, std::pair<double, double>> NetworkController::ge
     return result;
 }
 
-Vertex *NetworkController::getVertex(const std::string &id) {
-    return this->network.findVertex(id);
-}
 
 std::unordered_map<std::string, std::pair<double, double>>
 NetworkController::getAffectedByStation(const std::string &res_id) {
     Vertex* vertex = this->network.findVertex(res_id);
     if(vertex == nullptr) return {};
 
-    std::unordered_map<std::string, double> flowBeforeRemoval = this->getNetworkFlow();
+    std::unordered_map<std::string, double> flowBeforeRemoval = this->getCitiesFlow();
     std::unordered_map<std::string, double> flowAfterRemoval;
 
     std::unordered_map<std::string, std::pair<double, double>> result;
@@ -559,11 +557,11 @@ NetworkController::getAffectedByStation(const std::string &res_id) {
     std::vector<Pipe*> incoming = vertex->getIncoming();
     std::vector<Pipe*> outgoing = vertex->getOutgoing();
 
-
     vertex->setIncoming({});
     vertex->setOutgoing({});
+
     this->edmondsKarp();
-    flowAfterRemoval = this->getNetworkFlow();
+    flowAfterRemoval = this->getCitiesFlow();
 
 
     for(std::pair<std::string, double> afterPair: flowAfterRemoval){
@@ -594,40 +592,40 @@ Pipe* NetworkController::findPipe(const std::string& servicePointA, const std::s
 
 std::unordered_map<std::string, std::pair<double, double>> NetworkController::simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB) {
     Pipe* pipe = this->findPipe(servicePointA, servicePointB);
-    Vertex* a = this->network.findVertex(servicePointA);
-    Vertex* b = this->network.findVertex(servicePointB);
+    Vertex* origin = this->network.findVertex(servicePointA);
+    Vertex* dest = this->network.findVertex(servicePointB);
 
-    if (pipe == nullptr || a == nullptr || b == nullptr) {
+    if (pipe == nullptr || origin == nullptr || dest == nullptr) {
         throw std::invalid_argument("Pipeline was not found\n");
     }
 
-    std::unordered_map<std::string, double> flowBeforeRemoval = this->getNetworkFlow();
+    std::unordered_map<std::string, double> flowBeforeRemoval = this->getCitiesFlow();
     std::unordered_map<std::string, double> flowAfterRemoval;
     std::unordered_map<std::string, std::pair<double, double>> result;
 
     double originalCapacity = pipe->getCapacity();
-
     pipe->setCapacity(0);
     this->edmondsKarp();
 
-    flowAfterRemoval = this->getNetworkFlow();
+    flowAfterRemoval = this->getCitiesFlow();
 
-    for(std::pair<std::string, double> afterPair: flowAfterRemoval){
-
+    for(std::pair<std::string, double> cityFlowPair: flowAfterRemoval){
         // If it has its demand met
-        City* cityVertex = dynamic_cast<City*>(this->network.findVertex(afterPair.first));
-        if(cityVertex->getDemand() <= afterPair.second) continue;
+        City* cityVertex = dynamic_cast<City*>(this->network.findVertex(cityFlowPair.first));
+        if(cityVertex->getDemand() <= cityFlowPair.second) continue;
 
         // If the flow didn't change  i.g, not directly dependent -> skip
-        if(afterPair.second == flowBeforeRemoval[afterPair.first]) continue;
+        if(cityFlowPair.second == flowBeforeRemoval[cityFlowPair.first]) continue;
 
         // It does not have its demand met and the flow changed!!!
-        result[afterPair.first] = {flowBeforeRemoval[afterPair.first], flowAfterRemoval[afterPair.first]};
+        result[cityFlowPair.first] = {flowBeforeRemoval[cityFlowPair.first], flowAfterRemoval[cityFlowPair.first]};
     }
     pipe->setCapacity(originalCapacity);
     this->maxFlowValid = false;
     return result;
 }
+
+/* DEAD CODE
 
 void NetworkController::balanceNetwork() {
     double initialAverageDiff = this->network.calculateAverageDifference();
@@ -662,4 +660,95 @@ void NetworkController::balanceNetwork() {
 
 
 
+std::unordered_map<std::string, std::pair<double, double>> NetworkController::removeReservoirPartial(const std::string &res_id) {
+    Graph partialGraph;
+    std::unordered_set<std::string> citiesAffected;
 
+    // CREATING PARTIALGRAPH
+
+    std::vector<AUGMENTING_PATH> augPaths = this->network.getAugmentingPaths()[res_id];
+
+    // Add direct vertices of pair RESERVOIR-CITY
+    for(AUGMENTING_PATH path: augPaths){
+        citiesAffected.insert(path.front()->getOrigin()->getCode());
+        this->addAugmentingPathToGraph(&partialGraph, path);
+    }
+
+    // Add reservoirs that serve the same city as res_id
+    for(std::pair<std::string, std::vector<AUGMENTING_PATH>> path: this->network.getAugmentingPaths()){
+        // Path from reservoir x
+        augPaths = path.second;
+        for(AUGMENTING_PATH path: augPaths){
+            std::string cityInAugmentingPath = path.front()->getOrigin()->getCode();
+            if(citiesAffected.find(cityInAugmentingPath) != citiesAffected.end()){
+                // City in current augmenting path is also affected by reservoir res_id removal
+                this->addAugmentingPathToGraph(&partialGraph, path);
+            }
+        }
+    }
+    // Prevent reservoir from being used
+    for(Pipe* out: partialGraph.findVertex("SuperSource")->getOutgoing()){
+        if(out->getDestination()->getCode() == res_id) out->setCapacity(0);
+    }
+
+    std::cout << partialGraph.getVertexSet().size() << " - " << this->network.getVertexSet().size() << std::endl;
+
+    // For each pumping station i should reduce its capacity by the flow that is not present in the partial graph
+
+
+    // -------------------------------------
+    std::unordered_map<std::string, double> flowBeforeRemoval = this->getNetworkFlow();
+    Graph backupOriginal = this->network;
+
+    this->network = partialGraph;
+
+    this->edmondsKarp();
+
+    std::unordered_map<std::string, double> flowAfterRemoval = this->getCitiesFlow();
+
+    std::unordered_map<std::string, std::pair<double, double>> result;
+
+
+    for(std::pair<std::string, double> afterPair: flowAfterRemoval){
+
+        // If it has its demand met
+        City* cityVertex = dynamic_cast<City*>(this->network.findVertex(afterPair.first));
+        if(cityVertex->getDemand() <= afterPair.second) continue;
+
+        // If the flow didn't change  i.g, not directly dependent -> skip
+        if(afterPair.second == flowBeforeRemoval[afterPair.first]) continue;
+
+        // It does not have its demand met and the flow changed!!!
+        result[afterPair.first] = {flowBeforeRemoval[afterPair.first], flowAfterRemoval[afterPair.first]};
+
+    }
+
+    this->maxFlowValid = false;
+    this->network = backupOriginal;
+    return result;
+}
+
+void NetworkController::addAugmentingPathToGraph(Graph *graph, std::vector<Pipe *> path) {
+    Vertex* superSink = path.front()->getDestination();
+    graph->addVertex(new Vertex(superSink->getCode()));
+
+    for(Pipe* pipe: path){
+        // Add vertex endpoint to partialGraph
+        if(pipe->getOrigin()->getType() == CityVertex){
+            City* curr_vertex = dynamic_cast<City*>(pipe->getOrigin());
+            City* vertex = new City(curr_vertex);
+            graph->addVertex(vertex);
+        }
+        else{
+            Vertex* vertex = new Vertex(pipe->getOrigin()->getCode());
+            graph->addVertex(vertex);
+        }
+
+        // Add connection between endpoints
+        graph->addEdge(pipe->getOrigin()->getCode(), pipe->getDestinationId(), pipe->getCapacity());
+    }
+}
+
+
+
+ */
