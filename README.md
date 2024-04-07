@@ -1,9 +1,40 @@
-# Design of Algorithms Course Project Documentation
+# Water Supply Management Analysis Tool
 
-This project was developed as part of the Design of Algorithms course for the academic year 2023/2024.
+## Introduction
+Developed for the Design of Algorithms course (Spring 2024), this tool is designed to assist in managing the water supply network in Portugal. It simulates and analyzes water flow through the network, ensuring optimal distribution and resource management.
 
-## Project developed by:
+## Team Members
+- Rodrigo Ferreira Alves - up202207478
+- Gonçalo de Abreu Matias - up202108703
+- David Tavares Simões - up202210329
 
-- **Rodrigo Ferreira Alves**: up202207478
-- **Gonçalo de Abreu Matias**: up202108703
-- **David Tavares Simões**: up202210329
+## Installation
+To install and run the project, follow these steps:
+
+```bash
+git clone <repository-url>
+cd <project-directory>
+pip install -r requirements.txt
+```
+
+## Features
+- Implementation of the greedy algorithmic approach for maximum-flow problems.
+- Data parsing and processing from CSV files.
+- Graphical representation of water networks.
+- User-friendly menu interface for system interaction.
+- Comprehensive analysis and reporting of network's water distribution.
+
+## Usage
+To use the application, execute the following command in the terminal:
+
+```bash
+python main.py
+```
+
+Navigate through the menu to access different functionalities such as data parsing, analysis, and simulation results.
+
+## Algorithmic Approach
+The core algorithmic approach used in this project is based on the Edmonds-Karp algorithm, ensuring efficient and optimal water flow through the network.
+
+## Documentation
+The project's documentation is generated using Doxygen and is available under the `docs` directory. It includes an exhaustive time complexity analysis of the implemented algorithms.
