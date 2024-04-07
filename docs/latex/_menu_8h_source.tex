@@ -1,0 +1,53 @@
+\doxysection{Menu.\+h}
+\hypertarget{_menu_8h_source}{}\label{_menu_8h_source}\index{/Users/goncalomatias/Documents/GitHub/DA-\/Project-\/23-\/24/include/Menu.h@{/Users/goncalomatias/Documents/GitHub/DA-\/Project-\/23-\/24/include/Menu.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJECT\_23\_24\_MENU\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJECT\_23\_24\_MENU\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}NetworkController.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_menu}{Menu}}\{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_network_controller}{NetworkController}}*\ \mbox{\hyperlink{class_menu_abd2c418cdb82c4042f48160bb0973023}{controller}};\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_a666113bd51e697a9b2858fbe51711063}{running}}\ =\ \textcolor{keyword}{true};\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_menu_a5d83074853a713f7dc8f4b608f1f6bc9}{Menu}}(\mbox{\hyperlink{class_network_controller}{NetworkController}}*\ control);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ input\ handling}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{class_menu_a85e9ed3c10e2bb1317f46d258391a23f}{getInput}}(\textcolor{keyword}{const}\ std::string\&\ out);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a43f2072a1325b8f370c36447eca5012d}{waitForContinue}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_ad191c3c649b4680f33426d5e6b96eb15}{clearTerminal}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ Main\ menu}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a00fb77e5e7d27c559e7674bbb26b672c}{showMainMenu}}();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_ab6efea910e3312937ab093829214ccfd}{run\_menu}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//\ T2.1\ Menu}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_af104a92050598545ae5701c7b9b7292a}{showMaxFlowResult}}();}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a36dc6323ebad03d4393db4478f23a692}{showMaxFlowToCity}}();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ T2.2\ Menu}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a70f5691d9e661011b19e263f5c1046ad}{showCitiesWithDeficit}}();}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a1ccceb3db78ecc3e083ae79ceeb15c8c}{displayCityInfo}}(\textcolor{keyword}{const}\ std::string\&\ code,\textcolor{keyword}{const}\ std::string\&\ cityName,\ \textcolor{keywordtype}{int}\ demand,\ \textcolor{keywordtype}{int}\ actualFlow,\ \textcolor{keywordtype}{int}\ deficit);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ T3.1\ Menu}}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a279a0176d03eed2e10e282443cd5ce33}{showReservoirRemoval}}();}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//\ T3.2\ Menu}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_adb8c9391d153d838ca982c1a28cefa28}{showStationRemoval}}();}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{comment}{//\ T3.3\ Menu}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a17ecdb9e0b6953449466a163ee9cd28f}{simulatePipelineFailureHandler}}();}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJECT\_23\_24\_MENU\_H}}
+
+\end{DoxyCode}

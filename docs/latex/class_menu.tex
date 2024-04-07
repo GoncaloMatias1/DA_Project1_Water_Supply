@@ -1,0 +1,242 @@
+\doxysection{Menu Class Reference}
+\hypertarget{class_menu}{}\label{class_menu}\index{Menu@{Menu}}
+
+
+Represents a text-\/based menu interface for interacting with the network controller.  
+
+
+
+
+{\ttfamily \#include $<$Menu.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_menu_a5d83074853a713f7dc8f4b608f1f6bc9}{Menu}} (\mbox{\hyperlink{class_network_controller}{Network\+Controller}} \texorpdfstring{$\ast$}{*}control)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_menu}{Menu} object with a given \doxylink{class_network_controller}{Network\+Controller}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a43f2072a1325b8f370c36447eca5012d}{wait\+For\+Continue}} ()
+\begin{DoxyCompactList}\small\item\em Waits for the user to press a key to continue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_ad191c3c649b4680f33426d5e6b96eb15}{clear\+Terminal}} ()
+\begin{DoxyCompactList}\small\item\em Clears the terminal screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a00fb77e5e7d27c559e7674bbb26b672c}{show\+Main\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Displays the main menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_ab6efea910e3312937ab093829214ccfd}{run\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Runs the menu loop. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_af104a92050598545ae5701c7b9b7292a}{show\+Max\+Flow\+Result}} ()
+\begin{DoxyCompactList}\small\item\em Displays the maximum flow result menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a36dc6323ebad03d4393db4478f23a692}{show\+Max\+Flow\+To\+City}} ()
+\begin{DoxyCompactList}\small\item\em Displays the menu for finding maximum flow to a city. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a70f5691d9e661011b19e263f5c1046ad}{show\+Cities\+With\+Deficit}} ()
+\begin{DoxyCompactList}\small\item\em Displays cities with deficit menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a1ccceb3db78ecc3e083ae79ceeb15c8c}{display\+City\+Info}} (const std\+::string \&code, const std\+::string \&city\+Name, int demand, int actual\+Flow, int deficit)
+\begin{DoxyCompactList}\small\item\em Displays information about a city including its deficit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a279a0176d03eed2e10e282443cd5ce33}{show\+Reservoir\+Removal}} ()
+\begin{DoxyCompactList}\small\item\em Displays the reservoir removal menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_adb8c9391d153d838ca982c1a28cefa28}{show\+Station\+Removal}} ()
+\begin{DoxyCompactList}\small\item\em Displays the station removal menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a17ecdb9e0b6953449466a163ee9cd28f}{simulate\+Pipeline\+Failure\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Displays the pipeline failure simulation menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{class_menu_a85e9ed3c10e2bb1317f46d258391a23f}{get\+Input}} (const std\+::string \&out)
+\begin{DoxyCompactList}\small\item\em Retrieves user input from the console. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_network_controller}{Network\+Controller}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_abd2c418cdb82c4042f48160bb0973023}{controller}}
+\item 
+bool \mbox{\hyperlink{class_menu_a666113bd51e697a9b2858fbe51711063}{running}} = true
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a text-\/based menu interface for interacting with the network controller. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_menu_a5d83074853a713f7dc8f4b608f1f6bc9}\label{class_menu_a5d83074853a713f7dc8f4b608f1f6bc9} 
+\index{Menu@{Menu}!Menu@{Menu}}
+\index{Menu@{Menu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Menu()}{Menu()}}
+{\footnotesize\ttfamily Menu\+::\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_network_controller}{Network\+Controller}} \texorpdfstring{$\ast$}{*}}]{control }\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{class_menu}{Menu} object with a given \doxylink{class_network_controller}{Network\+Controller}. 
+
+Initializes the menu object with a pointer to a \doxylink{class_network_controller}{Network\+Controller} object, sets the running flag to true, and then calls the \doxylink{class_menu_ab6efea910e3312937ab093829214ccfd}{run\+\_\+menu()} function to start the menu loop.
+
+
+\begin{DoxyParams}{Parameters}
+{\em control} & Pointer to a \doxylink{class_network_controller}{Network\+Controller} object \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_menu_ad191c3c649b4680f33426d5e6b96eb15}\label{class_menu_ad191c3c649b4680f33426d5e6b96eb15} 
+\index{Menu@{Menu}!clearTerminal@{clearTerminal}}
+\index{clearTerminal@{clearTerminal}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{clearTerminal()}{clearTerminal()}}
+{\footnotesize\ttfamily void Menu\+::clear\+Terminal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clears the terminal screen. 
+
+Clears the terminal screen to provide a clean interface for displaying new content or messages. \Hypertarget{class_menu_a1ccceb3db78ecc3e083ae79ceeb15c8c}\label{class_menu_a1ccceb3db78ecc3e083ae79ceeb15c8c} 
+\index{Menu@{Menu}!displayCityInfo@{displayCityInfo}}
+\index{displayCityInfo@{displayCityInfo}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{displayCityInfo()}{displayCityInfo()}}
+{\footnotesize\ttfamily void Menu\+::display\+City\+Info (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code,  }\item[{const std\+::string \&}]{city\+Name,  }\item[{int}]{demand,  }\item[{int}]{actual\+Flow,  }\item[{int}]{deficit }\end{DoxyParamCaption})}
+
+
+
+Displays information about a city including its deficit. 
+
+Responsible for displaying information about a city, including its code, name, demand, actual flow, and deficit.
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & \doxylink{class_city}{City} code \\
+\hline
+{\em city\+Name} & Name of the city \\
+\hline
+{\em demand} & \doxylink{class_city}{City}\textquotesingle{}s demand \\
+\hline
+{\em actual\+Flow} & Actual flow to the city \\
+\hline
+{\em deficit} & Deficit of the city \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_menu_a85e9ed3c10e2bb1317f46d258391a23f}\label{class_menu_a85e9ed3c10e2bb1317f46d258391a23f} 
+\index{Menu@{Menu}!getInput@{getInput}}
+\index{getInput@{getInput}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getInput()}{getInput()}}
+{\footnotesize\ttfamily std\+::string Menu\+::get\+Input (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Retrieves user input from the console. 
+
+Prompts the user with a message provided as a parameter and reads input from the console.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & Message displayed before input prompt \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String containing user input 
+\end{DoxyReturn}
+\Hypertarget{class_menu_ab6efea910e3312937ab093829214ccfd}\label{class_menu_ab6efea910e3312937ab093829214ccfd} 
+\index{Menu@{Menu}!run\_menu@{run\_menu}}
+\index{run\_menu@{run\_menu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{run\_menu()}{run\_menu()}}
+{\footnotesize\ttfamily void Menu\+::run\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Runs the menu loop. 
+
+Runs the main menu loop of the Water Supply Management Analysis System. It continuously displays the main menu, prompts the user for input, and executes the corresponding functionality based on the selected option. \Hypertarget{class_menu_a70f5691d9e661011b19e263f5c1046ad}\label{class_menu_a70f5691d9e661011b19e263f5c1046ad} 
+\index{Menu@{Menu}!showCitiesWithDeficit@{showCitiesWithDeficit}}
+\index{showCitiesWithDeficit@{showCitiesWithDeficit}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{showCitiesWithDeficit()}{showCitiesWithDeficit()}}
+{\footnotesize\ttfamily void Menu\+::show\+Cities\+With\+Deficit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Displays cities with deficit menu. 
+
+Retrieves information about cities with water deficits from the controller object. It calculates the total deficit across all cities and displays details such as the city code, demand, actual flow, and deficit for each affected city. If no cities have deficits, it prints a message indicating that all cities have their water demands fully met. \Hypertarget{class_menu_a00fb77e5e7d27c559e7674bbb26b672c}\label{class_menu_a00fb77e5e7d27c559e7674bbb26b672c} 
+\index{Menu@{Menu}!showMainMenu@{showMainMenu}}
+\index{showMainMenu@{showMainMenu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{showMainMenu()}{showMainMenu()}}
+{\footnotesize\ttfamily void Menu\+::show\+Main\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Displays the main menu. 
+
+Displays the main menu of the Water Supply Management Analysis System. \Hypertarget{class_menu_af104a92050598545ae5701c7b9b7292a}\label{class_menu_af104a92050598545ae5701c7b9b7292a} 
+\index{Menu@{Menu}!showMaxFlowResult@{showMaxFlowResult}}
+\index{showMaxFlowResult@{showMaxFlowResult}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{showMaxFlowResult()}{showMaxFlowResult()}}
+{\footnotesize\ttfamily void Menu\+::show\+Max\+Flow\+Result (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Displays the maximum flow result menu. 
+
+Shows the maximum flow result of the network by retrieving flow information for each city from the controller object. It then prints the city code and its flow value, along with the total flow for all cities. \Hypertarget{class_menu_a36dc6323ebad03d4393db4478f23a692}\label{class_menu_a36dc6323ebad03d4393db4478f23a692} 
+\index{Menu@{Menu}!showMaxFlowToCity@{showMaxFlowToCity}}
+\index{showMaxFlowToCity@{showMaxFlowToCity}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{showMaxFlowToCity()}{showMaxFlowToCity()}}
+{\footnotesize\ttfamily void Menu\+::show\+Max\+Flow\+To\+City (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Displays the menu for finding maximum flow to a city. 
+
+Prompts the user to input a city code. It then retrieves information about the maximum flow to the specified city from the controller object. If the city is found, it prints details such as the city code, name, demand, and actual flow. If the city is not found, it displays a message indicating that the city code was not found. \Hypertarget{class_menu_a279a0176d03eed2e10e282443cd5ce33}\label{class_menu_a279a0176d03eed2e10e282443cd5ce33} 
+\index{Menu@{Menu}!showReservoirRemoval@{showReservoirRemoval}}
+\index{showReservoirRemoval@{showReservoirRemoval}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{showReservoirRemoval()}{showReservoirRemoval()}}
+{\footnotesize\ttfamily void Menu\+::show\+Reservoir\+Removal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Displays the reservoir removal menu. 
+
+Displays the impact of removing a water reservoir on the flow of water to various cities. It prompts the user to input the reservoir ID, retrieves the affected cities and their flow changes from the controller. If no cities are affected, it informs the user accordingly. \Hypertarget{class_menu_adb8c9391d153d838ca982c1a28cefa28}\label{class_menu_adb8c9391d153d838ca982c1a28cefa28} 
+\index{Menu@{Menu}!showStationRemoval@{showStationRemoval}}
+\index{showStationRemoval@{showStationRemoval}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{showStationRemoval()}{showStationRemoval()}}
+{\footnotesize\ttfamily void Menu\+::show\+Station\+Removal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Displays the station removal menu. 
+
+Shows the impact of removing a pumping station on the flow of water to various cities. It prompts the user to input the station ID, retrieves the affected cities and their flow changes from the controller. If no cities are affected, it informs the user accordingly. \Hypertarget{class_menu_a17ecdb9e0b6953449466a163ee9cd28f}\label{class_menu_a17ecdb9e0b6953449466a163ee9cd28f} 
+\index{Menu@{Menu}!simulatePipelineFailureHandler@{simulatePipelineFailureHandler}}
+\index{simulatePipelineFailureHandler@{simulatePipelineFailureHandler}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{simulatePipelineFailureHandler()}{simulatePipelineFailureHandler()}}
+{\footnotesize\ttfamily void Menu\+::simulate\+Pipeline\+Failure\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Displays the pipeline failure simulation menu. 
+
+Simulates a pipeline failure and displays the impact on water flow to various cities. It prompts the user to input the origin and destination IDs of the pipeline to simulate failure. Then, it calls the controller\textquotesingle{}s method to obtain the affected cities and their flow changes. If no cities are affected, it informs the user accordingly. If an error occurs, it displays the error message. \Hypertarget{class_menu_a43f2072a1325b8f370c36447eca5012d}\label{class_menu_a43f2072a1325b8f370c36447eca5012d} 
+\index{Menu@{Menu}!waitForContinue@{waitForContinue}}
+\index{waitForContinue@{waitForContinue}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{waitForContinue()}{waitForContinue()}}
+{\footnotesize\ttfamily void Menu\+::wait\+For\+Continue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Waits for the user to press a key to continue. 
+
+Prompts the user to press the Enter key to continue the program execution. It waits for the user input and clears the terminal afterward. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_menu_abd2c418cdb82c4042f48160bb0973023}\label{class_menu_abd2c418cdb82c4042f48160bb0973023} 
+\index{Menu@{Menu}!controller@{controller}}
+\index{controller@{controller}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{controller}{controller}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_network_controller}{Network\+Controller}}\texorpdfstring{$\ast$}{*} Menu\+::controller\hspace{0.3cm}{\ttfamily [private]}}
+
+Pointer to the \doxylink{class_network_controller}{Network\+Controller} object \Hypertarget{class_menu_a666113bd51e697a9b2858fbe51711063}\label{class_menu_a666113bd51e697a9b2858fbe51711063} 
+\index{Menu@{Menu}!running@{running}}
+\index{running@{running}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{running}{running}}
+{\footnotesize\ttfamily bool Menu\+::running = true\hspace{0.3cm}{\ttfamily [private]}}
+
+Flag indicating whether the menu is running 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/goncalomatias/\+Documents/\+Git\+Hub/\+DA-\/\+Project-\/23-\/24/include/Menu.\+h\item 
+/\+Users/goncalomatias/\+Documents/\+Git\+Hub/\+DA-\/\+Project-\/23-\/24/src/Menu.\+cpp\end{DoxyCompactItemize}

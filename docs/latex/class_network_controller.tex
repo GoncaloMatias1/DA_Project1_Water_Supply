@@ -1,0 +1,498 @@
+\doxysection{Network\+Controller Class Reference}
+\hypertarget{class_network_controller}{}\label{class_network_controller}\index{NetworkController@{NetworkController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_network_controller_a068bf0e71bb060d53c8c2a13abd90136}{Network\+Controller}} (const std\+::string \&src)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_network_controller}{Network\+Controller} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a911d450474ee64e37936ba17189db583}{parse\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Parses data from files to initialize the network graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a2016e06885a75757fe09ad5d4109580b}{parse\+Data\+Small}} ()
+\begin{DoxyCompactList}\small\item\em Parses a small amount of data from files to initialize the network graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_af107057d276b2b6b33493a0909761725}{read\+Reservoirs}} ()
+\begin{DoxyCompactList}\small\item\em Reads reservoir data from files and adds reservoir vertices to the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_ad91437811c29e05a2e1c852cd8d7d79c}{read\+Reservoirs\+Small}} ()
+\begin{DoxyCompactList}\small\item\em Reads a small amount of reservoir data from files and adds reservoir vertices to the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a271abf1a9f0fb19db8a034c1a66d3178}{read\+Pumping\+Stations}} ()
+\begin{DoxyCompactList}\small\item\em Reads pumping station data from files and adds pumping station vertices to the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_afcd6bcc261d916c0ba1ffd681f36c416}{read\+Stations\+Small}} ()
+\begin{DoxyCompactList}\small\item\em Reads a small amount of pumping station data from files and adds pumping station vertices to the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a5274e2d7054a384189406332ed8fc302}{read\+Cities}} ()
+\begin{DoxyCompactList}\small\item\em Reads city data from files and adds city vertices to the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a5990ce7ee9d7d954fc930ac25928b487}{read\+Cities\+Small}} ()
+\begin{DoxyCompactList}\small\item\em Reads a small amount of city data from files and adds city vertices to the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a20e9b3e10e489a2716b8174d9772013f}{read\+Pipes}} ()
+\begin{DoxyCompactList}\small\item\em Reads pipe data from files and adds pipes to connect vertices in the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_af704aebfe404fc5430d2074ab15682fb}{read\+Pipes\+Small}} ()
+\begin{DoxyCompactList}\small\item\em Reads a small amount of pipe data from files and adds pipes to connect vertices in the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_afd67674c6fe7831a02ddebed6ef0962e}{initialize\+Network}} (bool small)
+\begin{DoxyCompactList}\small\item\em Initializes the network graph. \end{DoxyCompactList}\item 
+\Hypertarget{class_network_controller_aa2ae5fa84350cc8214624b57512c4594}\label{class_network_controller_aa2ae5fa84350cc8214624b57512c4594} 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ {\bfseries simulate\+Pipeline\+Failure} (const std\+::string \&service\+PointA, const std\+::string \&service\+PointB)
+\item 
+\Hypertarget{class_network_controller_a0d0ce2712cedbe4d9d65c92bc699c4ff}\label{class_network_controller_a0d0ce2712cedbe4d9d65c92bc699c4ff} 
+\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} {\bfseries find\+Pipe} (const std\+::string \&service\+PointA, const std\+::string \&service\+PointB)
+\item 
+\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_network_controller_a5b233f36990e2cba20af91739ab4188b}{get\+Vertex}} (const std\+::string \&id)
+\begin{DoxyCompactList}\small\item\em Retrieves a vertex from the graph by its identifier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_network_controller_af46761ae0837190c2cc46a3a89fb3de7}{get\+Super\+Source}} ()
+\begin{DoxyCompactList}\small\item\em Generates a super source vertex that connects all sources to it with edge capacity INF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_network_controller_a9517ce860591b3c2e6453dfa282b55b2}{get\+Super\+Sink}} ()
+\begin{DoxyCompactList}\small\item\em Generates a super sink vertex that connects all sinks to it with edge capacity INF. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a8d082e6749a1628fe78a774be3109329}{edmonds\+Karp}} ()
+\begin{DoxyCompactList}\small\item\em Implements the Edmonds-\/\+Karp algorithm to find the maximum flow in the network. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_network_controller_a9ec6f22070d9d3950ed5e5b17815926e}{find\+Augmenting\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}source, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}sink)
+\begin{DoxyCompactList}\small\item\em Finds an augmenting path from the source to the sink using BFS. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a76e11da8f5a2b362d8d5b6a49871971f}{test\+And\+Visit}} (std\+::queue$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \&, \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}pipe, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}dest, double residual)
+\begin{DoxyCompactList}\small\item\em Tests and visits vertices along a path to determine the residual flow. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_network_controller_aee357be4a30bcfe5d1ce2b6f254a73ff}{find\+Min\+Residual\+Along\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}source, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}sink)
+\begin{DoxyCompactList}\small\item\em Finds the minimum residual along a path between a source and a sink. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_adb89054db645551ff46918917041dcb9}{augment\+Flow\+Along\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}source, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}sink, double f)
+\begin{DoxyCompactList}\small\item\em Augments the flow along the found augmenting path. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ std\+::string, double $>$ $>$ \mbox{\hyperlink{class_network_controller_ad3ad70cc28b7ef6b670641f247bcd054}{get\+Low\+Water\+Cities}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves cities with low water levels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_controller_a5b9e4151c670ce849efcdcb0c7c0aab4}{save\+City\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Saves city data to files. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::string, double $>$ \mbox{\hyperlink{class_network_controller_a327c30181704d49b267a841c47ba1724}{get\+Max\+Flow\+In\+City}} (const std\+::string \&city)
+\begin{DoxyCompactList}\small\item\em Retrieves the maximum flow in a city. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, double $>$ \mbox{\hyperlink{class_network_controller_a9e30d9415f43e2e3dcc656f98ef7d757}{get\+Network\+Flow}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the network flow. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ \mbox{\hyperlink{class_network_controller_a0520ebbd3516cacbf856e9fdc156f5a6}{get\+Affected\+By\+Reservoir}} (const std\+::string \&res\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Retrieves vertices affected by a reservoir. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ \mbox{\hyperlink{class_network_controller_a5c71ec8fd92b5233b51448f852092c14}{get\+Affected\+By\+Station}} (const std\+::string \&res\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Retrieves vertices affected by a pumping station. \end{DoxyCompactList}\item 
+\Hypertarget{class_network_controller_af4679e5aa16920742f8e1a986bc5277c}\label{class_network_controller_af4679e5aa16920742f8e1a986bc5277c} 
+void {\bfseries balance\+Network} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graph}{Graph}} \mbox{\hyperlink{class_network_controller_adde3b04107475aabb34b0dbaffc01dd3}{network}}
+\item 
+std\+::string \mbox{\hyperlink{class_network_controller_ac5168629871a52c482123004704a4384}{data\+Root}}
+\item 
+bool \mbox{\hyperlink{class_network_controller_a27713d324f3e08d08ccf7ad6ef3d9142}{max\+Flow\+Valid}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_network_controller_a068bf0e71bb060d53c8c2a13abd90136}\label{class_network_controller_a068bf0e71bb060d53c8c2a13abd90136} 
+\index{NetworkController@{NetworkController}!NetworkController@{NetworkController}}
+\index{NetworkController@{NetworkController}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{NetworkController()}{NetworkController()}}
+{\footnotesize\ttfamily Network\+Controller\+::\+Network\+Controller (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_network_controller}{Network\+Controller} class. 
+
+Initializes the data\+Root attribute with the provided source string, which represents the root directory of the data. It also sets the max\+Flow\+Valid attribute to false.
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The root directory containing data files. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_network_controller_adb89054db645551ff46918917041dcb9}\label{class_network_controller_adb89054db645551ff46918917041dcb9} 
+\index{NetworkController@{NetworkController}!augmentFlowAlongPath@{augmentFlowAlongPath}}
+\index{augmentFlowAlongPath@{augmentFlowAlongPath}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{augmentFlowAlongPath()}{augmentFlowAlongPath()}}
+{\footnotesize\ttfamily void Network\+Controller\+::augment\+Flow\+Along\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{source,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{sink,  }\item[{double}]{f }\end{DoxyParamCaption})}
+
+
+
+Augments the flow along the found augmenting path. 
+
+This method iterates over the path stored in the vertices from the sink to the source and updates the flow in each edge along the path by the minimum residual capacity.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The starting vertex of the augmenting path. \\
+\hline
+{\em sink} & The ending vertex of the augmenting path. \\
+\hline
+{\em f} & The amount of flow to augment along the path.\\
+\hline
+\end{DoxyParams}
+@complexity O(\+P), where P is the number of edges in the augmenting path. \Hypertarget{class_network_controller_a8d082e6749a1628fe78a774be3109329}\label{class_network_controller_a8d082e6749a1628fe78a774be3109329} 
+\index{NetworkController@{NetworkController}!edmondsKarp@{edmondsKarp}}
+\index{edmondsKarp@{edmondsKarp}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{edmondsKarp()}{edmondsKarp()}}
+{\footnotesize\ttfamily void Network\+Controller\+::edmonds\+Karp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements the Edmonds-\/\+Karp algorithm to find the maximum flow in the network. 
+
+This function generates a super source and a super sink, initializes flow values, and then iteratively finds augmenting paths and augments flow along them. It uses BFS to find the shortest path in terms of the number of edges, ensuring polynomial time complexity.
+
+\begin{DoxyPrecond}{Precondition}
+Assumes that the graph has been properly initialized with vertices and edges. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The graph will contain flow values corresponding to the maximum flow from source to sink.
+\end{DoxyPostcond}
+@complexity O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices and E is the number of edges in the graph. \Hypertarget{class_network_controller_a9ec6f22070d9d3950ed5e5b17815926e}\label{class_network_controller_a9ec6f22070d9d3950ed5e5b17815926e} 
+\index{NetworkController@{NetworkController}!findAugmentingPath@{findAugmentingPath}}
+\index{findAugmentingPath@{findAugmentingPath}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{findAugmentingPath()}{findAugmentingPath()}}
+{\footnotesize\ttfamily bool Network\+Controller\+::find\+Augmenting\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{source,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{sink }\end{DoxyParamCaption})}
+
+
+
+Finds an augmenting path from the source to the sink using BFS. 
+
+An augmenting path is a path where the residual capacity (original capacity minus current flow) is greater than zero. The path is stored in each vertex\textquotesingle{}s \textquotesingle{}path\textquotesingle{} field by the BFS.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The starting vertex for the BFS. \\
+\hline
+{\em sink} & The target vertex for the BFS. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if an augmenting path is found, false otherwise.
+\end{DoxyReturn}
+@complexity O(\+E), where E is the number of edges in the graph since BFS traverses each edge at most once. \Hypertarget{class_network_controller_aee357be4a30bcfe5d1ce2b6f254a73ff}\label{class_network_controller_aee357be4a30bcfe5d1ce2b6f254a73ff} 
+\index{NetworkController@{NetworkController}!findMinResidualAlongPath@{findMinResidualAlongPath}}
+\index{findMinResidualAlongPath@{findMinResidualAlongPath}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{findMinResidualAlongPath()}{findMinResidualAlongPath()}}
+{\footnotesize\ttfamily double Network\+Controller\+::find\+Min\+Residual\+Along\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{source,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{sink }\end{DoxyParamCaption})}
+
+
+
+Finds the minimum residual along a path between a source and a sink. 
+
+Calculates the minimum residual capacity along the augmenting path found during the Edmonds-\/\+Karp algorithm. It iterates through the path from the sink to the source, determining the minimum residual capacity based on the capacities and flows of the pipes along the path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The source vertex. \\
+\hline
+{\em sink} & The sink vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The minimum residual along the path. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_a0520ebbd3516cacbf856e9fdc156f5a6}\label{class_network_controller_a0520ebbd3516cacbf856e9fdc156f5a6} 
+\index{NetworkController@{NetworkController}!getAffectedByReservoir@{getAffectedByReservoir}}
+\index{getAffectedByReservoir@{getAffectedByReservoir}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{getAffectedByReservoir()}{getAffectedByReservoir()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ Network\+Controller\+::get\+Affected\+By\+Reservoir (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{res\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Retrieves vertices affected by a reservoir. 
+
+Analyzes the impact of removing a reservoir on city flows. It locates the reservoir in the network and retrieves the initial flow values before removal. Then, it sets the reservoir\textquotesingle{}s outgoing pipes\textquotesingle{} capacities to 0, recalculates the flows, and compares the before-\/and-\/after values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em res\+\_\+id} & The identifier of the reservoir. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An unordered map containing vertex codes and their respective minimum and maximum flow values. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_a5c71ec8fd92b5233b51448f852092c14}\label{class_network_controller_a5c71ec8fd92b5233b51448f852092c14} 
+\index{NetworkController@{NetworkController}!getAffectedByStation@{getAffectedByStation}}
+\index{getAffectedByStation@{getAffectedByStation}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{getAffectedByStation()}{getAffectedByStation()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ Network\+Controller\+::get\+Affected\+By\+Station (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{res\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Retrieves vertices affected by a pumping station. 
+
+Examines the impact of removing a pumping station on city flows. It first locates the station in the network and retrieves the initial flow values before removal. Then, it temporarily removes the station\textquotesingle{}s incoming and outgoing pipes, recalculates the flows, and compares the before-\/and-\/after values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em res\+\_\+id} & The identifier of the pumping station. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An unordered map containing vertex codes and their respective minimum and maximum flow values. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_ad3ad70cc28b7ef6b670641f247bcd054}\label{class_network_controller_ad3ad70cc28b7ef6b670641f247bcd054} 
+\index{NetworkController@{NetworkController}!getLowWaterCities@{getLowWaterCities}}
+\index{getLowWaterCities@{getLowWaterCities}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{getLowWaterCities()}{getLowWaterCities()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::pair$<$ std\+::string, double $>$ $>$ Network\+Controller\+::get\+Low\+Water\+Cities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieves cities with low water levels. 
+
+Identifies cities experiencing water shortage by comparing their demand with the current flow distribution after running the Edmonds-\/\+Karp algorithm. It retrieves the super sink vertex and checks incoming pipes. For cities with demand exceeding flow, it records the shortfall.
+
+\begin{DoxyReturn}{Returns}
+A vector of pairs containing city codes and their respective water levels. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_a327c30181704d49b267a841c47ba1724}\label{class_network_controller_a327c30181704d49b267a841c47ba1724} 
+\index{NetworkController@{NetworkController}!getMaxFlowInCity@{getMaxFlowInCity}}
+\index{getMaxFlowInCity@{getMaxFlowInCity}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{getMaxFlowInCity()}{getMaxFlowInCity()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::string, double $>$ Network\+Controller\+::get\+Max\+Flow\+In\+City (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{city }\end{DoxyParamCaption})}
+
+
+
+Retrieves the maximum flow in a city. 
+
+Calculates the maximum flow reaching a given city within the network. It first ensures the network\textquotesingle{}s maximum flow values are up-\/to-\/date by invoking edmonds\+Karp. Then, it retrieves the city vertex. If the city doesn\textquotesingle{}t exist, it returns a pair with the city name and -\/1. Otherwise, it checks outgoing pipes from the city to find the flow to the super sink.
+
+
+\begin{DoxyParams}{Parameters}
+{\em city} & The code of the city. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair containing the city code and its maximum flow. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_a9e30d9415f43e2e3dcc656f98ef7d757}\label{class_network_controller_a9e30d9415f43e2e3dcc656f98ef7d757} 
+\index{NetworkController@{NetworkController}!getNetworkFlow@{getNetworkFlow}}
+\index{getNetworkFlow@{getNetworkFlow}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{getNetworkFlow()}{getNetworkFlow()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ std\+::string, double $>$ Network\+Controller\+::get\+Network\+Flow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieves the network flow. 
+
+Obtains the flow values for cities within the network. It first verifies the validity of the maximum flow values using edmonds\+Karp if necessary. Then, it retrieves the super sink vertex. It iterates over incoming pipes to the super sink, collecting flow values for cities and storing them in an unordered map.
+
+\begin{DoxyReturn}{Returns}
+An unordered map containing vertex codes and their respective flow values. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_a9517ce860591b3c2e6453dfa282b55b2}\label{class_network_controller_a9517ce860591b3c2e6453dfa282b55b2} 
+\index{NetworkController@{NetworkController}!getSuperSink@{getSuperSink}}
+\index{getSuperSink@{getSuperSink}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{getSuperSink()}{getSuperSink()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} Network\+Controller\+::get\+Super\+Sink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Generates a super sink vertex that connects all sinks to it with edge capacity INF. 
+
+Ensures the existence of a vertex representing the super sink in the network. If it doesn\textquotesingle{}t exist, it creates one with the code "{}\+Super\+Sink"{} and connects it to all cities in the network with pipes having capacities equal to each city\textquotesingle{}s demand.
+
+\begin{DoxyReturn}{Returns}
+A pointer to the super sink vertex. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_af46761ae0837190c2cc46a3a89fb3de7}\label{class_network_controller_af46761ae0837190c2cc46a3a89fb3de7} 
+\index{NetworkController@{NetworkController}!getSuperSource@{getSuperSource}}
+\index{getSuperSource@{getSuperSource}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{getSuperSource()}{getSuperSource()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} Network\+Controller\+::get\+Super\+Source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Generates a super source vertex that connects all sources to it with edge capacity INF. 
+
+Creates a super source vertex if it doesn\textquotesingle{}t already exist in the network. It connects this super source vertex to all water reservoirs by creating pipes from the super source to each reservoir with capacities equal to their maximum delivery.
+
+\begin{DoxyReturn}{Returns}
+A pointer to the super source vertex. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_a5b233f36990e2cba20af91739ab4188b}\label{class_network_controller_a5b233f36990e2cba20af91739ab4188b} 
+\index{NetworkController@{NetworkController}!getVertex@{getVertex}}
+\index{getVertex@{getVertex}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{getVertex()}{getVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} Network\+Controller\+::get\+Vertex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id }\end{DoxyParamCaption})}
+
+
+
+Retrieves a vertex from the graph by its identifier. 
+
+Uses the find\+Vertex method of the network object to search for the vertex with the specified ID
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The identifier of the vertex to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the vertex if found, nullptr otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_network_controller_afd67674c6fe7831a02ddebed6ef0962e}\label{class_network_controller_afd67674c6fe7831a02ddebed6ef0962e} 
+\index{NetworkController@{NetworkController}!initializeNetwork@{initializeNetwork}}
+\index{initializeNetwork@{initializeNetwork}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{initializeNetwork()}{initializeNetwork()}}
+{\footnotesize\ttfamily void Network\+Controller\+::initialize\+Network (\begin{DoxyParamCaption}\item[{bool}]{small }\end{DoxyParamCaption})}
+
+
+
+Initializes the network graph. 
+
+Sets up the network according to the specified mode, either small or large. If the small parameter is true, it calls parse\+Data\+Small to parse the data for a small network, otherwise it calls parse\+Data for a large network. After parsing the data, it applies the Edmonds-\/\+Karp algorithm to find the maximum flow in the network using edmonds\+Karp.
+
+
+\begin{DoxyParams}{Parameters}
+{\em small} & Flag indicating whether to initialize a small version of the network. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_network_controller_a911d450474ee64e37936ba17189db583}\label{class_network_controller_a911d450474ee64e37936ba17189db583} 
+\index{NetworkController@{NetworkController}!parseData@{parseData}}
+\index{parseData@{parseData}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{parseData()}{parseData()}}
+{\footnotesize\ttfamily void Network\+Controller\+::parse\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Parses data from files to initialize the network graph. 
+
+Reads data for cities, reservoirs, pumping stations, and pipes from the datasets. It calls individual functions for each data type and handles any exceptions that may occur during parsing. Finally, it prints a completion message. \Hypertarget{class_network_controller_a2016e06885a75757fe09ad5d4109580b}\label{class_network_controller_a2016e06885a75757fe09ad5d4109580b} 
+\index{NetworkController@{NetworkController}!parseDataSmall@{parseDataSmall}}
+\index{parseDataSmall@{parseDataSmall}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{parseDataSmall()}{parseDataSmall()}}
+{\footnotesize\ttfamily void Network\+Controller\+::parse\+Data\+Small (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Parses a small amount of data from files to initialize the network graph. 
+
+Reads data for cities, reservoirs, stations, and pipes from small-\/sized datasets. It calls individual functions for each data type and handles any exceptions that may occur during parsing. Finally, it prints a completion message. \Hypertarget{class_network_controller_a5274e2d7054a384189406332ed8fc302}\label{class_network_controller_a5274e2d7054a384189406332ed8fc302} 
+\index{NetworkController@{NetworkController}!readCities@{readCities}}
+\index{readCities@{readCities}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{readCities()}{readCities()}}
+{\footnotesize\ttfamily void Network\+Controller\+::read\+Cities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads city data from files and adds city vertices to the graph. 
+
+Reads city data from a CSV file located at a specified path. It opens the file and reads each line, parsing information about each city such as name, ID, code, demand, and population. It then creates a \doxylink{class_city}{City} object with this information and adds it to the network. If the file cannot be opened, it throws an invalid\+\_\+argument exception. \Hypertarget{class_network_controller_a5990ce7ee9d7d954fc930ac25928b487}\label{class_network_controller_a5990ce7ee9d7d954fc930ac25928b487} 
+\index{NetworkController@{NetworkController}!readCitiesSmall@{readCitiesSmall}}
+\index{readCitiesSmall@{readCitiesSmall}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{readCitiesSmall()}{readCitiesSmall()}}
+{\footnotesize\ttfamily void Network\+Controller\+::read\+Cities\+Small (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads a small amount of city data from files and adds city vertices to the graph. 
+
+Reads city data from a CSV file located at a specific path. It opens the file and reads each line, parsing information about each city such as name, ID, code, demand, and population. It then creates a \doxylink{class_city}{City} object with this information and adds it to the network. If the file cannot be opened, it prints an error message. \Hypertarget{class_network_controller_a20e9b3e10e489a2716b8174d9772013f}\label{class_network_controller_a20e9b3e10e489a2716b8174d9772013f} 
+\index{NetworkController@{NetworkController}!readPipes@{readPipes}}
+\index{readPipes@{readPipes}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{readPipes()}{readPipes()}}
+{\footnotesize\ttfamily void Network\+Controller\+::read\+Pipes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads pipe data from files and adds pipes to connect vertices in the graph. 
+
+Reads pipe data from a CSV file specified by data\+Root. It opens the file and reads each line, parsing information about each pipe such as service points, capacity, and direction. It then adds edges to the network based on this information. If any endpoint of the pipe doesn\textquotesingle{}t exist in the network, it throws an exception. \Hypertarget{class_network_controller_af704aebfe404fc5430d2074ab15682fb}\label{class_network_controller_af704aebfe404fc5430d2074ab15682fb} 
+\index{NetworkController@{NetworkController}!readPipesSmall@{readPipesSmall}}
+\index{readPipesSmall@{readPipesSmall}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{readPipesSmall()}{readPipesSmall()}}
+{\footnotesize\ttfamily void Network\+Controller\+::read\+Pipes\+Small (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads a small amount of pipe data from files and adds pipes to connect vertices in the graph. 
+
+Reads pipe data for a small network from a CSV file. It iterates over each line of the file, extracts information about each pipe (such as service points, capacity, and direction), and adds edges to the network accordingly. If any endpoint of the pipe doesn\textquotesingle{}t exist in the network, it throws an exception. \Hypertarget{class_network_controller_a271abf1a9f0fb19db8a034c1a66d3178}\label{class_network_controller_a271abf1a9f0fb19db8a034c1a66d3178} 
+\index{NetworkController@{NetworkController}!readPumpingStations@{readPumpingStations}}
+\index{readPumpingStations@{readPumpingStations}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{readPumpingStations()}{readPumpingStations()}}
+{\footnotesize\ttfamily void Network\+Controller\+::read\+Pumping\+Stations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads pumping station data from files and adds pumping station vertices to the graph. 
+
+Reads pumping station data from a CSV file located at a specific path. It opens the file and reads each line, parsing information about each station, such as its ID and code. It then creates a \doxylink{class_pumping_station}{Pumping\+Station} object with this information and adds it to the network. If the file cannot be opened, it throws an invalid argument exception. \Hypertarget{class_network_controller_af107057d276b2b6b33493a0909761725}\label{class_network_controller_af107057d276b2b6b33493a0909761725} 
+\index{NetworkController@{NetworkController}!readReservoirs@{readReservoirs}}
+\index{readReservoirs@{readReservoirs}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{readReservoirs()}{readReservoirs()}}
+{\footnotesize\ttfamily void Network\+Controller\+::read\+Reservoirs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads reservoir data from files and adds reservoir vertices to the graph. 
+
+Reads reservoir data from a CSV file located at a specific path. It opens the file and reads each line, parsing information about each reservoir, such as its name, municipality, ID, code, and maximum delivery. It then creates a \doxylink{class_water_reservoir}{Water\+Reservoir} object with this information and adds it to the network. If the file cannot be opened, it throws an invalid argument exception. \Hypertarget{class_network_controller_ad91437811c29e05a2e1c852cd8d7d79c}\label{class_network_controller_ad91437811c29e05a2e1c852cd8d7d79c} 
+\index{NetworkController@{NetworkController}!readReservoirsSmall@{readReservoirsSmall}}
+\index{readReservoirsSmall@{readReservoirsSmall}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{readReservoirsSmall()}{readReservoirsSmall()}}
+{\footnotesize\ttfamily void Network\+Controller\+::read\+Reservoirs\+Small (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads a small amount of reservoir data from files and adds reservoir vertices to the graph. 
+
+Reads pumping station data from a CSV file located at a specific path. It opens the file and reads each line, parsing information about each station, such as its ID and code. It then creates a \doxylink{class_pumping_station}{Pumping\+Station} object with this information and adds it to the network. If the file cannot be opened, it throws an invalid argument exception. \Hypertarget{class_network_controller_afcd6bcc261d916c0ba1ffd681f36c416}\label{class_network_controller_afcd6bcc261d916c0ba1ffd681f36c416} 
+\index{NetworkController@{NetworkController}!readStationsSmall@{readStationsSmall}}
+\index{readStationsSmall@{readStationsSmall}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{readStationsSmall()}{readStationsSmall()}}
+{\footnotesize\ttfamily void Network\+Controller\+::read\+Stations\+Small (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads a small amount of pumping station data from files and adds pumping station vertices to the graph. 
+
+Reads station data from a CSV file located at a specific path. It opens the file and reads each line, parsing information about each station, such as its ID and code. It then creates a \doxylink{class_pumping_station}{Pumping\+Station} object with this information and adds it to the network. If the file cannot be opened, it prints an error message and returns. If a line has insufficient data or empty ID and code, it skips that line. \Hypertarget{class_network_controller_a5b9e4151c670ce849efcdcb0c7c0aab4}\label{class_network_controller_a5b9e4151c670ce849efcdcb0c7c0aab4} 
+\index{NetworkController@{NetworkController}!saveCityData@{saveCityData}}
+\index{saveCityData@{saveCityData}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{saveCityData()}{saveCityData()}}
+{\footnotesize\ttfamily void Network\+Controller\+::save\+City\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Saves city data to files. 
+
+Stores data about city flows in a text file named "{}max\+\_\+flow\+\_\+network.\+txt"{} located in the output directory. It first retrieves the super sink vertex to access incoming pipes. Then, it opens the output file and writes a header indicating the format of the data to be stored. For each incoming pipe, representing a city, it retrieves the city\textquotesingle{}s code, demand, and flow, and writes this information to the file. If the file cannot be opened, it displays an error message. \Hypertarget{class_network_controller_a76e11da8f5a2b362d8d5b6a49871971f}\label{class_network_controller_a76e11da8f5a2b362d8d5b6a49871971f} 
+\index{NetworkController@{NetworkController}!testAndVisit@{testAndVisit}}
+\index{testAndVisit@{testAndVisit}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{testAndVisit()}{testAndVisit()}}
+{\footnotesize\ttfamily void Network\+Controller\+::test\+And\+Visit (\begin{DoxyParamCaption}\item[{std\+::queue$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \&}]{q,  }\item[{\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}}]{pipe,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{dest,  }\item[{double}]{residual }\end{DoxyParamCaption})}
+
+
+
+Tests and visits vertices along a path to determine the residual flow. 
+
+Serves as a helper function within the BFS traversal process of the Edmonds-\/\+Karp algorithm, determining whether adjacent vertices should be visited based on residual capacity and visitation status.
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & A queue of vertices to visit. \\
+\hline
+{\em pipe} & The pipe connecting the vertices. \\
+\hline
+{\em dest} & The destination vertex. \\
+\hline
+{\em residual} & The residual flow. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_network_controller_ac5168629871a52c482123004704a4384}\label{class_network_controller_ac5168629871a52c482123004704a4384} 
+\index{NetworkController@{NetworkController}!dataRoot@{dataRoot}}
+\index{dataRoot@{dataRoot}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{dataRoot}{dataRoot}}
+{\footnotesize\ttfamily std\+::string Network\+Controller\+::data\+Root\hspace{0.3cm}{\ttfamily [private]}}
+
+Root directory containing data files \Hypertarget{class_network_controller_a27713d324f3e08d08ccf7ad6ef3d9142}\label{class_network_controller_a27713d324f3e08d08ccf7ad6ef3d9142} 
+\index{NetworkController@{NetworkController}!maxFlowValid@{maxFlowValid}}
+\index{maxFlowValid@{maxFlowValid}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{maxFlowValid}{maxFlowValid}}
+{\footnotesize\ttfamily bool Network\+Controller\+::max\+Flow\+Valid\hspace{0.3cm}{\ttfamily [private]}}
+
+Flag indicating whether maximum flow calculation is valid \Hypertarget{class_network_controller_adde3b04107475aabb34b0dbaffc01dd3}\label{class_network_controller_adde3b04107475aabb34b0dbaffc01dd3} 
+\index{NetworkController@{NetworkController}!network@{network}}
+\index{network@{network}!NetworkController@{NetworkController}}
+\doxysubsubsection{\texorpdfstring{network}{network}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_graph}{Graph}} Network\+Controller\+::network\hspace{0.3cm}{\ttfamily [private]}}
+
+\doxylink{class_graph}{Graph} representing the network 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/goncalomatias/\+Documents/\+Git\+Hub/\+DA-\/\+Project-\/23-\/24/include/Network\+Controller.\+h\item 
+/\+Users/goncalomatias/\+Documents/\+Git\+Hub/\+DA-\/\+Project-\/23-\/24/src/Network\+Controller.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,56 @@
+\doxysection{Pipe.\+h}
+\hypertarget{_pipe_8h_source}{}\label{_pipe_8h_source}\index{/Users/goncalomatias/Documents/GitHub/DA-\/Project-\/23-\/24/include/graph/Pipe.h@{/Users/goncalomatias/Documents/GitHub/DA-\/Project-\/23-\/24/include/graph/Pipe.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJECT\_23\_24\_PIPE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJECT\_23\_24\_PIPE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Graph.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Vertex.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_vertex}{Vertex}};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_pipe}{Pipe}}\{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pipe_a67fa0b6c2695587efd0def523e5ef6b5}{capacity}};\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ Used\ for\ network\ improvements}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pipe_a30b0b779cc63bb280040c683172577c6}{originalCapacity}};\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pipe_a981fd5273c13a0e2f89655033d224705}{flow}};\ }
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_pipe_aacca2f0eb15bdbbeef7e6ed69d240a5c}{destination}};\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_pipe_a1994c32a03e820ecc280cd5fc90890cb}{origin}};\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_pipe_a93643c42984c480f11f2bb6dc647b80d}{Pipe}}(\textcolor{keywordtype}{double}\ maxCapacity,\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_pipe_a1994c32a03e820ecc280cd5fc90890cb}{origin}},\mbox{\hyperlink{class_vertex}{Vertex}}*\ endpoint);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Class\ getters}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pipe_a65a6084868ecdf7ac60a945b343eff25}{getCapacity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_pipe_ae1277d6feab90800ae6459d7191e9a51}{getDestination}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{class_pipe_aa9a0efa66e02694cc8adbb81394eb90e}{getDestinationId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pipe_afda9933102df2e11477f5e25d3bd176d}{getFlow}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_pipe_a16644c80d1c7d9e4463b58675fa33024}{getOrigin}}();}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pipe_ad8f71f815d840ace5797b724eb63ce15}{getOriginalCapacity}}();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//\ Class\ setters}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_ab086a67689cbc9d36957f2a80a0b3225}{setCapacity}}(\textcolor{keywordtype}{double}\ newCapacity);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_a341d72f2ff342b4bf8ad57444889433b}{setDestination}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_pipe_aacca2f0eb15bdbbeef7e6ed69d240a5c}{destination}});}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_ad7ab16c1fd13568bed2e8253dc442d84}{setFlow}}(\textcolor{keywordtype}{double}\ newFlow);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_aab69a9bc7a179db5983a99b5d332de97}{setOrigin}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ orig);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00135\ \ \ \ \ std::string\ \mbox{\hyperlink{class_pipe_ac7fe27ffc22c427ab0dae4ef62b3935d}{getPipeId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJECT\_23\_24\_PIPE\_H}}
+
+\end{DoxyCode}
