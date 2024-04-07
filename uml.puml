@@ -1,0 +1,164 @@
+@startuml
+
+class Vertex {
+    -outgoing: vector<Pipe*>
+    -incoming: vector<Pipe*>
+    -code: string
+    -visited: bool
+    -processing: bool
+    -path: Pipe*
+    -vertexType: VertexType
+    +Vertex(identifier: string)
+    +clearIncoming(): void
+    +setCode(identifier: string): void
+    +setOutgoing(newAdj: vector<Pipe*>): void
+    +setIncoming(newAdj: vector<Pipe*>): void
+    +setVisited(newSt: bool): void
+    +setProcessing(proc: bool): void
+    +setPath(parent: Pipe*): void
+    +setType(type: VertexType): void
+    +addOutgoingPipe(newPipe: Pipe*): void
+    +addIncomingPipe(newPipe: Pipe*): void
+    +removePipeTo(endpoint: string): bool
+    +removePipeFrom(origin: string): bool
+    +getCode(): string
+    +isVisited(): bool
+    +isProcessing(): bool
+    +getPath(): Pipe*
+    +getIncoming(): vector<Pipe*>
+    +getOutgoing(): vector<Pipe*>
+    +getType(): VertexType
+}
+
+class City {
+    -cityName: string
+    -cityId: unsigned int
+    -pop: unsigned int
+    -demand: double
+    +City(vertexId: string, name: string, id: unsigned int, demand_: double, population: unsigned int)
+    +setName(name: string): void
+    +setID(id: unsigned int): void
+    +setPop(pop_: unsigned int): void
+    +setDemand(demand_: double): void
+    +getName(): string
+    +getID(): unsigned int
+    +getPop(): unsigned int
+    +getDemand(): double
+    +getType(): VertexType
+}
+
+City --|> Vertex
+
+class Pipe {
+    -capacity: double
+    -originalCapacity: double
+    -flow: double
+    -destination: Vertex*
+    -origin: Vertex*
+    +Pipe(maxCapacity: double, origin: Vertex*, endpoint: Vertex*)
+    +getCapacity(): double
+    +getDestination(): Vertex*
+    +getDestinationId(): string
+    +getFlow(): double
+    +getOrigin(): Vertex*
+    +getOriginalCapacity(): double
+    +setCapacity(newCapacity: double): void
+    +setDestination(destination: Vertex*): void
+    +setFlow(newFlow: double): void
+    +setOrigin(orig: Vertex*): void
+    +getPipeId(): string
+}
+
+Pipe "origin" o-- "1" Vertex
+Pipe "destination" o-- "1" Vertex
+
+class PumpingStation {
+    -stationId: unsigned int
+    +PumpingStation(id: string, psID: unsigned int)
+    +getType(): VertexType
+}
+
+PumpingStation --|> Vertex
+
+class WaterReservoir {
+    -name: string
+    -municipality: string
+    -reservoirID: unsigned int
+    -maxDelivery: double
+    +WaterReservoir(id: string, name: string, municipality: string, resID: unsigned int, maxDel: double)
+    +getType(): VertexType
+    +getMaxDelivery(): double
+}
+
+WaterReservoir --|> Vertex
+
+class Graph {
+    -vertexSet: unordered_map<string, Vertex*>
+    -citySet: unordered_map<string, City*>
+    -reservoirSet: unordered_map<string, WaterReservoir*>
+    -stationSet: unordered_map<string, PumpingStation*>
+    -pipeSet: unordered_map<string, Pipe*>
+    -augmentingPaths: unordered_map<string, vector<AUGMENTING_PATH>>
+    +~Graph()
+    +findVertex(in: string): Vertex*
+    +getVertexSet(): unordered_map<string, Vertex*>
+    +getCities(): vector<City*>
+    +getReservoirs(): vector<WaterReservoir*>
+    +getStations(): vector<PumpingStation*>
+    +getPipe(origin: string, endpoint: string): Pipe*
+    +addVertex(newVertex: Vertex*): bool
+    +removeVertex(in: string): bool
+    +addEdge(sourc: string, dest: string, w: double): bool
+    +removeEdge(source: string, dest: string): bool
+    +removeEdgesTo(out: string): void
+    +addBidirectionalEdge(sourc: string, dest: string, w: double): bool
+    +getCityPop(code: string): int
+    +getCityDemand(code: string): int
+    +addAugmentingPath(resCityID: string, path: AUGMENTING_PATH): void
+    +clearAugmentingPaths(): void
+    +calculateAverageDifference(): double
+    +calculateVariance(): double
+    +calculateMaxDifference(): double
+    +getPipeSet(): unordered_map<string, Pipe*>
+}
+
+Graph "1" o-- "*" Vertex : contains
+Graph "1" o-- "*" Pipe : contains
+
+class NetworkController {
+    -network: Graph
+    -dataRoot: string
+    -maxFlowValid: bool
+    +NetworkController(src: string)
+    +parseData(): void
+    +parseDataSmall(): void
+    +readReservoirs(): void
+    +readReservoirsSmall(): void
+    +readPumpingStations(): void
+    +readStationsSmall(): void
+    +readCities(): void
+    +readCitiesSmall(): void
+    +readPipes(): void
+    +readPipesSmall(): void
+    +initializeNetwork(small: bool): void
+    +simulatePipelineFailure(servicePointA: string, servicePointB: string): unordered_map<string, pair<double, double>>
+    +findPipe(servicePointA: string, servicePointB: string): Pipe*
+    +getVertex(id: string): Vertex*
+    +getSuperSource(): Vertex*
+    +getSuperSink(): Vertex*
+    +edmondsKarp(): void
+    +findAugmentingPath(source: Vertex*, sink: Vertex*): bool
+    +testAndVisit(q: queue<Vertex*>&, pipe: Pipe*, dest: Vertex*, residual: double): void
+    +findMinResidualAlongPath(source: Vertex*, sink: Vertex*): double
+    +augmentFlowAlongPath(source: Vertex*, sink: Vertex*, f: double): void
+    +getLowWaterCities(): vector<pair<string, double>>
+    +saveCityData(): void
+    +getMaxFlowInCity(city: string): pair<string, double>
+    +getNetworkFlow(): unordered_map<string, double>
+    +getAffectedByReservoir(res_id: string): unordered_map<string, pair<double, double>>
+    +getAffectedByStation(res_id: string): unordered_map<string, pair<double, double>>
+}
+
+NetworkController "1" o-- "1" Graph
+
+@enduml
