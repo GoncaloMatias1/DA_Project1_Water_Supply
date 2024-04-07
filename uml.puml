@@ -1,0 +1,154 @@
+@startuml
+
+class City {
+    - cityName : string
+    - cityId : unsigned int
+    - pop : unsigned int
+    - demand : double
+    + City(vertexId : string, name : string, id : unsigned int, demand_ : double, population : unsigned int)
+    + setName(name : string) : void
+    + setID(id : unsigned int) : void
+    + setPop(pop_ : unsigned int) : void
+    + setDemand(demand_ : double) : void
+    + getName() : string
+    + getID() : unsigned int
+    + getPop() : unsigned int
+    + getDemand() : double
+    + getType() : VertexType
+}
+
+class Vertex {
+    - code : string
+    - visited : bool
+    - processing : bool
+    - path : Pipe*
+    + Vertex(identifier : string)
+    + setCode(identifier : string) : void
+    + setVisited(newSt : bool) : void
+    + setProcessing(proc : bool) : void
+    + setPath(parent : Pipe*) : void
+    + addOutgoingPipe(newPipe : Pipe*) : void
+    + addIncomingPipe(newPipe : Pipe*) : void
+    + removePipeTo(endpoint : string) : bool
+    + removePipeFrom(origin : string) : bool
+    + getCode() : string
+    + isVisited() : bool
+    + isProcessing() : bool
+    + getPath() : Pipe*
+    + getIncoming() : Pipe[]
+    + getOutgoing() : Pipe[]
+    + clearIncoming() : void
+    + getType() : VertexType
+}
+
+class PumpingStation {
+    - stationId : unsigned int
+    + PumpingStation(id : string, psID : unsigned int)
+    + getType() : VertexType
+}
+
+class WaterReservoir {
+    - name : string
+    - municipality : string
+    - reservoirID : unsigned int
+    - maxDelivery : double
+    + WaterReservoir(id : string, name_ : string, municipality_ : string, resID : unsigned int, maxDel : double)
+    + getType() : VertexType
+    + getMaxDelivery() : double
+}
+
+class Pipe {
+    - capacity : double
+    - originalCapacity : double
+    - flow : double
+    - destination : Vertex*
+    - origin : Vertex*
+    + Pipe(maxCapacity : double, origin_ : Vertex*, endpoint : Vertex*)
+    + getCapacity() : double
+    + getDestination() : Vertex*
+    + getDestinationId() : string
+    + getFlow() : double
+    + getOrigin() : Vertex*
+    + getOriginalCapacity() : double
+    + setCapacity(newCapacity : double) : void
+    + setDestination(destination : Vertex*) : void
+    + setFlow(newFlow : double) : void
+    + setOrigin(orig : Vertex*) : void
+    + getPipeId() : string
+}
+
+class Graph {
+    - vertexSet : unordered_map<string, Vertex*>
+    - pipeSet : unordered_map<string, Pipe*>
+    - augmentingPaths : unordered_map<string, vector<AUGMENTING_PATH>>
+    + addVertex(newVertex : Vertex*) : bool
+    + removeVertex(in : string) : bool
+    + addEdge(sourc : string, dest : string, w : double) : bool
+    + removeEdge(source : string, dest : string) : bool
+    + addBidirectionalEdge(sourc : string, dest : string, w : double) : bool
+    + removeEdgesTo(out : string) : void
+    + getCityPop(code : string) : int
+    + getCityDemand(code : string) : int
+    + getVertexSet() : unordered_map<string, Vertex*>
+    + getPipe(origin : string, endpoint : string) : Pipe*
+    + clearAugmentingPaths() : void
+    + addAugmentingPath(resCityID : string, path : AUGMENTING_PATH) : void
+    + getCities() : vector<City*>
+    + getReservoirs() : vector<WaterReservoir*>
+    + getStations() : vector<PumpingStation*>
+    + calculateAverageDifference() : double
+    + calculateVariance() : double
+    + calculateMaxDifference() : double
+    + getPipeSet() : unordered_map<string, Pipe*>
+}
+
+class Menu {
+    - controller : NetworkController*
+    - running : bool
+    + Menu(control : NetworkController*)
+    + clearTerminal() : void
+    + waitForContinue() : void
+    + showMainMenu() : void
+    + run_menu() : void
+    + showMaxFlowResult() : void
+    + showMaxFlowToCity() : void
+    + getInput(out : string) : string
+    + displayCityInfo(code : string, cityName : string, demand : int, actualFlow : int, deficit : int) : void
+    + showCitiesWithDeficit() : void
+    + showReservoirRemoval() : void
+    + showStationRemoval() : void
+    + simulatePipelineFailureHandler() : void
+}
+
+class NetworkController {
+    - network : Graph
+    - dataRoot : string
+    - maxFlowValid : bool
+    + NetworkController(src : string)
+    + initializeNetwork(small : bool) : void
+    + parseData() : void
+    + parseDataSmall() : void
+    + edmondsKarp() : void
+    + findAugmentingPath(source : Vertex*, sink : Vertex*) : bool
+    + augmentFlowAlongPath(source : Vertex*, sink : Vertex*, f : double) : void
+    + getLowWaterCities() : vector<pair<string, double>>
+    + saveCityData() : void
+    + getMaxFlowInCity(city : string) : pair<string, double>
+    + getNetworkFlow() : unordered_map<string, double>
+    + getAffectedByReservoir(res_id : string) : unordered_map<string, pair<double, double>>
+    + getVertex(id : string) : Vertex*
+    + getSuperSource() : Vertex*
+    + getSuperSink() : Vertex*
+    + findPipe(servicePointA : string, servicePointB : string) : Pipe*
+    + simulatePipelineFailure(servicePointA : string, servicePointB : string) : unordered_map<string, pair<double, double>>
+    + balanceNetwork() : void
+}
+
+City --|> Vertex
+PumpingStation --|> Vertex
+WaterReservoir --|> Vertex
+Graph "1" *-- "many" Vertex : contains >
+Graph "1" o-- "many" Pipe : manages >
+Menu "1" --> "1" NetworkController
+
+@enduml
