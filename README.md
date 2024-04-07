@@ -35,7 +35,7 @@ make
 To use the application, execute the following command in the terminal:
 
 ```bash
-./DA_Project-23-24
+./DA_Project_23_24
 ```
 
 Navigate through the menu to access different functionalities such as data parsing, analysis, and simulation results.
