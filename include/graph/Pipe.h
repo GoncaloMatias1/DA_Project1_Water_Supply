@@ -28,6 +28,7 @@ public:
      * @param maxCapacity Maximum capacity of the pipe.
      * @param origin The origin vertex of the pipe.
      * @param endpoint The destination vertex of the pipe.
+     * @complexity O(1)
      */
     Pipe(double maxCapacity, Vertex* origin,Vertex* endpoint);
 
@@ -38,6 +39,7 @@ public:
      * Retrieves the maximum capacity of the pipe and returns it as a double value.
      *
      * @return The maximum capacity of the pipe.
+     * @complexity O(1)
      */
     double getCapacity() const;
 
@@ -47,6 +49,7 @@ public:
      * Returns a pointer to the endpoint vertex of the pipe.
      *
      * @return A pointer to the destination vertex.
+     * @complexity O(1)
      */
     Vertex* getDestination() const;
 
@@ -56,6 +59,7 @@ public:
      * Returns a constant reference to the code of the endpoint vertex of the pipe.
      *
      * @return A constant reference to the identifier of the destination vertex.
+     * @complexity O(1)
      */
     const std::string& getDestinationId() const;
 
@@ -65,6 +69,7 @@ public:
      * Returns the current flow value through the pipe.
      *
      * @return The current flow through the pipe.
+     * @complexity O(1)
      */
     double getFlow() const;
 
@@ -74,6 +79,7 @@ public:
      * Returns a pointer to the vertex from which the pipe originates.
      *
      * @return A pointer to the origin vertex.
+     * @complexity O(1)
      */
     Vertex* getOrigin();
 
@@ -84,6 +90,7 @@ public:
      * Returns the original maximum capacity of the pipe before any modifications.
      *
      * @return The original capacity of the pipe.
+     * @complexity O(1)
      */
     double getOriginalCapacity();
 
@@ -95,6 +102,7 @@ public:
      * Sets the new capacity of the pipe to the specified value.
      *
      * @param newCapacity The new maximum capacity of the pipe.
+     * @complexity O(1)
      */
     void setCapacity(double newCapacity);
 
@@ -104,6 +112,7 @@ public:
      * Sets the destination vertex of the pipe to the specified vertex.
      *
      * @param destination A pointer to the destination vertex.
+     * @complexity O(1)
      */
     void setDestination(Vertex* destination);
 
@@ -113,6 +122,7 @@ public:
      * Sets the flow rate of the pipe to the specified value.
      *
      * @param newFlow The new flow through the pipe.
+     * @complexity O(1)
      */
     void setFlow(double newFlow);
 
@@ -122,6 +132,7 @@ public:
      * Sets the origin vertex of the pipe to the specified vertex.
      *
      * @param orig A pointer to the origin vertex.
+     * @complexity O(1)
      */
     void setOrigin(Vertex* orig);
 
@@ -131,6 +142,7 @@ public:
      * Returns a unique identifier for the pipe, which is a combination of the origin vertex code and the destination vertex code, separated by a hyphen.
      *
      * @return A string referring to the ID of the pipe.
+     * @complexity O(1)
      */
     std::string getPipeId() const;
 

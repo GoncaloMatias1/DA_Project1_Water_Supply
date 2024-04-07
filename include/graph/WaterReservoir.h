@@ -28,6 +28,7 @@ public:
      * @param municipality The municipality where the water reservoir is located.
      * @param resID The unique identifier of the water reservoir.
      * @param maxDel The maximum delivery capacity of the water reservoir.
+     * @complexity O(1), as the operation involves direct assignment of basic types.
      */
     WaterReservoir(const std::string& id, const std::string& name, const std::string& municipality, unsigned int resID, double maxDel);
 
@@ -37,6 +38,7 @@ public:
      * Returns the type of the vertex, specifically indicating that it's a reservoir vertex.
      *
      * @return The type of the vertex.
+     * @complexity O(1), simply returns the type of the vertex.
      */
     VertexType getType() const override;
 
@@ -46,6 +48,7 @@ public:
      * Returns the maximum delivery capacity of the water reservoir.
      *
      * @return The maximum delivery capacity.
+     * @complexity O(1), as it returns a member variable.
      */
     double getMaxDelivery() const;
 };

@@ -22,6 +22,7 @@ public:
      *
      * @param id The identifier for the pumping station vertex.
      * @param psID The identifier for the pumping station.
+     * @complexity O(1), as the operation involves direct assignment of basic types.
      */
     PumpingStation(const std::string& id, unsigned int psID);
 
@@ -31,6 +32,7 @@ public:
      * Returns the type of the vertex, which is specifically a pumping station vertex.
      *
      * @return VertexType::PumpingStation.
+     * @complexity O(1), simply returns the enum value indicating the vertex type.
      */
     VertexType getType() const override;
 };

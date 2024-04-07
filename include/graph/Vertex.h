@@ -40,6 +40,7 @@ public:
      * It sets the code of the vertex to the provided identifier and clears both the incoming and outgoing pipe lists associated with the vertex.
      *
      * @param identifier The identifier of the vertex.
+     * @complexity O(1)
      */
     Vertex(const std::string& identifier);
 
@@ -47,6 +48,7 @@ public:
      * @brief Clears the list of incoming pipes.
      *
      * Clears the list of incoming pipes associated with the vertex by removing all elements from the incoming vector.
+     * @complexity O(1)
      */
     void clearIncoming();
 
@@ -58,6 +60,7 @@ public:
      * Sets the identifier (code) of the vertex to the provided string parameter.
      *
      * @param identifier The new identifier of the vertex.
+     * @complexity O(1)
      */
     void setCode(const std::string& identifier);
 
@@ -67,6 +70,7 @@ public:
      * Sets the outgoing pipes of the vertex to the provided vector of Pipe pointers.
      *
      * @param newAdj The new list of outgoing pipes.
+     * @complexity O(1)
      */
     void setOutgoing(const std::vector<Pipe*>& newAdj);
 
@@ -76,6 +80,7 @@ public:
      * Sets the incoming pipes of the vertex to the provided vector of Pipe pointers.
      *
      * @param newAdj The new list of incoming pipes.
+     * @complexity O(1)
      */
     void setIncoming(const std::vector<Pipe*>& newAdj);
 
@@ -86,6 +91,7 @@ public:
      * If newSt is true, it means the vertex has been visited; otherwise, it has not been visited.
      *
      * @param newSt The new visited status of the vertex.
+     * @complexity O(1)
      */
     void setVisited(bool newSt);
 
@@ -96,6 +102,7 @@ public:
      * If proc is true, it means the vertex is being processed; otherwise, it is not being processed.
      *
      * @param proc The new processing status of the vertex.
+     * @complexity O(1)
      */
     void setProcessing(bool proc);
 
@@ -106,6 +113,7 @@ public:
      * This path typically represents the parent pipe through which this vertex was reached during graph traversal algorithms such as BFS or DFS.
      *
      * @param parent The new path (predecessor pipe) of the vertex.
+     * @complexity O(1)
      */
     void setPath(Pipe* parent);
 
@@ -116,6 +124,7 @@ public:
      * It takes a pointer to a Pipe object as input and appends it to the outgoing vector of the vertex.
      *
      * @param newPipe The outgoing pipe to add.
+     * @complexity O(1)
      */
     void addOutgoingPipe(Pipe* newPipe);
 
@@ -126,6 +135,7 @@ public:
      * It takes a pointer to a Pipe object as input and appends it to the incoming vector of the vertex.
      *
      * @param newPipe The incoming pipe to add.
+     * @complexity O(1)
      */
     void addIncomingPipe(Pipe* newPipe);
 
@@ -133,6 +143,7 @@ public:
      * @brief Removes a pipe leading to the specified endpoint.
      * @param endpoint The identifier of the endpoint.
      * @return True if the pipe was successfully removed, false otherwise.
+     * @complexity O(E) where E is the number of outgoing pipes.
      */
     bool removePipeTo(const std::string& endpoint);
 
@@ -146,6 +157,7 @@ public:
      *
      * @param origin The identifier of the origin.
      * @return True if the pipe was successfully removed, false otherwise.
+     * @complexity O(E) where E is the number of incoming pipes.
      */
     bool removePipeFrom(const std::string& origin);
 
@@ -158,6 +170,7 @@ public:
      * Retrieves the code (identifier) of the vertex. It returns a constant reference to the code, ensuring that the code cannot be modified through this reference.
      *
      * @return The identifier of the vertex.
+     * @complexity O(1)
      */
     const std::string& getCode() const;
 
@@ -168,6 +181,7 @@ public:
      * It returns a boolean value indicating whether the vertex has been visited (true) or not (false).
      *
      * @return True if the vertex has been visited, false otherwise.
+     * @complexity O(1)
      */
     bool isVisited() const;
 
@@ -178,6 +192,7 @@ public:
      * It returns a boolean value indicating whether the vertex is being processed (true) or not (false).
      *
      * @return True if the vertex is being processed, false otherwise.
+     * @complexity O(1)
      */
     bool isProcessing() const;
 
@@ -188,6 +203,7 @@ public:
      * If no path has been set, it returns a null pointer.
      *
      * @return A pointer to the predecessor pipe.
+     * @complexity O(1)
      */
     Pipe* getPath() const;
 
@@ -198,6 +214,7 @@ public:
      * This function allows access to the incoming pipes without modifying them.
      *
      * @return A vector containing pointers to incoming pipes.
+     * @complexity O(1)
      */
     std::vector<Pipe*> getIncoming() const;
 
@@ -208,6 +225,7 @@ public:
      * This function allows access to the outgoing pipes without modifying them.
      *
      * @return A vector containing pointers to outgoing pipes.
+     * @complexity O(1)
      */
     std::vector<Pipe*> getOutgoing() const;
 
@@ -217,6 +235,7 @@ public:
      * In this implementation, it always returns VertexType::VirtualVertex, indicating that the vertex is a virtual vertex.
      *
      * @return The type of the vertex.
+     * @complexity O(1)
      */
     virtual VertexType getType() const;
 };

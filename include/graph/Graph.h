@@ -42,6 +42,7 @@ public:
     * @brief Destructor of the Graph class.
     *
     * Frees dynamically allocated memory for the graph's vertices.
+    * @complexity O(V + E), where V is the number of vertices and E is the number of edges.
     */
     ~Graph();
 
@@ -50,6 +51,7 @@ public:
     *
     * @param in The code of the vertex to find.
     * @return A pointer to the found vertex, or nullptr if not found.
+    * @complexity O(1) assuming unordered_map has average constant time complexity for find operation.
     */
     Vertex *findVertex(const std::string& in) const;
 
@@ -57,6 +59,7 @@ public:
     * @brief Gets the set of vertices of the graph.
     *
     * @return An unordered map of the graph's vertices.
+    * @complexity O(1)
     */
     std::unordered_map<std::string, Vertex*> getVertexSet() const;
 
@@ -64,6 +67,7 @@ public:
     * @brief Gets a list of all cities in the graph.
     *
     * @return A vector of pointers to the cities in the graph.
+    * @complexity O(C) where C is the number of cities.
     */
     std::vector<City*> getCities();
 
@@ -71,6 +75,7 @@ public:
     * @brief Gets a list of all water reservoirs in the graph.
     *
     * @return A vector of pointers to the water reservoirs in the graph.
+    * @complexity O(R) where R is the number of reservoirs.
     */
     std::vector<WaterReservoir*> getReservoirs();
 
@@ -78,6 +83,7 @@ public:
     * @brief Gets a list of all pumping stations in the graph.
     *
     * @return A vector of pointers to the pumping stations in the graph.
+    * @complexity O(P) where P is the number of pumping stations.
     */
     std::vector<PumpingStation*> getStations();
 
@@ -95,6 +101,7 @@ public:
     *
     * @param newVertex Pointer to the vertex to be added.
     * @return True if the vertex is added successfully, false otherwise.
+    * @complexity O(1) for insertion.
     */
     bool addVertex(Vertex* newVertex);
 
@@ -103,6 +110,7 @@ public:
     *
     * @param in The code of the vertex to be removed.
     * @return True if the vertex is removed successfully, false otherwise.
+    * @complexity O(V + E) because it must remove all connecting edges.
     */
     bool removeVertex(const std::string &in);
 
@@ -113,6 +121,7 @@ public:
     * @param dest The code of the destination vertex.
     * @param w The weight (capacity) of the edge.
     * @return True if the edge is added successfully, false otherwise.
+    * @complexity O(1) for inserting the edge.
     */
     bool addEdge(const std::string &sourc, const std::string &dest, double w);
 
@@ -122,6 +131,7 @@ public:
     * @param source The code of the source vertex.
     * @param dest The code of the destination vertex.
     * @return True if the edge is removed successfully, false otherwise.
+    * @complexity O(E) where E is the number of edges to search through.
     */
     bool removeEdge(const std::string &source, const std::string &dest);
 
@@ -129,6 +139,7 @@ public:
     * @brief Removes all edges connected to a specified vertex.
     *
     * @param out The code of the vertex to remove edges from.
+    * @complexity O(E) where E is the number of edges to search through.
     */
     void removeEdgesTo(const std::string& out);
 
@@ -139,6 +150,7 @@ public:
     * @param dest The code of the destination vertex.
     * @param w The weight (capacity) of the edge.
     * @return True if the bidirectional edge is added successfully, false otherwise.
+    * @complexity O(1) for inserting each direction, assuming addEdge is O(1).
     */
     bool addBidirectionalEdge(const std::string &sourc, const std::string &dest, double w);
 
@@ -147,6 +159,7 @@ public:
     *
     * @param code The code of the city.
     * @return The population of the city, or -1 if not found.
+    * @complexity O(1) assuming unordered_map has average constant time complexity for find operation.
     */
     int getCityPop(const std::string& code) const;
 
@@ -155,6 +168,7 @@ public:
     *
     * @param code The code of the city.
     * @return The demand of the city, or -1 if not found.
+    * @complexity O(1) assuming unordered_map has average constant time complexity for find operation.
     */
     int getCityDemand(const std::string& code) const;
 
@@ -163,11 +177,13 @@ public:
     *
     * @param resCityID The ID of the reservoir-city pair.
     * @param path The augmenting path to add.
+    * @complexity O(1) for insertion.
     */
     void addAugmentingPath(const std::string& resCityID,AUGMENTING_PATH path);
 
     /**
     * @brief Clears all augmenting paths from the graph.
+    * @complexity O(1) for clearing the map.
     */
     void clearAugmentingPaths();
 
@@ -176,6 +192,7 @@ public:
     * @brief Calculates the average difference between capacity and flow in all pipes.
     *
     * @return The average difference.
+    * @complexity O(E), where E is the number of pipes.
     */
     double calculateAverageDifference();
 
@@ -183,6 +200,7 @@ public:
     * @brief Calculates the variance of differences between capacity and flow in all pipes.
     *
     * @return The variance.
+    * @complexity O(E), where E is the number of pipes, since it requires calculating the mean first.
     */
     double calculateVariance();
 
@@ -190,6 +208,7 @@ public:
     * @brief Calculates the maximum difference between capacity and flow in all pipes.
     *
     * @return The maximum difference.
+    * @complexity O(E), where E is the number of pipes.
     */
     double calculateMaxDifference();
 
@@ -197,6 +216,7 @@ public:
     * @brief Gets the set of pipes in the graph.
     *
     * @return An unordered map of pipes in the graph.
+    * @complexity O(1)
     */
     std::unordered_map<std::string, Pipe*> getPipeSet();
 
