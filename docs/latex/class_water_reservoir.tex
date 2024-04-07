@@ -1,0 +1,195 @@
+\doxysection{Water\+Reservoir Class Reference}
+\hypertarget{class_water_reservoir}{}\label{class_water_reservoir}\index{WaterReservoir@{WaterReservoir}}
+
+
+Represents a water reservoir vertex in the network.  
+
+
+
+
+{\ttfamily \#include $<$Water\+Reservoir.\+h$>$}
+
+Inheritance diagram for Water\+Reservoir\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_water_reservoir}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_water_reservoir_acd7c93383dc605c1f76bece629364b62}{Water\+Reservoir}} (const std\+::string \&id, const std\+::string \&\mbox{\hyperlink{class_water_reservoir_afad826667f31586f4c713e10e86cd078}{name}}, const std\+::string \&\mbox{\hyperlink{class_water_reservoir_aacb24dded1ff9d1c901aa6f868dbd09c}{municipality}}, unsigned int res\+ID, double max\+Del)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_water_reservoir}{Water\+Reservoir} object with the specified attributes. \end{DoxyCompactList}\item 
+Vertex\+Type \mbox{\hyperlink{class_water_reservoir_a3a6f4ef8ed72df095413503ea429234b}{get\+Type}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type of the vertex (\doxylink{class_water_reservoir}{Water\+Reservoir}). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_water_reservoir_ace9992a2f909bc7b5757f03c8307fdd6}{get\+Max\+Delivery}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum delivery capacity of the water reservoir. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_vertex}{Vertex}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vertex_a433bee659c8d45a0520db0104ddd8739}{Vertex}} (const std\+::string \&identifier)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_vertex}{Vertex} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a343aa23769956dfd7ef3a8f1966c89ab}{clear\+Incoming}} ()
+\begin{DoxyCompactList}\small\item\em Clears the list of incoming pipes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a454aba74d56b566a43229c33a7830ca7}{set\+Code}} (const std\+::string \&identifier)
+\begin{DoxyCompactList}\small\item\em Sets the identifier of the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a263fc22ab241088c91e3a2e0defa89fa}{set\+Outgoing}} (const std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \&new\+Adj)
+\begin{DoxyCompactList}\small\item\em Sets the list of outgoing pipes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_aff0de67975f679c4843d1644accc479f}{set\+Incoming}} (const std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \&new\+Adj)
+\begin{DoxyCompactList}\small\item\em Sets the list of incoming pipes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a1a6d60ddd29e2adfe8afc8babbbe8686}{set\+Visited}} (bool new\+St)
+\begin{DoxyCompactList}\small\item\em Sets the visited status of the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_aaefc824b5ab98ade8e6ae258b80f90c8}{set\+Processing}} (bool proc)
+\begin{DoxyCompactList}\small\item\em Sets the processing status of the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a49582cd122dd75740df1a7a6d0f6da83}{set\+Path}} (\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}parent)
+\begin{DoxyCompactList}\small\item\em Sets the path (predecessor pipe) of the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a33df093abd11e7c0460725c7fcdf7294}{add\+Outgoing\+Pipe}} (\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}new\+Pipe)
+\begin{DoxyCompactList}\small\item\em Adds an outgoing pipe to the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_ae4134728e8591e1a3c9c20189244fad6}{add\+Incoming\+Pipe}} (\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}new\+Pipe)
+\begin{DoxyCompactList}\small\item\em Adds an incoming pipe to the vertex. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_a0677c70ea1bf7cd5cc86f290dc368f82}{remove\+Pipe\+To}} (const std\+::string \&endpoint)
+\begin{DoxyCompactList}\small\item\em Removes a pipe leading to the specified endpoint. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_a2e14b11be7954724dfc25b99bc8c5b80}{remove\+Pipe\+From}} (const std\+::string \&origin)
+\begin{DoxyCompactList}\small\item\em Removes a pipe originating from the specified origin. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{class_vertex_a6ed1acd5f744298b0358b485c4f0d196}{get\+Code}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the identifier of the vertex. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_aa4bd82105b85ee53a917391f4811cd8a}{is\+Visited}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the vertex has been visited during traversal. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_a126e306f0534b99cd97aa864fdb243d4}{is\+Processing}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the vertex is currently being processed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_vertex_afdc6a4154139fedb4c34bba13c3c5f43}{get\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the predecessor pipe in the shortest path. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_vertex_ab113b6d8783a099354a40e15ee5f0901}{get\+Incoming}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the list of incoming pipes. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_vertex_af548abedd5e5a13a77a6539052f64771}{get\+Outgoing}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the list of outgoing pipes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_water_reservoir_afad826667f31586f4c713e10e86cd078}{name}}
+\item 
+std\+::string \mbox{\hyperlink{class_water_reservoir_aacb24dded1ff9d1c901aa6f868dbd09c}{municipality}}
+\item 
+unsigned int \mbox{\hyperlink{class_water_reservoir_a6e57a4fcecd902ef78dcb84b492f4d4d}{reservoir\+ID}}
+\item 
+double \mbox{\hyperlink{class_water_reservoir_a848ffa63024fef337863459cdd799da8}{max\+Delivery}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_vertex}{Vertex}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_vertex_a78320582753a6c0efee93e6e11655d0a}{outgoing}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_vertex_a0a61bdc0794865448b52480446ac12f5}{incoming}}
+\item 
+std\+::string \mbox{\hyperlink{class_vertex_a0291c0ebdee9d12acd1d19e73c27d1df}{code}}
+\item 
+bool \mbox{\hyperlink{class_vertex_aaef9f7de91b4b8f1752d391a1aae9c2e}{visited}} = false
+\item 
+bool \mbox{\hyperlink{class_vertex_a305dc8fcad6e4c7ef2491409ca7ddaa4}{processing}} = false
+\item 
+\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_vertex_a6db3b22d8890895e4391965534be2bb7}{path}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a water reservoir vertex in the network. 
+
+Inherits from the \doxylink{class_vertex}{Vertex} class and adds specific properties related to water reservoirs. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_water_reservoir_acd7c93383dc605c1f76bece629364b62}\label{class_water_reservoir_acd7c93383dc605c1f76bece629364b62} 
+\index{WaterReservoir@{WaterReservoir}!WaterReservoir@{WaterReservoir}}
+\index{WaterReservoir@{WaterReservoir}!WaterReservoir@{WaterReservoir}}
+\doxysubsubsection{\texorpdfstring{WaterReservoir()}{WaterReservoir()}}
+{\footnotesize\ttfamily Water\+Reservoir\+::\+Water\+Reservoir (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id,  }\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{municipality,  }\item[{unsigned int}]{res\+ID,  }\item[{double}]{max\+Del }\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{class_water_reservoir}{Water\+Reservoir} object with the specified attributes. 
+
+The constructor for the \doxylink{class_water_reservoir}{Water\+Reservoir} class. It initializes a new instance of a water reservoir vertex with the provided attributes such as ID, name, municipality, reservoir ID, and maximum delivery capacity. These attributes are stored within the object for later use.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the water reservoir. \\
+\hline
+{\em name} & The name of the water reservoir. \\
+\hline
+{\em municipality} & The municipality where the water reservoir is located. \\
+\hline
+{\em res\+ID} & The unique identifier of the water reservoir. \\
+\hline
+{\em max\+Del} & The maximum delivery capacity of the water reservoir. @complexity O(1), as the operation involves direct assignment of basic types. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_water_reservoir_ace9992a2f909bc7b5757f03c8307fdd6}\label{class_water_reservoir_ace9992a2f909bc7b5757f03c8307fdd6} 
+\index{WaterReservoir@{WaterReservoir}!getMaxDelivery@{getMaxDelivery}}
+\index{getMaxDelivery@{getMaxDelivery}!WaterReservoir@{WaterReservoir}}
+\doxysubsubsection{\texorpdfstring{getMaxDelivery()}{getMaxDelivery()}}
+{\footnotesize\ttfamily double Water\+Reservoir\+::get\+Max\+Delivery (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum delivery capacity of the water reservoir. 
+
+Returns the maximum delivery capacity of the water reservoir.
+
+\begin{DoxyReturn}{Returns}
+The maximum delivery capacity. @complexity O(1), as it returns a member variable. 
+\end{DoxyReturn}
+\Hypertarget{class_water_reservoir_a3a6f4ef8ed72df095413503ea429234b}\label{class_water_reservoir_a3a6f4ef8ed72df095413503ea429234b} 
+\index{WaterReservoir@{WaterReservoir}!getType@{getType}}
+\index{getType@{getType}!WaterReservoir@{WaterReservoir}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Vertex\+Type Water\+Reservoir\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the type of the vertex (\doxylink{class_water_reservoir}{Water\+Reservoir}). 
+
+Returns the type of the vertex, specifically indicating that it\textquotesingle{}s a reservoir vertex.
+
+\begin{DoxyReturn}{Returns}
+The type of the vertex. @complexity O(1), simply returns the type of the vertex. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_vertex_a7c108e91ff65d2c1e568c682a821a3c4}{Vertex}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_water_reservoir_a848ffa63024fef337863459cdd799da8}\label{class_water_reservoir_a848ffa63024fef337863459cdd799da8} 
+\index{WaterReservoir@{WaterReservoir}!maxDelivery@{maxDelivery}}
+\index{maxDelivery@{maxDelivery}!WaterReservoir@{WaterReservoir}}
+\doxysubsubsection{\texorpdfstring{maxDelivery}{maxDelivery}}
+{\footnotesize\ttfamily double Water\+Reservoir\+::max\+Delivery\hspace{0.3cm}{\ttfamily [private]}}
+
+The maximum delivery capacity of the water reservoir. \Hypertarget{class_water_reservoir_aacb24dded1ff9d1c901aa6f868dbd09c}\label{class_water_reservoir_aacb24dded1ff9d1c901aa6f868dbd09c} 
+\index{WaterReservoir@{WaterReservoir}!municipality@{municipality}}
+\index{municipality@{municipality}!WaterReservoir@{WaterReservoir}}
+\doxysubsubsection{\texorpdfstring{municipality}{municipality}}
+{\footnotesize\ttfamily std\+::string Water\+Reservoir\+::municipality\hspace{0.3cm}{\ttfamily [private]}}
+
+The municipality where the water reservoir is located. \Hypertarget{class_water_reservoir_afad826667f31586f4c713e10e86cd078}\label{class_water_reservoir_afad826667f31586f4c713e10e86cd078} 
+\index{WaterReservoir@{WaterReservoir}!name@{name}}
+\index{name@{name}!WaterReservoir@{WaterReservoir}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily std\+::string Water\+Reservoir\+::name\hspace{0.3cm}{\ttfamily [private]}}
+
+The name of the water reservoir. \Hypertarget{class_water_reservoir_a6e57a4fcecd902ef78dcb84b492f4d4d}\label{class_water_reservoir_a6e57a4fcecd902ef78dcb84b492f4d4d} 
+\index{WaterReservoir@{WaterReservoir}!reservoirID@{reservoirID}}
+\index{reservoirID@{reservoirID}!WaterReservoir@{WaterReservoir}}
+\doxysubsubsection{\texorpdfstring{reservoirID}{reservoirID}}
+{\footnotesize\ttfamily unsigned int Water\+Reservoir\+::reservoir\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+The unique identifier of the water reservoir. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/goncalomatias/\+Documents/\+Git\+Hub/\+DA-\/\+Project-\/23-\/24/include/graph/Water\+Reservoir.\+h\item 
+/\+Users/goncalomatias/\+Documents/\+Git\+Hub/\+DA-\/\+Project-\/23-\/24/src/graph/Water\+Reservoir.\+cpp\end{DoxyCompactItemize}

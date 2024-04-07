@@ -1,0 +1,437 @@
+\doxysection{Vertex Class Reference}
+\hypertarget{class_vertex}{}\label{class_vertex}\index{Vertex@{Vertex}}
+
+
+Represents all the existing vertices of a graph.  
+
+
+
+
+{\ttfamily \#include $<$Vertex.\+h$>$}
+
+Inheritance diagram for Vertex\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_vertex}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vertex_a433bee659c8d45a0520db0104ddd8739}{Vertex}} (const std\+::string \&identifier)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_vertex}{Vertex} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a343aa23769956dfd7ef3a8f1966c89ab}{clear\+Incoming}} ()
+\begin{DoxyCompactList}\small\item\em Clears the list of incoming pipes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a454aba74d56b566a43229c33a7830ca7}{set\+Code}} (const std\+::string \&identifier)
+\begin{DoxyCompactList}\small\item\em Sets the identifier of the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a263fc22ab241088c91e3a2e0defa89fa}{set\+Outgoing}} (const std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \&new\+Adj)
+\begin{DoxyCompactList}\small\item\em Sets the list of outgoing pipes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_aff0de67975f679c4843d1644accc479f}{set\+Incoming}} (const std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \&new\+Adj)
+\begin{DoxyCompactList}\small\item\em Sets the list of incoming pipes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a1a6d60ddd29e2adfe8afc8babbbe8686}{set\+Visited}} (bool new\+St)
+\begin{DoxyCompactList}\small\item\em Sets the visited status of the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_aaefc824b5ab98ade8e6ae258b80f90c8}{set\+Processing}} (bool proc)
+\begin{DoxyCompactList}\small\item\em Sets the processing status of the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a49582cd122dd75740df1a7a6d0f6da83}{set\+Path}} (\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}parent)
+\begin{DoxyCompactList}\small\item\em Sets the path (predecessor pipe) of the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a33df093abd11e7c0460725c7fcdf7294}{add\+Outgoing\+Pipe}} (\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}new\+Pipe)
+\begin{DoxyCompactList}\small\item\em Adds an outgoing pipe to the vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_ae4134728e8591e1a3c9c20189244fad6}{add\+Incoming\+Pipe}} (\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}new\+Pipe)
+\begin{DoxyCompactList}\small\item\em Adds an incoming pipe to the vertex. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_a0677c70ea1bf7cd5cc86f290dc368f82}{remove\+Pipe\+To}} (const std\+::string \&endpoint)
+\begin{DoxyCompactList}\small\item\em Removes a pipe leading to the specified endpoint. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_a2e14b11be7954724dfc25b99bc8c5b80}{remove\+Pipe\+From}} (const std\+::string \&origin)
+\begin{DoxyCompactList}\small\item\em Removes a pipe originating from the specified origin. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{class_vertex_a6ed1acd5f744298b0358b485c4f0d196}{get\+Code}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the identifier of the vertex. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_aa4bd82105b85ee53a917391f4811cd8a}{is\+Visited}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the vertex has been visited during traversal. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_a126e306f0534b99cd97aa864fdb243d4}{is\+Processing}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the vertex is currently being processed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_vertex_afdc6a4154139fedb4c34bba13c3c5f43}{get\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the predecessor pipe in the shortest path. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_vertex_ab113b6d8783a099354a40e15ee5f0901}{get\+Incoming}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the list of incoming pipes. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_vertex_af548abedd5e5a13a77a6539052f64771}{get\+Outgoing}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the list of outgoing pipes. \end{DoxyCompactList}\item 
+virtual Vertex\+Type \mbox{\hyperlink{class_vertex_a7c108e91ff65d2c1e568c682a821a3c4}{get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the type of the vertex. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_vertex_a78320582753a6c0efee93e6e11655d0a}{outgoing}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_vertex_a0a61bdc0794865448b52480446ac12f5}{incoming}}
+\item 
+std\+::string \mbox{\hyperlink{class_vertex_a0291c0ebdee9d12acd1d19e73c27d1df}{code}}
+\item 
+bool \mbox{\hyperlink{class_vertex_aaef9f7de91b4b8f1752d391a1aae9c2e}{visited}} = false
+\item 
+bool \mbox{\hyperlink{class_vertex_a305dc8fcad6e4c7ef2491409ca7ddaa4}{processing}} = false
+\item 
+\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_vertex_a6db3b22d8890895e4391965534be2bb7}{path}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents all the existing vertices of a graph. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_vertex_a433bee659c8d45a0520db0104ddd8739}\label{class_vertex_a433bee659c8d45a0520db0104ddd8739} 
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{Vertex()}{Vertex()}}
+{\footnotesize\ttfamily Vertex\+::\+Vertex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{identifier }\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_vertex}{Vertex} class. 
+
+The constructor of the \doxylink{class_vertex}{Vertex} class, which initializes a vertex object with a given identifier. It sets the code of the vertex to the provided identifier and clears both the incoming and outgoing pipe lists associated with the vertex.
+
+
+\begin{DoxyParams}{Parameters}
+{\em identifier} & The identifier of the vertex. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_vertex_ae4134728e8591e1a3c9c20189244fad6}\label{class_vertex_ae4134728e8591e1a3c9c20189244fad6} 
+\index{Vertex@{Vertex}!addIncomingPipe@{addIncomingPipe}}
+\index{addIncomingPipe@{addIncomingPipe}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{addIncomingPipe()}{addIncomingPipe()}}
+{\footnotesize\ttfamily void Vertex\+::add\+Incoming\+Pipe (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}}]{new\+Pipe }\end{DoxyParamCaption})}
+
+
+
+Adds an incoming pipe to the vertex. 
+
+Adds a new incoming pipe to the vertex\textquotesingle{}s list of incoming pipes. It takes a pointer to a \doxylink{class_pipe}{Pipe} object as input and appends it to the incoming vector of the vertex.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Pipe} & The incoming pipe to add. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_vertex_a33df093abd11e7c0460725c7fcdf7294}\label{class_vertex_a33df093abd11e7c0460725c7fcdf7294} 
+\index{Vertex@{Vertex}!addOutgoingPipe@{addOutgoingPipe}}
+\index{addOutgoingPipe@{addOutgoingPipe}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{addOutgoingPipe()}{addOutgoingPipe()}}
+{\footnotesize\ttfamily void Vertex\+::add\+Outgoing\+Pipe (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}}]{new\+Pipe }\end{DoxyParamCaption})}
+
+
+
+Adds an outgoing pipe to the vertex. 
+
+Adds a new outgoing pipe to the vertex\textquotesingle{}s list of outgoing pipes. It takes a pointer to a \doxylink{class_pipe}{Pipe} object as input and appends it to the outgoing vector of the vertex.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Pipe} & The outgoing pipe to add. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_vertex_a343aa23769956dfd7ef3a8f1966c89ab}\label{class_vertex_a343aa23769956dfd7ef3a8f1966c89ab} 
+\index{Vertex@{Vertex}!clearIncoming@{clearIncoming}}
+\index{clearIncoming@{clearIncoming}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{clearIncoming()}{clearIncoming()}}
+{\footnotesize\ttfamily void Vertex\+::clear\+Incoming (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clears the list of incoming pipes. 
+
+Clears the list of incoming pipes associated with the vertex by removing all elements from the incoming vector. @complexity O(1) \Hypertarget{class_vertex_a6ed1acd5f744298b0358b485c4f0d196}\label{class_vertex_a6ed1acd5f744298b0358b485c4f0d196} 
+\index{Vertex@{Vertex}!getCode@{getCode}}
+\index{getCode@{getCode}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getCode()}{getCode()}}
+{\footnotesize\ttfamily const std\+::string \& Vertex\+::get\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the identifier of the vertex. 
+
+Retrieves the code (identifier) of the vertex. It returns a constant reference to the code, ensuring that the code cannot be modified through this reference.
+
+\begin{DoxyReturn}{Returns}
+The identifier of the vertex. @complexity O(1) 
+\end{DoxyReturn}
+\Hypertarget{class_vertex_ab113b6d8783a099354a40e15ee5f0901}\label{class_vertex_ab113b6d8783a099354a40e15ee5f0901} 
+\index{Vertex@{Vertex}!getIncoming@{getIncoming}}
+\index{getIncoming@{getIncoming}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getIncoming()}{getIncoming()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ Vertex\+::get\+Incoming (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the list of incoming pipes. 
+
+Returns a constant reference to the vector of pointers to incoming pipes connected to the current vertex. This function allows access to the incoming pipes without modifying them.
+
+\begin{DoxyReturn}{Returns}
+A vector containing pointers to incoming pipes. @complexity O(1) 
+\end{DoxyReturn}
+\Hypertarget{class_vertex_af548abedd5e5a13a77a6539052f64771}\label{class_vertex_af548abedd5e5a13a77a6539052f64771} 
+\index{Vertex@{Vertex}!getOutgoing@{getOutgoing}}
+\index{getOutgoing@{getOutgoing}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getOutgoing()}{getOutgoing()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ Vertex\+::get\+Outgoing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the list of outgoing pipes. 
+
+Returns a constant reference to the vector of pointers to outgoing pipes connected to the current vertex. This function allows access to the outgoing pipes without modifying them.
+
+\begin{DoxyReturn}{Returns}
+A vector containing pointers to outgoing pipes. @complexity O(1) 
+\end{DoxyReturn}
+\Hypertarget{class_vertex_afdc6a4154139fedb4c34bba13c3c5f43}\label{class_vertex_afdc6a4154139fedb4c34bba13c3c5f43} 
+\index{Vertex@{Vertex}!getPath@{getPath}}
+\index{getPath@{getPath}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} Vertex\+::get\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the predecessor pipe in the shortest path. 
+
+Returns a pointer to the \doxylink{class_pipe}{Pipe} object representing the path leading to the current vertex during traversal or algorithm execution. If no path has been set, it returns a null pointer.
+
+\begin{DoxyReturn}{Returns}
+A pointer to the predecessor pipe. @complexity O(1) 
+\end{DoxyReturn}
+\Hypertarget{class_vertex_a7c108e91ff65d2c1e568c682a821a3c4}\label{class_vertex_a7c108e91ff65d2c1e568c682a821a3c4} 
+\index{Vertex@{Vertex}!getType@{getType}}
+\index{getType@{getType}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Vertex\+Type Vertex\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Retrieves the type of the vertex. 
+
+In this implementation, it always returns Vertex\+Type\+::\+Virtual\+Vertex, indicating that the vertex is a virtual vertex.
+
+\begin{DoxyReturn}{Returns}
+The type of the vertex. @complexity O(1) 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_city_aee9010b405e8b29262fbc1a79a2d73f4}{City}}, \mbox{\hyperlink{class_pumping_station_afcc3800f663235a0c92327a4adca4e34}{Pumping\+Station}}, and \mbox{\hyperlink{class_water_reservoir_a3a6f4ef8ed72df095413503ea429234b}{Water\+Reservoir}}.
+
+\Hypertarget{class_vertex_a126e306f0534b99cd97aa864fdb243d4}\label{class_vertex_a126e306f0534b99cd97aa864fdb243d4} 
+\index{Vertex@{Vertex}!isProcessing@{isProcessing}}
+\index{isProcessing@{isProcessing}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{isProcessing()}{isProcessing()}}
+{\footnotesize\ttfamily bool Vertex\+::is\+Processing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Checks if the vertex is currently being processed. 
+
+Checks whether the vertex is currently being processed during an algorithm execution. It returns a boolean value indicating whether the vertex is being processed (true) or not (false).
+
+\begin{DoxyReturn}{Returns}
+True if the vertex is being processed, false otherwise. @complexity O(1) 
+\end{DoxyReturn}
+\Hypertarget{class_vertex_aa4bd82105b85ee53a917391f4811cd8a}\label{class_vertex_aa4bd82105b85ee53a917391f4811cd8a} 
+\index{Vertex@{Vertex}!isVisited@{isVisited}}
+\index{isVisited@{isVisited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{isVisited()}{isVisited()}}
+{\footnotesize\ttfamily bool Vertex\+::is\+Visited (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Checks if the vertex has been visited during traversal. 
+
+Checks whether the vertex has been visited during a traversal or algorithm execution. It returns a boolean value indicating whether the vertex has been visited (true) or not (false).
+
+\begin{DoxyReturn}{Returns}
+True if the vertex has been visited, false otherwise. @complexity O(1) 
+\end{DoxyReturn}
+\Hypertarget{class_vertex_a2e14b11be7954724dfc25b99bc8c5b80}\label{class_vertex_a2e14b11be7954724dfc25b99bc8c5b80} 
+\index{Vertex@{Vertex}!removePipeFrom@{removePipeFrom}}
+\index{removePipeFrom@{removePipeFrom}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{removePipeFrom()}{removePipeFrom()}}
+{\footnotesize\ttfamily bool Vertex\+::remove\+Pipe\+From (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{origin }\end{DoxyParamCaption})}
+
+
+
+Removes a pipe originating from the specified origin. 
+
+Removes a pipe that leads to a specified endpoint from the vertex\textquotesingle{}s list of outgoing pipes. It takes the endpoint\textquotesingle{}s identifier as input and iterates through the outgoing vector of the vertex. If a pipe with the specified destination endpoint is found, it removes that pipe from the outgoing vector and returns true. If no such pipe is found, it returns false.
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The identifier of the origin. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the pipe was successfully removed, false otherwise. @complexity O(\+E) where E is the number of incoming pipes. 
+\end{DoxyReturn}
+\Hypertarget{class_vertex_a0677c70ea1bf7cd5cc86f290dc368f82}\label{class_vertex_a0677c70ea1bf7cd5cc86f290dc368f82} 
+\index{Vertex@{Vertex}!removePipeTo@{removePipeTo}}
+\index{removePipeTo@{removePipeTo}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{removePipeTo()}{removePipeTo()}}
+{\footnotesize\ttfamily bool Vertex\+::remove\+Pipe\+To (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{endpoint }\end{DoxyParamCaption})}
+
+
+
+Removes a pipe leading to the specified endpoint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The identifier of the endpoint. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the pipe was successfully removed, false otherwise. @complexity O(\+E) where E is the number of outgoing pipes. 
+\end{DoxyReturn}
+\Hypertarget{class_vertex_a454aba74d56b566a43229c33a7830ca7}\label{class_vertex_a454aba74d56b566a43229c33a7830ca7} 
+\index{Vertex@{Vertex}!setCode@{setCode}}
+\index{setCode@{setCode}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setCode()}{setCode()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Code (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{identifier }\end{DoxyParamCaption})}
+
+
+
+Sets the identifier of the vertex. 
+
+Sets the identifier (code) of the vertex to the provided string parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em identifier} & The new identifier of the vertex. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_vertex_aff0de67975f679c4843d1644accc479f}\label{class_vertex_aff0de67975f679c4843d1644accc479f} 
+\index{Vertex@{Vertex}!setIncoming@{setIncoming}}
+\index{setIncoming@{setIncoming}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setIncoming()}{setIncoming()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Incoming (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \&}]{new\+Adj }\end{DoxyParamCaption})}
+
+
+
+Sets the list of incoming pipes. 
+
+Sets the incoming pipes of the vertex to the provided vector of \doxylink{class_pipe}{Pipe} pointers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Adj} & The new list of incoming pipes. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_vertex_a263fc22ab241088c91e3a2e0defa89fa}\label{class_vertex_a263fc22ab241088c91e3a2e0defa89fa} 
+\index{Vertex@{Vertex}!setOutgoing@{setOutgoing}}
+\index{setOutgoing@{setOutgoing}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setOutgoing()}{setOutgoing()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Outgoing (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \&}]{new\+Adj }\end{DoxyParamCaption})}
+
+
+
+Sets the list of outgoing pipes. 
+
+Sets the outgoing pipes of the vertex to the provided vector of \doxylink{class_pipe}{Pipe} pointers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Adj} & The new list of outgoing pipes. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_vertex_a49582cd122dd75740df1a7a6d0f6da83}\label{class_vertex_a49582cd122dd75740df1a7a6d0f6da83} 
+\index{Vertex@{Vertex}!setPath@{setPath}}
+\index{setPath@{setPath}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setPath()}{setPath()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pipe}{Pipe}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+
+
+
+Sets the path (predecessor pipe) of the vertex. 
+
+Sets the path of the vertex to the provided \doxylink{class_pipe}{Pipe} pointer. This path typically represents the parent pipe through which this vertex was reached during graph traversal algorithms such as BFS or DFS.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The new path (predecessor pipe) of the vertex. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_vertex_aaefc824b5ab98ade8e6ae258b80f90c8}\label{class_vertex_aaefc824b5ab98ade8e6ae258b80f90c8} 
+\index{Vertex@{Vertex}!setProcessing@{setProcessing}}
+\index{setProcessing@{setProcessing}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setProcessing()}{setProcessing()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Processing (\begin{DoxyParamCaption}\item[{bool}]{proc }\end{DoxyParamCaption})}
+
+
+
+Sets the processing status of the vertex. 
+
+Sets the processing status of the vertex to the provided boolean value. If proc is true, it means the vertex is being processed; otherwise, it is not being processed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc} & The new processing status of the vertex. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_vertex_a1a6d60ddd29e2adfe8afc8babbbe8686}\label{class_vertex_a1a6d60ddd29e2adfe8afc8babbbe8686} 
+\index{Vertex@{Vertex}!setVisited@{setVisited}}
+\index{setVisited@{setVisited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setVisited()}{setVisited()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Visited (\begin{DoxyParamCaption}\item[{bool}]{new\+St }\end{DoxyParamCaption})}
+
+
+
+Sets the visited status of the vertex. 
+
+Sets the visited status of the vertex to the provided boolean value. If new\+St is true, it means the vertex has been visited; otherwise, it has not been visited.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+St} & The new visited status of the vertex. @complexity O(1) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_vertex_a0291c0ebdee9d12acd1d19e73c27d1df}\label{class_vertex_a0291c0ebdee9d12acd1d19e73c27d1df} 
+\index{Vertex@{Vertex}!code@{code}}
+\index{code@{code}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{code}{code}}
+{\footnotesize\ttfamily std\+::string Vertex\+::code\hspace{0.3cm}{\ttfamily [protected]}}
+
+Identifier of the vertex \Hypertarget{class_vertex_a0a61bdc0794865448b52480446ac12f5}\label{class_vertex_a0a61bdc0794865448b52480446ac12f5} 
+\index{Vertex@{Vertex}!incoming@{incoming}}
+\index{incoming@{incoming}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{incoming}{incoming}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_pipe}{Pipe}}\texorpdfstring{$\ast$}{*}$>$ Vertex\+::incoming\hspace{0.3cm}{\ttfamily [protected]}}
+
+Vector containing pointers to incoming pipes \Hypertarget{class_vertex_a78320582753a6c0efee93e6e11655d0a}\label{class_vertex_a78320582753a6c0efee93e6e11655d0a} 
+\index{Vertex@{Vertex}!outgoing@{outgoing}}
+\index{outgoing@{outgoing}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{outgoing}{outgoing}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_pipe}{Pipe}}\texorpdfstring{$\ast$}{*}$>$ Vertex\+::outgoing\hspace{0.3cm}{\ttfamily [protected]}}
+
+Vector containing pointers to outgoing pipes \Hypertarget{class_vertex_a6db3b22d8890895e4391965534be2bb7}\label{class_vertex_a6db3b22d8890895e4391965534be2bb7} 
+\index{Vertex@{Vertex}!path@{path}}
+\index{path@{path}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{path}{path}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_pipe}{Pipe}}\texorpdfstring{$\ast$}{*} Vertex\+::path = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+Pointer to the predecessor pipe in the shortest path \Hypertarget{class_vertex_a305dc8fcad6e4c7ef2491409ca7ddaa4}\label{class_vertex_a305dc8fcad6e4c7ef2491409ca7ddaa4} 
+\index{Vertex@{Vertex}!processing@{processing}}
+\index{processing@{processing}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{processing}{processing}}
+{\footnotesize\ttfamily bool Vertex\+::processing = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+Flag indicating whether the vertex is currently being processed \Hypertarget{class_vertex_aaef9f7de91b4b8f1752d391a1aae9c2e}\label{class_vertex_aaef9f7de91b4b8f1752d391a1aae9c2e} 
+\index{Vertex@{Vertex}!visited@{visited}}
+\index{visited@{visited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{visited}{visited}}
+{\footnotesize\ttfamily bool Vertex\+::visited = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+Flag indicating whether the vertex has been visited during traversal 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/goncalomatias/\+Documents/\+Git\+Hub/\+DA-\/\+Project-\/23-\/24/include/graph/Vertex.\+h\item 
+/\+Users/goncalomatias/\+Documents/\+Git\+Hub/\+DA-\/\+Project-\/23-\/24/src/graph/Vertex.\+cpp\end{DoxyCompactItemize}
