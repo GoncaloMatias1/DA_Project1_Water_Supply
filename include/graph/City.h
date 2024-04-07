@@ -1,7 +1,3 @@
-//
-// Created by admin1 on 08-03-2024.
-//
-
 #ifndef DA_PROJECT_23_24_CITY_H
 #define DA_PROJECT_23_24_CITY_H
 

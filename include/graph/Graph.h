@@ -1,7 +1,3 @@
-//
-// Created by admin1 on 03-03-2024.
-//
-
 #ifndef DA_PROJECT_23_24_GRAPH_H
 #define DA_PROJECT_23_24_GRAPH_H
 
