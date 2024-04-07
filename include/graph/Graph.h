@@ -13,8 +13,7 @@
 #include <string>
 
 #define PIPE_ID(origin, endpoint) (origin + "/" + endpoint)
-#define RESERVOIR_CITY(res, city) (res + "/" + city)
-#define AUGMENTING_PATH std::pair<std::vector<Pipe*>, double>
+#define AUGMENTING_PATH std::vector<Pipe*>
 
 class Pipe;
 
@@ -186,6 +185,7 @@ public:
     * @complexity O(1) for clearing the map.
     */
     void clearAugmentingPaths();
+
 
     // Network effiency improvements
     /**

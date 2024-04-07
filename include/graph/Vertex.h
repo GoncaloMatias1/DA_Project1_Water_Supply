@@ -29,8 +29,10 @@ protected:
     std::string code; /**< Identifier of the vertex */
     bool visited = false; /**< Flag indicating whether the vertex has been visited during traversal */
 
+
     bool processing = false; /**< Flag indicating whether the vertex is currently being processed */
     Pipe* path = nullptr; /**< Pointer to the predecessor pipe in the shortest path */
+    VertexType vertexType; /**< Enum that represents a VertexType:  ReservoirVertex, PumpingStationVertex, CityVertex, VirtualVertex*/
 
 public:
     /**
@@ -116,6 +118,7 @@ public:
      * @complexity O(1)
      */
     void setPath(Pipe* parent);
+    void setType(VertexType type);
 
     /**
      * @brief Adds an outgoing pipe to the vertex.

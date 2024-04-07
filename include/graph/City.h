@@ -29,6 +29,7 @@ public:
      * @complexity O(1), direct assignments of basic data types and string.
      */
     City(const std::string& vertexId, const std::string &name, unsigned int id, double demand_, unsigned int population);
+    City(City* city);
 
     // Getters and setters
 

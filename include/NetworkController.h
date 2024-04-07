@@ -353,7 +353,8 @@ public:
     * @brief Balances the network to achieve more uniform flow distribution.
     * @complexity O(V*E^2), assuming adjustment of capacities and rerunning of Edmonds-Karp to assess the impact.
     */
-    void balanceNetwork();
+    //void balanceNetwork();
+
 
 };
 
