@@ -25,6 +25,7 @@ public:
      * It also sets the maxFlowValid attribute to false.
      *
      * @param src The root directory containing data files.
+     * @complexity O(1)
      */
     NetworkController(const std::string& src);
 
@@ -34,6 +35,7 @@ public:
      * Reads data for cities, reservoirs, pumping stations, and pipes from the datasets.
      * It calls individual functions for each data type and handles any exceptions that may occur during parsing.
      * Finally, it prints a completion message.
+     * @complexity O(N), where N is the sum of lines in all data files.
      */
     void parseData();
 
@@ -43,6 +45,7 @@ public:
      * Reads data for cities, reservoirs, stations, and pipes from small-sized datasets.
      * It calls individual functions for each data type and handles any exceptions that may occur during parsing.
      * Finally, it prints a completion message.
+     * @complexity O(N), where N is the sum of lines in small data files.
      */
     void parseDataSmall();
 
@@ -53,6 +56,7 @@ public:
      * It opens the file and reads each line, parsing information about each reservoir, such as its name, municipality, ID, code, and maximum delivery.
      * It then creates a WaterReservoir object with this information and adds it to the network.
      * If the file cannot be opened, it throws an invalid argument exception.
+     * @complexity O(R), where R is the number of reservoirs.
 
      */
     void readReservoirs();
@@ -64,6 +68,7 @@ public:
      * It opens the file and reads each line, parsing information about each station, such as its ID and code.
      * It then creates a PumpingStation object with this information and adds it to the network.
      * If the file cannot be opened, it throws an invalid argument exception.
+     * @complexity O(R), where R is the number of reservoirs in the small dataset.
      */
     void readReservoirsSmall();
 
@@ -74,6 +79,7 @@ public:
      * It opens the file and reads each line, parsing information about each station, such as its ID and code.
      * It then creates a PumpingStation object with this information and adds it to the network.
      * If the file cannot be opened, it throws an invalid argument exception.
+     * @complexity O(P), where P is the number of pumping stations.
      */
     void readPumpingStations();
 
@@ -84,6 +90,7 @@ public:
      * information about each station, such as its ID and code. It then creates a PumpingStation object with this
      * information and adds it to the network. If the file cannot be opened, it prints an error message and returns.
      * If a line has insufficient data or empty ID and code, it skips that line.
+     * @complexity O(P), where P is the number of pumping stations in the small dataset.
      */
     void readStationsSmall();
 
@@ -94,6 +101,7 @@ public:
      * information about each city such as name, ID, code, demand, and population.
      * It then creates a City object with this information and adds it to the network.
      * If the file cannot be opened, it throws an invalid_argument exception.
+     * @complexity O(C), where C is the number of cities.
      */
     void readCities();
 
@@ -103,6 +111,7 @@ public:
      *  Reads city data from a CSV file located at a specific path. It opens the file and reads each line, parsing
      *  information about each city such as name, ID, code, demand, and population. It then creates a City object with
      *  this information and adds it to the network. If the file cannot be opened, it prints an error message.
+     *  @complexity O(C), where C is the number of cities.
      */
     void readCitiesSmall();
 
@@ -112,6 +121,7 @@ public:
      * Reads pipe data from a CSV file specified by dataRoot. It opens the file and reads each line, parsing information
      * about each pipe such as service points, capacity, and direction. It then adds edges to the network based on this information.
      * If any endpoint of the pipe doesn't exist in the network, it throws an exception.
+     * @complexity O(P), where P is the number of pipes.
      */
     void readPipes();
 
@@ -121,6 +131,7 @@ public:
      * Reads pipe data for a small network from a CSV file. It iterates over each line of the file, extracts information
      * about each pipe (such as service points, capacity, and direction), and adds edges to the network accordingly.
      * If any endpoint of the pipe doesn't exist in the network, it throws an exception.
+     * @complexity O(E), where E is the number of pipes in the small dataset.
      */
     void readPipesSmall();
 
@@ -132,11 +143,21 @@ public:
      * After parsing the data, it applies the Edmonds-Karp algorithm to find the maximum flow in the network using edmondsKarp.
      *
      * @param small Flag indicating whether to initialize a small version of the network.
+     * @complexity O(V + E) for parseData / O(V + E) for parseDataSmall, where V is the number of vertices and E is the number of edges.
      */
     void initializeNetwork(bool small);
 
-
+    /**
+    * @brief Simulates the failure of a pipeline and evaluates its impact on the network flow.
+    * @complexity O(V*E^2), due to the necessity to rerun the Edmonds-Karp algorithm after modifying the network.
+    */
     std::unordered_map<std::string, std::pair<double, double>> simulatePipelineFailure(const std::string& servicePointA, const std::string& servicePointB);
+
+
+    /**
+    * @brief Finds a pipe between two service points.
+    * @complexity O(1), assuming a hash map or similar data structure is used for efficient lookup.
+    */
     Pipe* findPipe(const std::string& servicePointA, const std::string& servicePointB);
 
     /**
@@ -146,6 +167,7 @@ public:
      *
      * @param id The identifier of the vertex to retrieve.
      * @return A pointer to the vertex if found, nullptr otherwise.
+     * @complexity O(1), assuming a hash map or similar data structure is used for efficient lookup.
      */
     Vertex* getVertex(const std::string& id);
 
@@ -160,6 +182,7 @@ public:
      * each reservoir with capacities equal to their maximum delivery.
      *
      * @return A pointer to the super source vertex.
+     * @complexity O(R), where R is the number of reservoirs, due to the creation of edges from the super source to each reservoir.
      */
     Vertex* getSuperSource();
 
@@ -172,6 +195,7 @@ public:
      * pipes having capacities equal to each city's demand.
      *
      * @return A pointer to the super sink vertex.
+     * @complexity O(C), where C is the number of cities, due to the creation of edges from each city to the super sink.
      */
     Vertex* getSuperSink();
 
@@ -213,6 +237,7 @@ public:
      * @param pipe The pipe connecting the vertices.
      * @param dest The destination vertex.
      * @param residual The residual flow.
+     * @complexity O(1), as the operation consists of conditional checks and queue manipulation, which are constant time operations.
      */
     void testAndVisit(std::queue<Vertex*>&, Pipe* pipe, Vertex* dest, double residual);
 
@@ -226,6 +251,7 @@ public:
      * @param source The source vertex.
      * @param sink The sink vertex.
      * @return The minimum residual along the path.
+     * @complexity O(P), where P is the length of the path.
      */
     double findMinResidualAlongPath(Vertex *source, Vertex *sink);
 
@@ -253,6 +279,7 @@ public:
      * For cities with demand exceeding flow, it records the shortfall.
      *
      * @return A vector of pairs containing city codes and their respective water levels.
+     * @complexity O(C), where C is the number of cities connected to the super sink. The complexity is linear with respect to the number of cities because the method iterates once through all the incoming pipes to the super sink, each representing a city's water supply.
      */
     std::vector<std::pair<std::string, double>> getLowWaterCities();
 
@@ -264,6 +291,7 @@ public:
      * header indicating the format of the data to be stored. For each incoming pipe, representing a city, it retrieves
      * the city's code, demand, and flow, and writes this information to the file.
      * If the file cannot be opened, it displays an error message.
+     * @complexity O(C), where C is the number of cities.
      */
     void saveCityData();
 
@@ -277,6 +305,7 @@ public:
      *
      * @param city The code of the city.
      * @return A pair containing the city code and its maximum flow.
+     * @complexity O(1) assuming the flow values are already calculated and O(V*E^2) if Edmonds-Karp needs to be run.
      */
     std::pair<std::string, double> getMaxFlowInCity(const std::string& city);
 
@@ -289,6 +318,7 @@ public:
      * values for cities and storing them in an unordered map.
      *
      * @return An unordered map containing vertex codes and their respective flow values.
+     * @complexity O(C), where C is the number of cities.
      */
     std::unordered_map<std::string, double> getNetworkFlow();
 
@@ -302,6 +332,7 @@ public:
      *
      * @param res_id The identifier of the reservoir.
      * @return An unordered map containing vertex codes and their respective minimum and maximum flow values.
+     * @complexity O(V*E^2), due to the necessity to rerun the Edmonds-Karp algorithm after modifying the network.
      */
     std::unordered_map<std::string, std::pair<double, double>> getAffectedByReservoir( const std::string& res_id);
 
@@ -314,9 +345,14 @@ public:
      *
      * @param res_id The identifier of the pumping station.
      * @return An unordered map containing vertex codes and their respective minimum and maximum flow values.
+     * @complexity O(V*E^2), because of the need to rerun the Edmonds-Karp algorithm after network modification.
      */
     std::unordered_map<std::string, std::pair<double, double>> getAffectedByStation( const std::string& res_id);
 
+    /**
+    * @brief Balances the network to achieve more uniform flow distribution.
+    * @complexity O(V*E^2), assuming adjustment of capacities and rerunning of Edmonds-Karp to assess the impact.
+    */
     void balanceNetwork();
 
 };
