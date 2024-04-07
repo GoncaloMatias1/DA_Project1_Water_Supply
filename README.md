@@ -12,9 +12,16 @@ Developed for the Design of Algorithms course (Spring 2024), this tool is design
 To install and run the project, follow these steps:
 
 ```bash
-git clone <repository-url>
-cd <project-directory>
-pip install -r requirements.txt
+git clone https://github.com/GoncaloMatias1/DA-Project-23-24
+cd DA-Project-23-24
+```
+
+To compile the project:
+```bash
+mkdir build
+cd build
+cmake ..
+make
 ```
 
 ## Features
@@ -28,7 +35,7 @@ pip install -r requirements.txt
 To use the application, execute the following command in the terminal:
 
 ```bash
-python main.py
+./DA_Project-23-24
 ```
 
 Navigate through the menu to access different functionalities such as data parsing, analysis, and simulation results.
