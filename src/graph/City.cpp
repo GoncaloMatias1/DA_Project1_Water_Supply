@@ -1,6 +1,3 @@
-//
-// Created by admin1 on 08-03-2024.
-//
 #include "City.h"
 
 City::City(const std::string& vertexId, const std::string &name, unsigned int id, double demand_,
@@ -45,4 +42,11 @@ double City::getDemand() const {
 
 VertexType City::getType() const {
     return VertexType::CityVertex;
+}
+
+City::City(City *city): Vertex(city->getCode()){
+    this->pop = city->getPop();
+    this->cityName = city->getName();
+    this->cityId = city->getID();
+    this->demand = city->getDemand();
 }

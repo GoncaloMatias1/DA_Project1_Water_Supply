@@ -1,8 +1,3 @@
-//
-// Created by admin1 on 04-03-2024.
-//
-
-
 #include "Vertex.h"
 
 Vertex::Vertex(const std::string & identifier) {
@@ -93,6 +88,11 @@ std::vector<Pipe *> Vertex::getOutgoing() const {
 void Vertex::clearIncoming() {
     this->incoming.clear();
 }
+
+void Vertex::setType(VertexType type) {
+    this->vertexType = type;
+}
+
 
 
 

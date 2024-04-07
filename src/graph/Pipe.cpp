@@ -1,12 +1,9 @@
-//
-// Created by admin1 on 04-03-2024.
-//
-
 #include "Pipe.h"
 #include "Vertex.h"
 
 Pipe::Pipe(double maxCapacity, Vertex *origin_, Vertex *endpoint) {
     this->capacity = maxCapacity;
+    this->originalCapacity = maxCapacity;
     this->origin = origin_;
     this->destination = endpoint;
     this->flow = 0;
@@ -51,5 +48,9 @@ void Pipe::setOrigin(Vertex *orig) {
 
 std::string Pipe::getPipeId() const {
     return origin->getCode() + "-" + destination->getCode();
+}
+
+double Pipe::getOriginalCapacity() {
+    return this->originalCapacity;
 }
 

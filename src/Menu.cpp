@@ -1,7 +1,3 @@
-//
-// Created by admin1 on 03-04-2024.
-//
-
 #include <iomanip>
 #include "Menu.h"
 #include "City.h"
@@ -51,7 +47,7 @@ void Menu::showMainMenu() {
     std::cout << "4. Analyze Impact of Reservoir Removal\n";
     std::cout << "5. Analyze Impact of Pumping Station Removal\n";
     std::cout << "6. Simulate Pipeline Failure\n" << RESET;
-    std::cout << "7. Exit\n" << RESET;
+    std::cout << RED << "7. Exit\n" << RESET;
     std::cout << "Select an option: ";
 }
 
@@ -64,21 +60,27 @@ void Menu::run_menu() {
         switch (choice - '0') {
             case 1:
                 this->showMaxFlowResult();
+                this->waitForContinue();
                 break;
             case 2:
                 this->showMaxFlowToCity();
+                this->waitForContinue();
                 break;
             case 3:
                 this->showCitiesWithDeficit();
+                this->waitForContinue();
                 break;
             case 4:
                 this->showReservoirRemoval();
+                this->waitForContinue();
                 break;
             case 5:
                 this->showStationRemoval();
+                this->waitForContinue();
                 break;
             case 6:
                 this->simulatePipelineFailureHandler();
+                this->waitForContinue();
                 break;
             case 7:
                 running = false;
@@ -86,9 +88,10 @@ void Menu::run_menu() {
                 return;
             default:
                 std::cout << "Invalid option!\n";
+                this->waitForContinue();
                 break;
         }
-        this->waitForContinue();
+
     }
 }
 
@@ -201,15 +204,30 @@ void Menu::showStationRemoval() {
 
 
 void Menu::simulatePipelineFailureHandler() {
-    std::string pipeId = getInput("Enter the pipeline ID to simulate failure: ");
-    size_t delimiterPos = pipeId.find('-');
-    if (delimiterPos != std::string::npos) {
-        std::string servicePointA = pipeId.substr(0, delimiterPos);
-        std::string servicePointB = pipeId.substr(delimiterPos + 1);
-        this->controller->simulatePipelineFailure(servicePointA, servicePointB);
-    } else {
-        std::cerr << "Invalid pipeline ID format. Please use the format 'ServicePointA-ServicePointB'." << std::endl;
+    std::cout << "Enter the pipeline information to simulate failure\n";
+    std::string originId = getInput("Enter the pipeline origin ID: ");
+    std::string destId = getInput("Enter the pipeline destination ID: ");
+
+    try{
+        std::unordered_map<std::string, std::pair<double, double>> result = this->controller->simulatePipelineFailure(originId, destId);
+        if(!result.empty()){
+            std::cout << std::left << std::setw(15) << "City"
+                      << std::setw(15) << "Old Flow"
+                      << std::setw(15) << "New Flow" << std::endl;
+            for (const auto& pair : result) {
+                std::cout << std::left << std::setw(15) << pair.first
+                          << std::setw(15) << pair.second.first
+                          << std::setw(15) << pair.second.second << std::endl;
+            }
+        }
+        else{
+            std::cout << BOLDGREEN <<"Pipeline did not compromise water delivery." << RESET<< std::endl;
+        }
+
+    }catch (const std::exception& e){
+        std::cout << RED << e.what() << RESET;
     }
+
 }
 
 
