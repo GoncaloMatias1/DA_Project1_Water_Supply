@@ -1,7 +1,3 @@
-//
-// Created by admin1 on 03-04-2024.
-//
-
 #include <iomanip>
 #include "Menu.h"
 #include "City.h"

@@ -1,6 +1,3 @@
-//
-// Created by admin1 on 08-03-2024.
-//
 #include "WaterReservoir.h"
 
 

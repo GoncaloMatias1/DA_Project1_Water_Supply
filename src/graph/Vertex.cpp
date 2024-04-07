@@ -1,8 +1,3 @@
-//
-// Created by admin1 on 04-03-2024.
-//
-
-
 #include "Vertex.h"
 
 Vertex::Vertex(const std::string & identifier) {

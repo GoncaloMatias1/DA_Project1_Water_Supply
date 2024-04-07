@@ -1,7 +1,3 @@
-//
-// Created by admin1 on 04-03-2024.
-//
-
 #include "Pipe.h"
 #include "Vertex.h"
 
