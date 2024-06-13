@@ -3,6 +3,8 @@
 ## Introduction
 Developed for the Design of Algorithms course (Spring 2024), this tool is designed to assist in managing the water supply network in Portugal. It simulates and analyzes water flow through the network, ensuring optimal distribution and resource management.
 
+**Grade:** 18.5/20
+
 ## Team Members
 - Rodrigo Ferreira Alves - up202207478
 - Gonçalo de Abreu Matias - up202108703
